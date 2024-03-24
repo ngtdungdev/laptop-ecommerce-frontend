@@ -1,4 +1,4 @@
-import {getAccessToken, getRefreshToken} from "./token";
+import {getAccessToken, getRefreshToken, refreshNewTokens} from "./token";
 
 export class ApiResponse {
     constructor({status, message, data}) {
@@ -8,8 +8,8 @@ export class ApiResponse {
     }
 }
 
-export const GET = (url, body) => {
-    return callApiWithAccessToken(url, "GET", body);
+export const GET = (url) => {
+    return callApiWithAccessToken(url, "GET", undefined);
 };
 
 export const POST = (url, body) => {
@@ -20,13 +20,29 @@ export const PUT = (url, body) => {
     return callApiWithAccessToken(url, "PUT", body);
 };
 
-export const DELETE = (url, body) => {
-    return callApiWithAccessToken(url, "DELETE", body);
+export const DELETE = (url) => {
+    return callApiWithAccessToken(url, "DELETE", undefined);
 };
 
 export const callApiWithAccessToken = (url, method, body) => {
     const accessToken = getAccessToken();
-    return callApiWithToken(url, method, body, accessToken);
+    return callApiWithToken(url, method, body, accessToken)
+        .then(response => {
+            if (response.status === 401) {
+                const success = refreshNewTokens();
+                if (success) {
+                    return callApiWithRefreshToken(url, method, body);
+                } else {
+                    console.log("call using refresh");
+                    return new ApiResponse({
+                        status: 401,
+                        message: "Unauthorized",
+                        data: null
+                    });
+                }
+            }
+            return response;
+        });
 };
 
 export const callApiWithRefreshToken = (url, method, body) => {
@@ -35,26 +51,28 @@ export const callApiWithRefreshToken = (url, method, body) => {
 };
 
 export const callApiWithToken = (url, method, body, token) => {
-    const headers = {
+    const extraHeaders = {
         "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
     };
-    return call(url, method, headers, body);
+    return call(url, method, extraHeaders, body);
 };
 
 export const callApi = (url, method, body) => {
-    const headers = {
-        "Content-Type": "application/json"
-    };
-    return call(url, method, headers, body);
+    return call(url, method, undefined, body);
 };
 
-export const call = (url, method, headers, body) => {
-    return fetch(url, {
+export const call = (url, method, extraHeaders, body) => {
+    const init = {
         method: method,
-        headers: headers,
-        body: JSON.stringify(body)
-    })
+        headers: {
+            "Content-Type": "application/json",
+            ...extraHeaders
+        }
+    };
+    if (body && (method === "POST" || method === "PUT" || method === "PATCH")) {
+        init.body = JSON.stringify(body);
+    }
+    return fetch(url, init)
         .then(response => response.json())
         .then(data => new ApiResponse(data))
         .catch(error => {

@@ -3,8 +3,9 @@ import {apiUrl} from "./config";
 import {callApiWithRefreshToken} from "./fetch";
 
 export const storeTokens = (accessToken, refreshToken) => {
-    Cookies.set("accessToken", accessToken, {expires: 2})
-    Cookies.set("refreshToken", refreshToken, {expires: 2})
+    const expiration = process.env.REACT_APP_COOKIE_EXPIRATION / (24 * 60 * 60); // seconds to days
+    Cookies.set("accessToken", accessToken, {expires: expiration});
+    Cookies.set("refreshToken", refreshToken, {expires: expiration});
 }
 
 export const getAccessToken = () => {
@@ -22,8 +23,14 @@ export const removeAllTokens = () => {
     Cookies.remove("refreshToken");
 }
 
-export const refreshNewTokens = () => {
-    return callApiWithRefreshToken(
+export const refreshNewTokens = async () => {
+    const accessToken = getAccessToken();
+    const refreshToken = getRefreshToken();
+    if (!accessToken || !refreshToken) {
+        removeAllTokens();
+        return false;
+    }
+    return await callApiWithRefreshToken(
         `${apiUrl}/auth/refresh-token`,
         "POST",
         null
@@ -36,25 +43,19 @@ export const refreshNewTokens = () => {
         })
         .catch(error => {
             removeAllTokens();
-            window.location.href = "/login";
-            return undefined;
+            return false;
         });
 }
 
-export const tryRefreshTokensAndRun = async ({functionCallback}) => {
-    const accessToken = getAccessToken();
-    const refreshToken = getRefreshToken();
-    if (!accessToken || !refreshToken) {
-        removeAllTokens();
-        window.location.href = "/login";
-    }
-    await refreshNewTokens()
-        .then(success => {
-            if (success) {
-                functionCallback();
-            } else {
-                removeAllTokens();
-                window.location.href = "/login";
-            }
-        });
-}
+// export const tryRefreshTokensAndRun = async (functionCallback) => {
+//     const response = await refreshNewTokens()
+//         .then(success => {
+//             if (success) {
+//                 return functionCallback();
+//             } else {
+//                 removeAllTokens();
+//                 return null;
+//             }
+//         });
+//     return response ? response : null;
+// }
