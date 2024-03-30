@@ -1,4 +1,5 @@
 import "./App.css";
+import {useState} from "react";
 import React from "react";
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import {useAuth} from "./contexts/AuthContext";
@@ -25,7 +26,7 @@ import Statistics from "./pages/Admin/Statistics";
 
 const App = () => {
     const {currentUser} = useAuth();
-
+    const [isActive, setIsActive] = useState(true);
     const allRoutes = [
         {path: "*", element: <Navigate to={"/"}/>},
         {path: "/", element: <FullLayout element={Home}/>},
@@ -35,8 +36,8 @@ const App = () => {
         {path: "/about-us", element: <FullLayout element={AboutUs}/>},
         {path: "/payment", element: <FullLayout element={Payment}/>, permissions: []},
         {path: "/profile", element: <FullLayout element={Profile}/>, permissions: []},
-        {path: "/login", element: <Login/>},
-        {path: "/signup", element: <SignUp/>},
+        {path: "/login", element: <Login active={isActive}/>},
+        {path: "/signup", element: <Login active={!isActive}/>},
         {path: "/forgot-password", element: <ForgotPassword/>},
         {path: "/admin/*", element: <Navigate to={"/admin"}/>, permissions: []},
         {path: "/admin", element: <FullLayout element={Admin}/>, permissions: []},
