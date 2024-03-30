@@ -3,6 +3,9 @@ import {Link, useNavigate} from "react-router-dom";
 import styles  from "./Login.module.scss"
 import classNames from "classnames/bind"
 import logo from "../../assets/images/logo.jpg"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
+import { FcGoogle } from "react-icons/fc";
 import {useAuth} from "../../contexts/AuthContext";
 import {login, signInWithGoogle, signUp} from "../../utils/firebase/auth";
 
@@ -92,30 +95,66 @@ const Login = () => {
                                         <div className={cx("combined-email")}>
                                             <div className={cx("next-email")}>
                                                 <label className={cx("next-email-label")}>Email</label>
-                                                <div className={cx("next-input")} >
+                                                <div className={cx("next-input")}>
                                                     <div className={cx("combined-input")}>
                                                         <input className={cx("email")}/>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div className={cx("combined-password")}>
+                                            <div className={cx("next-password")}>
+                                                <label className={cx("next-password-label")}>Password</label>
+                                                <div className={cx("next-input")}>
+                                                    <div className={cx("combined-input")}>
+                                                        <input className={cx("password")}/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={cx("button-login-container")}>
+                                            <button className={cx("ui-button")}>
+                                                <span className={cx("content")}>
+                                                    <span className={cx("ui-button-text")}>Login</span>
+                                                    <span className={cx("ui-button-hover-icon")}>
+                                                        <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
+                                                    </span>
+                                                </span>
+                                            </button>
+                                        </div>
                                     </form>
                                     <div className={cx("external-login-divider-container")}>
                                         <div className={cx("external-login-divider")}>
-
+                                            <div className={cx("external-login-divider-text")}>or
+                                            </div>
                                         </div>
                                     </div>
                                     <div className={cx("external-login-providers")}>
-
+                                        {/*<div className={cx('button-google')}>*/}
+                                            <button className={cx('ui-button-google')}>
+                                                <span className={cx('button-google-text')}>Đăng nhập bằng Google</span>
+                                                <span className={cx('button-google-icon')}><FcGoogle/></span>
+                                            </button>
+                                        {/*</div>*/}
                                     </div>
                                     <p className={cx("help-link")}>
-                                        <span className={cx("help-link-text")}></span>
+                                        <span className={cx("help-link-text")}>New to Laptop?</span>
+                                        <Link className={cx("ui-arrow-link")} to={"\"/signup"}>
+                                            Get started
+                                            <span className={cx("arrow-link-icon")}>
+                                                <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
+                                            </span>
+                                        </Link>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <footer className={cx("login-footer")}>
-                            <div className={cx("login-footer-link")}></div>
+                            <div className={cx("login-footer-link")}>
+                                <Link to={"\"/login"} className={cx("login-link")}>Help</Link>
+                                <Link to={"\"/login"} className={cx("login-link")}>Privacy</Link>
+                                <Link to={"\"/login"} className={cx("login-link")}>Terms</Link>
+                            </div>
                         </footer>
                     </div>
                 </div>

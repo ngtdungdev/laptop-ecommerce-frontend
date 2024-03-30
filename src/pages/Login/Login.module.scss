@@ -1,3 +1,7 @@
+html, body {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+}
+
 .page-container {
   position: relative;
   .main-page {
@@ -110,8 +114,232 @@
                     .next-input:focus-within {// tạo viền và khoàng cách giữa viền với thẻ div mà ko ảnh hưởng đến thẻ
                       outline: 2px solid #005bd3;
                       outline-offset: 1px;
+                      background-color: #f3f3f3;
                       transition: outline-offset .75ms linear;
                     }
+                  }
+                }
+                .combined-password {
+                  .next-password {
+                    position: relative;
+                    margin-top: 0.5rem;
+                    .next-password-label {
+                      font-size: 14px;
+                      line-height: 20px;
+                      display: block;
+                      font-weight: 400;
+                      margin-bottom: 4px;
+                      cursor: pointer;
+                    }
+
+                    .next-input {
+                      border-radius: 8px;
+                      border-width: 1px;
+                      border-color: #1A1A1A;
+                      background-color: #FFFFFF;
+                      max-height: 2.5rem;
+                      line-height: 20px;
+                      position: relative;
+                      display: flex;
+                      box-sizing: border-box;
+                      border-style: solid;
+                      vertical-align: baseline;
+                      align-items: center;
+                      font-weight: 400;
+                      width: 100%;
+                      color: #303030;
+
+                      .combined-input {
+                        flex: 1 1; //lấp đầy không gian trống (nếu có) và cũng có thể co lại khi không gian bị hạn chế
+                        .password {
+                          position: relative;
+                          background: none;
+                          border: 0;
+                          width: 100%;
+                          font-size: 0.875rem;
+                          outline: none;
+                          box-sizing: border-box;
+                          font-weight: 450;
+                          padding: 12px;
+                          line-height: 12px;
+                        }
+                      }
+                    }
+                    .next-input:focus-within {// tạo viền và khoàng cách giữa viền với thẻ div mà ko ảnh hưởng đến thẻ
+                      outline: 2px solid #005bd3;
+                      outline-offset: 1px;
+                      background-color: #f3f3f3;
+                      transition: outline-offset .75ms linear;
+                    }
+                  }
+                }
+                .button-login-container {
+                  .ui-button {
+                    margin-top: 8px;
+                    font-weight: 500;
+                    display: flex;//giúp bạn dễ dàng sắp xếp các phần tử theo chiều ngang hoặc chiều dọc quản lý khoảng cách giữa chúng
+                    min-height: 32px;
+                    min-width: 32px;
+                    height: auto;
+                    padding: 12px 16px;
+                    border-radius: 8px;
+                    opacity: 0.9;
+                    background-color: #303030;
+                    position: relative;// tạo bố cục Di chuyển một phần tử tới vị trí mới mà không ảnh hưởng đến vị trí của các phần tử khác.băằng left right top
+                    width: 100%;
+                    color: #FFFFFF;
+                    cursor: pointer;
+                    border-bottom-width: 3px;
+                    align-items: center;// căn giữa theo chiều dọc trục Oy
+                    justify-content: center; // căn giữa ngang Ox
+                    .content {
+                      position: relative;
+                      font-size: 14px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      transition: transform 75ms cubic-bezier(0.19, 0.91, 0.38, 1);
+                      user-select: none;
+                      .ui-button-text {
+                        font: 1rem "ShopifySans", -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+                        font-size: 14px;
+                        font-weight: 550;
+                        line-height: 20px;
+                      }
+                      .ui-button-hover-icon {
+                        display: flex;
+                        right: 0;
+                        width: 20px;
+                        opacity: 0;
+                        height: 20px;
+                        align-items: center;
+                        line-height: 20px;
+                        justify-content: center;
+                        position: absolute;
+                        transform: translate3d(100%, 0, 0);
+                        transition: all 300ms cubic-bezier(.165, .84, .44, 1);
+                      }
+                    }
+                  }
+                  .ui-button:hover {
+                    opacity: 1;
+                    .ui-button-hover-icon {
+                      opacity: 1;
+                      transform: translate3d(120%, 0, 0);
+                    }
+                  }
+                }
+              }
+              .external-login-divider-container {
+                padding: 0 32px;
+                .external-login-divider {
+                  margin-top: 16px;
+                  margin-bottom: 16px;
+                  width: 100%;
+                  line-height: 20px;
+                  text-align: center;
+                  display: flex;
+                  align-items: center;
+                  background: none;
+                  justify-content: center;
+                  position: relative;
+                  .external-login-divider-text {
+                    padding: 0 12px;
+                    color: #616161;
+                  }
+                }
+                .external-login-divider:before{
+                  left: 0;
+                  content: "";
+                  background: #e3e3e3;
+                  height: 1px;
+                  position: absolute;
+                  width: 45%;
+                }
+                .external-login-divider:after{
+                  right: 0;
+                  content: "";
+                  background: #e3e3e3;
+                  height: 1px;
+                  position: absolute;
+                  width: 45%;
+                }
+              }
+              .external-login-providers {
+                display: grid;
+                .ui-button-google {
+                  border-radius: 8px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  background: #f1f1f1;
+                  padding: 8px;
+                  border: none;
+                  .button-google-text {
+                    color: #606060;
+                    font: 1rem "ShopifySans", -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+                    font-size: 14px;
+                    font-weight: 550;
+                  }
+                  .button-google-icon {
+                    margin-left: 5px;
+                    font-size: 30px;
+                    width: 30px;
+                    height: 30px;
+                  }
+                }
+                .ui-button-google:active {
+                  background-color: #ebebeb;
+                  box-shadow: 0 2px 1px 0 rgba(26,26,26,0.2) inset,
+                  1px 0 1px 0 rgba(26,26,26,0.12) inset,
+                  -1px 0px 1px 0px rgba(26,26,26,0.12) inset,
+                  0px -1px 0px #b5b5b5 inset;
+                }
+                .ui-button-google:hover {
+                  background-color: #ebebeb;
+                  .button-google-icon {
+                    display: flex;
+                    align-items: center;
+                    font-size: 25px;
+                    transition: 0.3s cubic-bezier(0.19, 0.91, 0.38, 1);
+                    transform: scale(0.9) translate3d(0, 0, 0);
+                    backface-visibility: hidden;
+                  }
+                }
+              }
+              .help-link {
+                margin-top: 32px;
+                font-size: 13px;
+                font-style: normal;
+                .help-link-text {
+                  color: #303030;
+                  font-weight: 550;
+                  font-family: system-ui;
+                  line-height: 20px;
+                  margin-right: 5px;
+                }
+                .ui-arrow-link {
+                  margin-left: 0;
+                  display: inline-flex;
+                  color: #005bd3;
+                  font-family: system-ui;
+                  line-height: 20px;
+                  text-decoration: none;
+                  font-weight: 550;
+                  font-size: 14px;
+                  background: transparent;
+                  .arrow-link-icon {
+                    margin-left: 5px;
+                    .icons {
+                      font-size: 15px;
+                    }
+                  }
+                }
+                .ui-arrow-link:hover {
+                  color: #004299;
+                  .arrow-link-icon {
+                    transform: translate3d(3px, 0, 0);
+                    transition: transform 0.3s cubic-bezier(.165, .84, .44, 1);
                   }
                 }
               }
@@ -120,7 +348,22 @@
         }
       }
       .login-footer {
-          padding: 2.5rem 2.5rem 2.5rem;
+        padding: 2.5rem 2.5rem 2.5rem;
+        .login-footer-link {
+          .login-link {
+            color: #616161;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 450;
+            text-decoration: none;
+            line-height: 16px;
+            margin-right: 8px;
+          }
+          .login-link:hover {
+            color: #454f5b;
+            text-decoration: underline solid Currentcolor;
+          }
+        }
       }
     }
   }
@@ -153,7 +396,18 @@
         animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
       }
       .gradient-background-right {
+        top: 0;
+        right: 0;
+        width: 650px;
+        height: 650px;
+        background: #44f2eb;
+        transform: translate(20%, -40%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
 
+        animation-iteration-count: infinite;// tạo ra một luồng để khiến cho animation lặp lại một cách vô tận
+        animation-duration: 20s;// thời lượng animation
+        position: absolute;
+        border-radius: 100%;
+        animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
       }
     }
     .gradient-background-noise {
