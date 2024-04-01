@@ -2,7 +2,7 @@ import {useEffect, useState, useRef} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import styles  from "./Login.module.scss"
 import classNames from "classnames/bind"
-import logo from "../../assets/images/logo.jpg"
+import logo from "../../assets/images/logoWeb.svg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FcGoogle } from "react-icons/fc";
@@ -84,7 +84,6 @@ const Login = ({active}) => {
                                         <img src={logo} alt={""}/>
                                     </Link>
                                 </header>
-                                LapTop
                             </h1>
                         </div>
                         {

@@ -1,0 +1,36 @@
+.navbar-container {
+  height: 100%;
+  .navbar-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .navbar-left {
+      width: 85%;
+      .navbar-links {
+        margin: 0;
+        display: flex;
+        list-style-type: none;
+        justify-content: center;
+        align-items: center;
+        .ui-navbar {
+          padding: 20px 50px;
+          color: #e3e3e3;
+          .ui-navbar-links {
+            color: #1eabbb;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+    .navbar-right {
+      width: 15%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .navbar-avatar {
+
+      }
+    }
+  }
+}

@@ -57,7 +57,7 @@ html, body {
     background-color: white;
     .page-content {
       display: flex;
-      animation: slideDownTopBottom 1.0s ease-out forwards;
+      animation: slideDownTopBottom 0.5s ease-out forwards;
       z-index: 1;
       flex-direction: column;
       background-color: #ffffff;
@@ -70,18 +70,18 @@ html, body {
         .cart {
           padding: 2.5rem 2.5rem 0;
           .cart-helder {
-            margin-bottom: 0.5rem;
             .cart-logo {
               width: 5.75rem;
               display: flex;
+              margin: 0;
               font-weight: 500;
               font-family: emoji;
               font-size: 21px;
               .loginCart-helder {
                 margin-right: 0.2rem;
                 img {
-                  width: 1.5rem;
-                  height: 1.5rem;
+                  width: 8rem;
+                  height: 2.5rem;
                 }
               }
             }
@@ -169,12 +169,12 @@ html, body {
                   }
                   .next-email {
                     opacity: 0;
-                    animation: slideDownLeftRight 1.0s ease-out forwards;
+                    animation: slideDownLeftRight 0.5s ease-out forwards;
                     //animation-delay: 1.0s;
                   }
                   .next-name {
                     opacity: 0;
-                    animation: slideDownRightLeft 1.0s ease-out forwards;
+                    animation: slideDownRightLeft 0.5s ease-out forwards;
                     //animation-delay: 1.0s;
                   }
                 }
@@ -246,12 +246,12 @@ html, body {
                   }
                   .next-password {
                     opacity: 0;
-                    animation: slideDownRightLeft 1.0s ease-out forwards;
+                    animation: slideDownRightLeft 0.5s ease-out forwards;
                     //animation-delay: 1.0s;
                   }
                   .next-newPassword {
                     opacity: 0;
-                    animation: slideDownLeftRight 1.0s ease-out forwards;
+                    animation: slideDownLeftRight 0.5s ease-out forwards;
                     //animation-delay: 1.0s;
                   }
                 }
@@ -259,8 +259,8 @@ html, body {
                   .ui-button {
                     margin-top: 8px;
                     opacity: 0;
-                    animation: expandHorizontalCenter 1.0s ease-out forwards;
-                    animation-delay: 1.0s;
+                    animation: expandHorizontalCenter 0.5s ease-out forwards;
+                    animation-delay: 0.5s;
                     font-weight: 500;
                     display: flex;//giúp bạn dễ dàng sắp xếp các phần tử theo chiều ngang hoặc chiều dọc quản lý khoảng cách giữa chúng
                     min-height: 32px;
@@ -355,8 +355,8 @@ html, body {
                 .ui-button-google {
                   border-radius: 8px;
                   opacity: 0;
-                  animation: expandHorizontalCenter 1.0s ease-out forwards;
-                  animation-delay: 1.0s;
+                  animation: expandHorizontalCenter 0.5s ease-out forwards;
+                  animation-delay: 0.5s;
                   display: flex;
                   justify-content: center;
                   align-items: center;
