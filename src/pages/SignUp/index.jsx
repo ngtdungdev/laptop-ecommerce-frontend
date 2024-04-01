@@ -19,12 +19,27 @@ const SignUp = ({OnClickSignIn}) => {
     const [password, setPassword] = useState("");
     const [isSigningUp, setIsSigningUp] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
 
     useEffect(() => {
-        if (userLoggedIn) {
-            navigate("/", {replace: true});
-        }
-    }, [navigate, userLoggedIn]);
+        const timer = setTimeout(() => {
+            const elements = [
+                document.querySelector(".next-email"),
+                document.querySelector(".next-name"),
+                document.querySelector(".next-password"),
+                document.querySelector(".next-newPassword"),
+                document.querySelector(".ui-button"),
+                document.querySelector(".ui-button-google"),
+            ];
+
+            elements.forEach((element) => {
+                if (element) {
+                    element.style.animationDelay = "0s";
+                }
+            });
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
 
     const checkEmailExists = async (e) => {
         e.preventDefault();
@@ -42,24 +57,6 @@ const SignUp = ({OnClickSignIn}) => {
         }
     }
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        if (isSigningUp)
-            return
-        setIsSigningUp(true);
-        await signUp({
-                displayName: name,
-                email: email,
-                password: password,
-                phone: null,
-                avatar: "", // TODO
-            },
-            () => setErrorMessage("Hệ thống đang bảo trì, vui lòng thử lại sau."),
-            () => setErrorMessage("Không tìm thấy nhóm quyền."),
-            () => setErrorMessage("Email đã tồn tại.")
-        );
-        setIsSigningUp(false);
-    };
 
     const onGoogleSignUp = async (e) => {
         e.preventDefault();
@@ -79,6 +76,7 @@ const SignUp = ({OnClickSignIn}) => {
         setIsSigningUp(false);
     };
 
+
     return (
         <div>
             <div className={cx("login-cart-content")}>
@@ -91,13 +89,13 @@ const SignUp = ({OnClickSignIn}) => {
                     </div>
                     <div className={cx("captcha-element")}></div>
                     <form className={cx("web_authn_form")}></form>
-                    <form className={cx("account-lookup")} onSubmit={"onSubmit"}>
+                    <form className={cx("account-lookup")} >
                         <div className={cx("combined-email")}>
                             <div className={cx("next-email")}>
                                 <label className={cx("next-email-label")}>Email</label>
                                 <div className={cx("next-input")}>
                                     <div className={cx("combined-input")}>
-                                        <input className={cx("email")}/>
+                                        <input className={cx("email")} type={"email"}/>
                                     </div>
                                 </div>
                             </div>
@@ -122,25 +120,25 @@ const SignUp = ({OnClickSignIn}) => {
                                 <label className={cx("next-password-label")}>Password</label>
                                 <div className={cx("next-input")}>
                                     <div className={cx("combined-input")}>
-                                        <input className={cx("password")}/>
+                                        <input className={cx("password")} type={"password"}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className={cx("combined-password")}>
-                            <div className={cx("next-password")}>
-                                <label className={cx("next-password-label")}>Confirm new password</label>
+                        <div className={cx("combined-newPassword")}>
+                            <div className={cx("next-newPassword")}>
+                                <label className={cx("next-newPassword-label")}>Confirm new password</label>
                                 <div className={cx("next-input")}>
                                     <div className={cx("combined-input")}>
-                                        <input className={cx("password")}/>
+                                        <input className={cx("newPassword")} type={"password"}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className={cx("button-login-container")}>
-                            <button className={cx("ui-button")}>
+                            <button className={cx("ui-button")} style={{ opacity: 0 }}>
                             <span className={cx("content")}>
-                                <span className={cx("ui-button-text")}>Login</span>
+                                <span className={cx("ui-button-text")}>Create Laptop account</span>
                                 <span className={cx("ui-button-hover-icon")}>
                                     <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
                                 </span>
@@ -148,10 +146,10 @@ const SignUp = ({OnClickSignIn}) => {
                             </button>
                         </div>
                     </form>
-                    <p className={cx("help-link")}>
-                        <span className={cx("help-link-text")}>New to Laptop?</span>
-                        <Link className={cx("ui-arrow-link")} to={"/signup"} onClick={OnClickSignIn}>
-                        Get started
+                    <p className={cx("help-link","help-link-signIn")}>
+                        <span className={cx("help-link-text")}>Already have a Shopify account?</span>
+                        <Link className={cx("ui-arrow-link")} to={"/login"} onClick={OnClickSignIn}>
+                        Login
                             <span className={cx("arrow-link-icon")}>
                             <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
                         </span>
