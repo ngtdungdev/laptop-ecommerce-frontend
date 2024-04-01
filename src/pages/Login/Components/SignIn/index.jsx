@@ -27,6 +27,24 @@ const SignIn = ({OnClickSignUp}) => {
         }
         setIsLoggingIn(false);
     };
+    useEffect(() => {
+        // const timer = setTimeout(() => {
+        //     const elements = [
+        //         document.querySelector(".next-email"),
+        //         document.querySelector(".next-password"),
+        //         document.querySelector(".ui-button"),
+        //         document.querySelector(".ui-button-google"),
+        //     ];
+        //
+        //     elements.forEach((element) => {
+        //         if (element) {
+        //             element.style.animationDelay = "0s";
+        //         }
+        //     });
+        // }, 2000);
+        // return () => clearTimeout(timer);
+    }, []);
+
 
 
     return (
@@ -46,7 +64,7 @@ const SignIn = ({OnClickSignUp}) => {
                             <label className={cx("next-email-label")}>Email</label>
                             <div className={cx("next-input")}>
                                 <div className={cx("combined-input")}>
-                                    <input className={cx("email")}/>
+                                    <input className={cx("email")} type={"email"}/>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +74,7 @@ const SignIn = ({OnClickSignUp}) => {
                             <label className={cx("next-password-label")}>Password</label>
                             <div className={cx("next-input")}>
                                 <div className={cx("combined-input")}>
-                                    <input className={cx("password")}/>
+                                    <input className={cx("password")} type={"password"}/>
                                 </div>
                             </div>
                         </div>
