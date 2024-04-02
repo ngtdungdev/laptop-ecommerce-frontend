@@ -86,22 +86,25 @@ const Navbar = () => {
 
                                 <div className={cx("ui-navbar-login")}>
                                     <div className={cx("ui-avatar")}>
-                                        <div className={cx("avatar")}>
-                                            <img src={avatar} alt={""}/>
-                                            <span className={cx("user-name")}>Nguyễn Tiến Dũng</span>
+                                        <div className={cx("avatar-container")}>
+                                            <div className={cx("avatar")}>
+                                                <img src={avatar} alt={""}/>
+                                                <span className={cx("user-name")}>Nguyễn Tiến Dũng</span>
+                                            </div>
                                             <div className={cx("ui-info")}>
-                                                <div className={cx("ui-name")}></div>
                                                 <div className={cx("ui-arrow")}>
-                                                    <FontAwesomeIcon icon={faAngleDown} />
+                                                    <FontAwesomeIcon icon={faAngleDown}/>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className={cx("list-option")}>
-
+                                            <div className={cx("list-option-arrow")}></div>
+                                            <div className={cx("list-option")}>
+                                                <span className={cx("option")}>Thông tin cá nhân</span>
+                                                <span className={cx("option")}>Đăng xuất</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className={cx("ui-cart")}>
-                                        <FontAwesomeIcon icon={faCartShopping}/>
+                                    <FontAwesomeIcon icon={faCartShopping}/>
                                         <p className={cx("quantity")}>0</p>
                                     </div>
                                 </div>
