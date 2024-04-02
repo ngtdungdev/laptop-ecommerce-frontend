@@ -10,7 +10,7 @@
     .gradient-background {
       top: 0;
       left: 0;
-      filter: blur(250px);// phân tán màu đi như kiểu làm nhòe màu hay màu thêm nước vào ấy
+      filter: blur(40px);// phân tán màu đi như kiểu làm nhòe màu hay màu thêm nước vào ấy
       height: 100%;
       width: 100%;
       transform: translate3d(0,0,0);// cố định vị trí theo 3 chiều
@@ -18,10 +18,10 @@
       .gradient-background-left {
         bottom: 0;
         left: 0;
-        width: 750px;
-        height: 750px;
+        width: 650px;
+        height: 3.5rem;
         background: #8e7bff;
-        transform: translate(-30%, 40%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
+        transform: translate(-20%, 0%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
 
         animation-iteration-count: infinite;// tạo ra một luồng để khiến cho animation lặp lại một cách vô tận
         animation-duration: 20s;// thời lượng animation
@@ -33,9 +33,9 @@
         top: 0;
         right: 0;
         width: 650px;
-        height: 650px;
+        height: 3.5rem;
         background: #44f2eb;
-        transform: translate(20%, -40%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
+        transform: translate(20%, 0%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
 
         animation-iteration-count: infinite;// tạo ra một luồng để khiến cho animation lặp lại một cách vô tận
         animation-duration: 20s;// thời lượng animation

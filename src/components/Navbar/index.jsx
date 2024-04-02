@@ -3,7 +3,12 @@ import {useAuth} from "../../contexts/AuthContext";
 import {removeAllTokens} from "../../utils/token";
 import {useEffect, useState} from "react";
 import classNames from "classnames/bind";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import avatar from "../../assets/images/logo.svg"
 import styles from "./Navbar.module.scss"
+import logo from "../../assets/images/logoWeb.svg";
 
 const Navbar = () => {
     const cx = classNames.bind(styles)
@@ -45,7 +50,9 @@ const Navbar = () => {
                     <ul className={cx("navbar-links")}>
                         {items.map((item, index) =>
                             <li key={index} className={cx("ui-navbar")}>
-                                <Link to={item.link} className={cx("ui-navbar-links")}>{item.title}</Link>
+                                <div className={cx("ui-links")}>
+                                    <Link to={item.link} className={cx("ui-navbar-links")}>{item.title}</Link>
+                                </div>
                             </li>
                         )}
                     </ul>
@@ -55,12 +62,50 @@ const Navbar = () => {
                         {userLoggedIn
                             ?
                             <>
-                                <button onClick={doSignOut}>Sign out</button>
+                                {/*<div className={cx("ui-navbar-login")}>*/}
+                                {/*    <div className={cx("ui-avatar")}>*/}
+                                {/*        <div className={cx("avatar")}>*/}
+                                {/*            <img src={avatar} alt={""}/>*/}
+                                {/*            <div className={cx("ui-arrow")}></div>*/}
+                                {/*        </div>*/}
+                                {/*        <div className={cx("list-option")}>*/}
+
+                                {/*        </div>*/}
+                                {/*    </div>*/}
+                                {/*    <div className={cx("ui-cart")}>*/}
+                                {/*        <FontAwesomeIcon icon={faCartShopping} />*/}
+                                {/*        <p className={cx("quantity")}>0</p>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
+                                {/*<button onClick={doSignOut}>Sign out</button>*/}
                             </>
                             :
                             <>
-                                <Link to={cx("/login")}>Login</Link>
-                                <Link to={cx("/signup")}>Sign up</Link>
+                                {/*<button className={cx("btn-Login")}>Login</button>*/}
+                                {/*<button className={cx("btn-SignUp")}>Sign up</button>*/}
+
+                                <div className={cx("ui-navbar-login")}>
+                                    <div className={cx("ui-avatar")}>
+                                        <div className={cx("avatar")}>
+                                            <img src={avatar} alt={""}/>
+                                            <span className={cx("user-name")}>Nguyễn Tiến Dũng</span>
+                                            <div className={cx("ui-info")}>
+                                                <div className={cx("ui-name")}></div>
+                                                <div className={cx("ui-arrow")}>
+                                                    <FontAwesomeIcon icon={faAngleDown} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={cx("list-option")}>
+
+                                        </div>
+                                    </div>
+                                    <div className={cx("ui-cart")}>
+                                        <FontAwesomeIcon icon={faCartShopping}/>
+                                        <p className={cx("quantity")}>0</p>
+                                    </div>
+                                </div>
+                                {/*<button onClick={doSignOut}>Sign out</button>*/}
                             </>
                         }
                     </div>
