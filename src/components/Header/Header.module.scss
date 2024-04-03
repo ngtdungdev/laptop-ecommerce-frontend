@@ -1,94 +1,97 @@
 .page-container {
-  position: relative;
-  height: 3.5rem;
-  .gradient-background-wrapper {
-    position: fixed;
-    overflow: hidden;
-    background: #141414;
-    width: 100%;
-    height: 3.5rem;
-    .gradient-background {
-      top: 0;
-      left: 0;
-      filter: blur(40px);// phân tán màu đi như kiểu làm nhòe màu hay màu thêm nước vào ấy
-      height: 100%;
+  position: fixed;
+  width: 100%;
+  .ui-page-container {
+    position: relative;
+    .gradient-background-wrapper {
+      position: fixed;
+      overflow: hidden;
+      background: #141414;
       width: 100%;
-      transform: translate3d(0,0,0);// cố định vị trí theo 3 chiều
-      position: absolute;
-      .gradient-background-left {
-        bottom: 0;
-        left: 0;
-        width: 650px;
-        height: 3.5rem;
-        background: #8e7bff;
-        transform: translate(-20%, 0%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
-
-        animation-iteration-count: infinite;// tạo ra một luồng để khiến cho animation lặp lại một cách vô tận
-        animation-duration: 20s;// thời lượng animation
-        position: absolute;
-        border-radius: 100%;
-        animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
-      }
-      .gradient-background-right {
+      height: 3.5rem;
+      .gradient-background {
         top: 0;
-        right: 0;
-        width: 650px;
-        height: 3.5rem;
-        background: #44f2eb;
-        transform: translate(20%, 0%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
-
-        animation-iteration-count: infinite;// tạo ra một luồng để khiến cho animation lặp lại một cách vô tận
-        animation-duration: 20s;// thời lượng animation
+        left: 0;
+        filter: blur(40px);// phân tán màu đi như kiểu làm nhòe màu hay màu thêm nước vào ấy
+        height: 100%;
+        width: 100%;
+        transform: translate3d(0,0,0);// cố định vị trí theo 3 chiều
         position: absolute;
-        border-radius: 100%;
-        animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
+        .gradient-background-left {
+          bottom: 0;
+          left: 0;
+          width: 650px;
+          height: 3.5rem;
+          background: #8e7bff;
+          transform: translate(-20%, 0%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
+
+          animation-iteration-count: infinite;// tạo ra một luồng để khiến cho animation lặp lại một cách vô tận
+          animation-duration: 20s;// thời lượng animation
+          position: absolute;
+          border-radius: 100%;
+          animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
+        }
+        .gradient-background-right {
+          top: 0;
+          right: 0;
+          width: 650px;
+          height: 3.5rem;
+          background: #44f2eb;
+          transform: translate(20%, 0%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
+
+          animation-iteration-count: infinite;// tạo ra một luồng để khiến cho animation lặp lại một cách vô tận
+          animation-duration: 20s;// thời lượng animation
+          position: absolute;
+          border-radius: 100%;
+          animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
+        }
+      }
+      .gradient-background-noise {
+        position: absolute;// cần có position này để có thể set top left right các kiểu nói chung như frame layout ấy
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("https://cdn.shopify.com/shopifycloud/identity/assets/gradient/noise-ae0ab1628dee87591c6f6d3740b6e7e4e5109417e35a0781070d9d737f959e22.png");
+        background-size: 100px;// size hình ảnh
       }
     }
-    .gradient-background-noise {
-      position: absolute;// cần có position này để có thể set top left right các kiểu nói chung như frame layout ấy
-      top: 0;
-      left: 0;
+    .main-page {
+      flex: 1;
       width: 100%;
       height: 100%;
-      background-image: url("https://cdn.shopify.com/shopifycloud/identity/assets/gradient/noise-ae0ab1628dee87591c6f6d3740b6e7e4e5109417e35a0781070d9d737f959e22.png");
-      background-size: 100px;// size hình ảnh
-    }
-  }
-  .main-page {
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .cart-helder {
-      z-index: 1;
-      width: 15%;
       display: flex;
       justify-content: center;
       align-items: center;
-      .cart-logo {
-        margin: 0;
+      .cart-helder {
+        z-index: 1;
+        width: 15%;
         display: flex;
-        font-weight: 500;
+        justify-content: center;
         align-items: center;
-        background: transparent;
-        font-family: emoji;
-        font-size: 21px;
-        .loginCart-helder {
-          img {
-            width: 10rem;
-            height: 2.5rem;
+        .cart-logo {
+          margin: 0;
+          display: flex;
+          font-weight: 500;
+          align-items: center;
+          background: transparent;
+          font-family: emoji;
+          font-size: 21px;
+          .loginCart-helder {
+            img {
+              width: 10rem;
+              height: 2.5rem;
+            }
           }
         }
       }
-    }
-    .navbar {
-      z-index: 1;
-      background: transparent;
-      width: 85%;
-      height: 100%;
-      flex: 1;
+      .navbar {
+        z-index: 1;
+        background: transparent;
+        width: 85%;
+        height: 100%;
+        flex: 1;
+      }
     }
   }
 }

@@ -280,49 +280,53 @@
           }
         }
 
-        .btn-Login, .btn-SignUp {
-          padding: 10px;
-          width: 5rem;
-          color:  #1eabbb;
-          background-color: transparent;
-          border: none;
-          border-radius: 0.625em;
-          font-size: 14px;
-          font-weight: bold;
-          cursor: pointer;
-          position: relative;
-          z-index: 1;
-          overflow: hidden;
-        }
-        .btn-Login:hover, .btn-SignUp:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 20px 10px rgba(0, 0, 0, 0.2);
-        }
+        .ui-button {
+          display: flex;
+          justify-content: center;
+          .btn-Login, .btn-SignUp {
+            padding: 10px;
+            width: 5rem;
+            color:  #1eabbb;
+            background-color: transparent;
+            border: none;
+            border-radius: 0.625em;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+          }
+          .btn-Login:hover, .btn-SignUp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 10px rgba(0, 0, 0, 0.2);
+          }
 
-        .btn-Login:active, .btn-SignUp:active {
-          transform: translateY(-1px);
-          box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-        }
-        .btn-Login:after, .btn-SignUp:after {
-          content: "";
-          background: white;
-          position: absolute;
-          z-index: -1;
-          left: -20%;
-          right: -20%;
-          top: 0;
-          bottom: 0;
-          transform: skewX(-45deg) scale(0, 1); // ngiêng một góc 45 độ theo trục X ngược kim đồng hồ
-          // 0 theo trục X và 1 theo trục Y
-          transition: all 0.5s;
-        }
+          .btn-Login:active, .btn-SignUp:active {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+          }
+          .btn-Login:after, .btn-SignUp:after {
+            content: "";
+            background: white;
+            position: absolute;
+            z-index: -1;
+            left: -20%;
+            right: -20%;
+            top: 0;
+            bottom: 0;
+            transform: skewX(-45deg) scale(0, 1); // ngiêng một góc 45 độ theo trục X ngược kim đồng hồ
+            // 0 theo trục X và 1 theo trục Y
+            transition: all 0.5s;
+          }
 
-        .btn-Login:hover:after, .btn-SignUp:hover:after {
-          transform: skewX(-45deg) scale(1, 1);
-          transition: all 0.5s;
-        }
-        .btn-SignUp {
-          margin-left: 10px;
+          .btn-Login:hover:after, .btn-SignUp:hover:after {
+            transform: skewX(-45deg) scale(1, 1);
+            transition: all 0.5s;
+          }
+          .btn-SignUp {
+            margin-left: 10px;
+          }
         }
       }
     }
