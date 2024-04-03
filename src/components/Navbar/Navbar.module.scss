@@ -1,31 +1,3 @@
-@keyframes expandWidth {
-  0% {
-    width: 3rem;
-    border-radius: 30px;
-  }
-
-  75% {
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
-  }
-
-  100% {
-    width: 11.5rem;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-  }
-}
-
-@keyframes expandLeft {
-  0% {
-    margin-left: 1em;
-  }
-
-  100% {
-    margin-left: 0.5em;
-  }
-}
-
 @keyframes expandLeftToRight {
   0% {
     opacity: 0;
@@ -37,6 +9,22 @@
     width: 100%;
   }
 }
+
+@keyframes ui-cart {
+  0% {
+    width: 0;
+    height: 3px;
+  }
+  50% {
+    width: 2.5rem;
+    height: 3px;
+  }
+  100% {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
 
 .navbar-container {
   height: 100%;
@@ -103,6 +91,7 @@
             .avatar-container {
               font-size: 20px;
               display: flex;
+              z-index: 1;
               position: relative;
               .avatar {
                 display: flex;
@@ -118,6 +107,7 @@
                   display: flex;
                   align-items: center;
                   justify-content: center;
+                  transition: 0.5s margin-left;
                   font-size: 14px;
                   color: #e3e3e3;
                   z-index: 1;
@@ -132,6 +122,7 @@
                 border-radius: 30px;
                 top: 50%;
                 transform: translateY(-50%);
+                transition: width 1s, border-radius 1.5s;
                 width: 2.5rem;
                 height: 2.5rem;
                 background-color: #2a2f3b;
@@ -149,6 +140,7 @@
               .list-option {
                 position: absolute;
                 display: flex;
+                z-index: 3;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
@@ -156,11 +148,11 @@
                 padding: 5px;
                 border-radius: 5px;
                 background-color: #2a2f3b;
-                top: 0;
+                top: -6rem;
                 width: 11.5rem;
                 opacity: 0;
                 transition-delay: 5s;
-                transition: 300ms;
+                transition: 300ms opacity, 0.6s top;
                 margin: 0;
                 .option {
                   display: flex;
@@ -230,7 +222,7 @@
               }
               .user-name {
                 cursor: pointer;
-                animation: expandLeft 0.5s forwards;
+                margin-left: 0.5em;
               }
               img {
                 display: flex;
@@ -240,19 +232,51 @@
                 backface-visibility: hidden;
               }
               .ui-info {
-                animation: expandWidth 1s forwards;
-              }
+                width: 11.5rem;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;              }
             }
           }
           .ui-cart {
             width: 30%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
-            .quantity {
-              font-size: 15px;
+            .cart {
+              z-index: 1;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 20px;
+              .quantity {
+                width: 5px;
+                height: 5px;
+                border-radius: 5px;
+                background-color: #c51414;
+                font-size: 15px;
+                position: relative;
+                top: -10px;
+                margin: 0;
+              }
             }
+          }
+          .ui-cart:after {
+            content: "";
+            width: 0;
+            position: absolute;
+            border-radius: 5px;
+            bottom: 10px;
+            height: 3px;
+            margin-top: 5px;
+            background-color: #70c9d3;
+            z-index: -1;
+          }
+          .ui-cart:hover:after {
+            animation: ui-cart 1s forwards;
+          }
+          .ui-cart:active {
+            opacity: 0.7;
           }
         }
 
