@@ -15,6 +15,7 @@ import AboutUs from "./pages/AboutUs";
 import Payment from "./pages/Payment";
 import Profile from "./pages/Profile";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Admin from "./pages/Admin/index.js";
 import Order from "./pages/Admin/Order";
 import Support from "./pages/Admin/Support";
@@ -35,6 +36,7 @@ const App = () => {
         {path: "/cart", element: <FullLayout element={Cart}/>},
         {path: "/orders", element: <FullLayout element={Orders}/>},
         {path: "/header", element: <Header/>},
+        {path: "/footer", element: <Footer/>},
         {path: "/about-us", element: <FullLayout element={AboutUs}/>},
         {path: "/payment", element: <FullLayout element={Payment}/>, permissions: []},
         {path: "/profile", element: <FullLayout element={Profile}/>, permissions: []},

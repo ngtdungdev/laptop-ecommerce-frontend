@@ -14,7 +14,6 @@ const Navbar = () => {
     const cx = classNames.bind(styles)
     const navigate = useNavigate();
     const {userLoggedIn, currentUser} = useAuth();
-
     const [isScrolled, setIsScrolled] = useState(false);
 
     const items = [
@@ -43,6 +42,7 @@ const Navbar = () => {
         window.location.href = "/";
     };
 
+
     return (
         <nav className={cx({"navbar-container": true, "scrolled": isScrolled})}>
             <div className={cx("navbar-content")}>
@@ -62,28 +62,6 @@ const Navbar = () => {
                         {userLoggedIn
                             ?
                             <>
-                                {/*<div className={cx("ui-navbar-login")}>*/}
-                                {/*    <div className={cx("ui-avatar")}>*/}
-                                {/*        <div className={cx("avatar")}>*/}
-                                {/*            <img src={avatar} alt={""}/>*/}
-                                {/*            <div className={cx("ui-arrow")}></div>*/}
-                                {/*        </div>*/}
-                                {/*        <div className={cx("list-option")}>*/}
-
-                                {/*        </div>*/}
-                                {/*    </div>*/}
-                                {/*    <div className={cx("ui-cart")}>*/}
-                                {/*        <FontAwesomeIcon icon={faCartShopping} />*/}
-                                {/*        <p className={cx("quantity")}>0</p>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
-                                {/*<button onClick={doSignOut}>Sign out</button>*/}
-                            </>
-                            :
-                            <>
-                                {/*<button className={cx("btn-Login")}>Login</button>*/}
-                                {/*<button className={cx("btn-SignUp")}>Sign up</button>*/}
-
                                 <div className={cx("ui-navbar-login")}>
                                     <div className={cx("ui-avatar")}>
                                         <div className={cx("avatar-container")}>
@@ -104,11 +82,18 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                     <div className={cx("ui-cart")}>
-                                    <FontAwesomeIcon icon={faCartShopping}/>
-                                        <p className={cx("quantity")}>0</p>
+                                        <div className={cx("cart")}>
+                                            <FontAwesomeIcon icon={faCartShopping}/>
+                                            <div className={cx("quantity")}></div>
+                                        </div>
                                     </div>
                                 </div>
                                 {/*<button onClick={doSignOut}>Sign out</button>*/}
+                            </>
+                            :
+                            <>
+                                <button className={cx("btn-Login")}>Login</button>
+                                <button className={cx("btn-SignUp")}>Sign up</button>
                             </>
                         }
                     </div>

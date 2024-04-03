@@ -1,0 +1,223 @@
+.footer-container {
+  height: 20%;
+  bottom: 0;
+  position: relative;
+  .gradient-background-wrapper {
+    position: fixed;
+    overflow: hidden;
+    background: #141414;
+    width: 100%;
+    height: 35%;
+    .gradient-background {
+      top: 0;
+      left: 0;
+      filter: blur(80px);// phân tán màu đi như kiểu làm nhòe màu hay màu thêm nước vào ấy
+      height: 100%;
+      width: 100%;
+      transform: translate3d(0,0,0);// cố định vị trí theo 3 chiều
+      position: absolute;
+      .gradient-background-left {
+        bottom: 0;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        background: #8e7bff;
+        transform: translate(-20%, 0%);
+        animation-iteration-count: infinite;
+        animation-duration: 20s;
+        position: absolute;
+        border-radius: 100%;
+        animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
+      }
+      .gradient-background-right {
+        top: 0;
+        right: 0;
+        width: 40%;
+        height: 100%;
+        background: #44f2eb;
+        transform: translate(20%, 0%); // như kiểu chỉnh tọa độ x,y trong một fragment mà ko ảnh hưởng đến các thành phần
+
+        animation-iteration-count: infinite;// tạo ra một luồng để khiến cho animation lặp lại một cách vô tận
+        animation-duration: 20s;// thời lượng animation
+        position: absolute;
+        border-radius: 100%;
+        animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
+      }
+    }
+    .gradient-background-noise {
+      position: absolute;// cần có position này để có thể set top left right các kiểu nói chung như frame layout ấy
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("https://cdn.shopify.com/shopifycloud/identity/assets/gradient/noise-ae0ab1628dee87591c6f6d3740b6e7e4e5109417e35a0781070d9d737f959e22.png");
+      background-size: 100px;// size hình ảnh
+    }
+  }
+  .ui-footer {
+    position: relative;
+    padding: 2rem 10px 0.5rem;
+    margin-right: 10px;
+    margin-left: 10px;
+    .ui-footer-top {
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      .row {
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        .column {
+          padding-left: 2rem;
+          padding-right: 2rem;
+          position: relative;
+          width: 100%;
+          max-width: 29%;
+          flex: 0 0 29%;
+        }
+
+        .ui-column-1 {
+          .logo {
+            img {
+              width: 10rem;
+              height: 3.5rem;
+            }
+          }
+
+          .text {
+            p {
+              font-size: 15px;
+              color: #e3e3e3;
+              line-height: 1.5;
+              letter-spacing: normal;
+              margin-top: 0;
+              margin-bottom: 1rem;
+            }
+          }
+        }
+
+        .ui-column-2 {
+          color: #dedede;
+          .title {
+            p {
+              margin-top: 0;
+              margin-bottom: 1.25rem;
+              font-weight: 700;
+              color: #dedede;
+              font-size: 13px;
+              line-height: 1.5;
+              font-family: system-ui;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            }
+          }
+
+          .address {
+            p {
+              font-size: 15px;
+              margin-top: 0;
+              line-height: 1.5;
+              letter-spacing: normal;
+            }
+          }
+
+          .number-phone {
+            display: flex;
+            font-size: 15px;
+            line-height: 1.5;
+            letter-spacing: normal;
+            p {
+              margin-left: 5px;
+              font-weight: 550;
+              font-size: 14px;
+              margin-top: 0;
+              color: rgba(255, 255, 255, 0.90);
+              letter-spacing: normal;
+            }
+          }
+
+          .email {
+            display: flex;
+            font-size: 15px;
+            line-height: 1.5;
+            letter-spacing: normal;
+
+            a {
+              margin-left: 5px;
+              font-weight: 550;
+              font-size: 14px;
+              margin-top: 0;
+              color: rgba(255, 255, 255, 0.90);
+              letter-spacing: normal;
+              text-decoration: none;
+            }
+            a:hover {
+              color:  #1eabbb;
+              opacity: 0.9;
+            }
+          }
+        }
+
+        .ui-column-3 {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          .title {
+            p {
+              margin-top: 0;
+              margin-bottom: 1.25rem;
+              font-weight: 700;
+              color: #dedede;
+              font-size: 13px;
+              line-height: 1.5;
+              font-family: system-ui;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            }
+          }
+
+          .editTextEmail {
+            width: 70%;
+          }
+
+          .buttonEmail {
+            margin-top: 0.5rem;
+            .btn {
+              background-image: linear-gradient(to right, #1eabbb, #56ecfd);
+              width: 6rem;
+              color: #dedede;
+            }
+            .btn:hover {
+              color: #44f2eb;
+            }
+          }
+
+          .note {
+            p {
+              font-size: 15px;
+              color: #e3e3e3;
+              line-height: 1.5;
+              letter-spacing: normal;
+              padding-top: 10px;
+              margin-top: 0;
+              margin-bottom: 0.3rem;
+            }
+          }
+        }
+      }
+    }
+    .ui-footer-bottom {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      .footer-credit {
+        font-size: 13px;
+        letter-spacing: normal;
+        color: #ffffff;
+        opacity: 0.6;
+      }
+    }
+  }
+}
