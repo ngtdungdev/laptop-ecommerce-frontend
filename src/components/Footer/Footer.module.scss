@@ -3,11 +3,11 @@
   bottom: 0;
   position: relative;
   .gradient-background-wrapper {
-    position: fixed;
     overflow: hidden;
+    position: absolute;
     background: #141414;
     width: 100%;
-    height: 35%;
+    height: 100%;
     .gradient-background {
       top: 0;
       left: 0;
@@ -73,8 +73,7 @@
           padding-right: 2rem;
           position: relative;
           width: 100%;
-          max-width: 29%;
-          flex: 0 0 29%;
+          max-width: 28%;
         }
 
         .ui-column-1 {
