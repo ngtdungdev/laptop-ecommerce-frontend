@@ -1,5 +1,6 @@
 .page-container {
   position: fixed;
+  z-index: 3;
   width: 100%;
   .ui-page-container {
     position: relative;

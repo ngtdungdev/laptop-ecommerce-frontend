@@ -1,0 +1,43 @@
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  color: #1A1A1A;
+  .name-slider {
+    font-size: 16px;
+    font-weight: 550;
+    font-family: system-ui;
+    top: -5px;
+    color: #1A1A1A;
+    position: absolute;
+  }
+  .ui-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e3e3e3;
+      height: 2.5rem;
+      width: 8rem;
+      background-color: #1eabbb;
+      border-radius: 10px;
+    }
+    .price-from {
+
+    }
+    .slider {
+      width: 10rem;
+      border-radius: 10px;
+      margin: 0 10px;
+    }
+    .price-to {
+
+    }
+  }
+}
