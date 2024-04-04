@@ -1,0 +1,110 @@
+
+@keyframes expandLeftToRight {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+
+  100% {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+.ui-select-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  .ui-select {
+    overflow: hidden;
+    height: 2.5rem;
+    width: 10rem;
+    border-radius: 8px;
+    transition: all 0.3s;
+    position: relative;
+    background: #1eabbb;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .select {
+      font-size: 16px;
+      color: #e3e3e3;
+      cursor: default;
+      user-select: none;
+      margin: 0;
+    }
+    .img {
+      position: absolute;
+      transform: rotate(-90deg);
+      transition: 300ms;
+      margin-right: 10px;
+      color: #e3e3e3;
+      right: 0;
+    }
+  }
+  .ui-select:before {
+    content: "";
+    position: absolute;
+    background-image: linear-gradient(to right, #82e4e7, #3d8cf3);
+    z-index: -1;
+    opacity: 0;
+    inset: 0;
+  }
+  .list-option {
+    background: #1eabbb;
+    width: 100%;
+    top: 2.5rem;
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 1s;
+    z-index: 1;
+    .option {
+      display: flex;
+      position: relative;
+      align-items: center;
+      color: #e3e3e3;
+      user-select: none;
+      justify-content: center;
+      cursor: pointer;
+      padding: 10px;
+    }
+    .option:before {
+      content: "";
+      position: absolute;
+      background-image: linear-gradient(to right, #82e4e7, #3d8cf3);
+      z-index: -1;
+      opacity: 0;
+      inset: 0;
+    }
+    .option:hover:before {
+      animation: expandLeftToRight 0.5s forwards;
+    }
+    .option:active {
+      opacity: 0.8;
+    }
+  }
+}
+.ui-select-container:hover {
+  .img {
+    transform: rotate(0deg);
+  }
+  .ui-select {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .ui-select:hover:before {
+    animation: expandLeftToRight 0.5s forwards;
+  }
+  .list-option {
+    opacity: 1;
+    height: auto;
+  }
+}

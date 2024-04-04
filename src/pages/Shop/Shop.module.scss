@@ -1,15 +1,13 @@
-
-@keyframes expandLeftToRight {
+@keyframes expandTopToBottom {
   0% {
-    opacity: 0;
-    width: 0;
+    height: 0;
   }
 
   100% {
-    opacity: 1;
-    width: 100%;
+    height: auto;
   }
 }
+
 
 @keyframes ui-search {
   0% {
@@ -28,17 +26,25 @@
 
 
 .shop-container {
-  padding: 5rem;
+  padding: 8rem 2rem;
   z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   .ui-shop {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     .ui-shop-top {
       display: flex;
       justify-content: center;
       .ui-option {
-        margin-right: 5rem;
+        margin-right: 4rem;
       }
       .ui-search {
-        width: 20%;
+        width: 18rem;
         .next-input {
           .combined-input{
             display: flex;
@@ -47,13 +53,13 @@
             .input {
             }
             .ui-search {
-              width: 40px;
+              width: 3rem;
               justify-content: center;
               align-items: center;
               display: flex;
-              height: 40px;
-              background-image: linear-gradient(to right, #82e4e7, #3d8cf3);
+              height: 2.5rem;
               z-index: 1;
+              background-color: #1eabbb;
               img {
                 width: 1.5rem;
                 height: 1.5rem;
@@ -65,7 +71,7 @@
               width: 0;
               position: absolute;
               height: 3px;
-              background-color: #70c9d3;
+              background-image: linear-gradient(to right, #82e4e7, #3d8cf3);
               z-index: -1;
             }
             .ui-search:hover:after {
@@ -78,64 +84,35 @@
         }
       }
       .ui-combobox {
-        .ui-select-container {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          .ui-select {
-            overflow: hidden;
-            height: 2.5rem;
-            width: 10rem;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            position: relative;
-            background: #1eabbb;
-            z-index: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .select {
-              font-size: 16px;
-              color: #e3e3e3;
-              margin: 0;
-            }
-            .img {
-              position: absolute;
-              transform: rotate(-90deg);
-              transition: 300ms;
-              margin-right: 10px;
-              color: #e3e3e3;
-              right: 0;
-            }
-          }
-          .ui-select:before {
-            content: "";
-            position: absolute;
-            background-image: linear-gradient(to right, #1eabbb, #56ecfd);;
-            z-index: -1;
-            opacity: 0;
-            inset: 0;
-          }
-          .list-option {
 
-          }
-        }
-        .ui-select-container:hover {
-          .img {
-            transform: rotate(0deg);
-          }
-          .ui-select:hover:before {
-            animation: expandLeftToRight 0.5s forwards;
-          }
-        }
       }
       .ui-tow-bar {
 
       }
+      .ui-button {
+        .btn-price-filter {
+          height: 2.5rem;
+          font-weight: 500;
+          background-color: #1eabbb;
+          width: 6rem;
+          color: #dedede;
+        }
+        .btn-price-filter:after {
+          background-image: linear-gradient(to right, #82e4e7, #3d8cf3);
+        }
+        .btn-price-filter:hover {
+          background-color: #1eabbb;
+        }
+      }
     }
     .ui-shop-bottom {
-
+      display: grid;
+      padding-top: 5rem;
+      width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(calc(15% - 0rem), 1fr));
+      grid-auto-rows: auto;
+      gap: 2rem;
+      justify-content: center;
     }
   }
 }
