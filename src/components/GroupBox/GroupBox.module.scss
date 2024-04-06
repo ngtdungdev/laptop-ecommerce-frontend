@@ -1,0 +1,55 @@
+.group-box-container {
+  padding: 5rem 0;
+  display: flex;
+  justify-content: center;
+  transform: translateY(0);
+  align-items: center;
+  .arrow-left {
+    border-radius: 5px;
+    padding: 5px 10px;
+    background: #a3fff8;
+  }
+  .group-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+      user-select: none;
+      margin: 0;
+      border-radius: 5px;
+      padding: 5px 10px;
+      background: #a3fff8;
+    }
+    .option-selected {
+      background: #44f2eb;
+    }
+    .option {
+      margin-left: 10px;
+      transform: translateY(0);
+    }
+    .option:hover {
+      transform: translateY(-5px);
+      box-shadow: 2px 2px 20px #cacaca, -2px -2px 20px #70c9d3;
+    }
+    .option:active {
+      transform: translateY(-2px);
+      opacity: 0.8;
+    }
+  }
+  .arrow-right {
+    margin-left: 10px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transform: translateY(0);
+    background: #a3fff8
+  }
+  .arrow-right:hover, .arrow-left:hover {
+    transform: translateY(-5px);
+    box-shadow: 2px 2px 20px #cacaca, -2px -2px 20px #70c9d3;
+  }
+  .arrow-right:active, .arrow-left:active {
+    transform: translateY(-2px);
+    opacity: 0.8;
+  }
+
+}

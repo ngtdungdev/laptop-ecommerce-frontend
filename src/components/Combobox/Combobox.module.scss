@@ -52,6 +52,9 @@
     opacity: 0;
     inset: 0;
   }
+  .ui-select:hover:before {
+    animation: expandLeftToRight 0.5s forwards;
+  }
   .list-option {
     background: #1eabbb;
     width: 100%;
@@ -99,9 +102,6 @@
   .ui-select {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-  }
-  .ui-select:hover:before {
-    animation: expandLeftToRight 0.5s forwards;
   }
   .list-option {
     opacity: 1;
