@@ -4,6 +4,7 @@ import React from "react";
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import {useAuth} from "./contexts/AuthContext";
 import FullLayout from "./layouts/FullLayout";
+import HeaderLayout from "./layouts/HeaderLayout";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -16,7 +17,7 @@ import Payment from "./pages/Payment";
 import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Admin from "./pages/Admin/index.js";
+import Admin from "./pages/Admin";
 import Order from "./pages/Admin/Order";
 import Support from "./pages/Admin/Support";
 import Product from "./pages/Admin/Product";
@@ -43,8 +44,8 @@ const App = () => {
         {path: "/login", element: <Login active={isActive}/>},
         {path: "/signup", element: <Login active={!isActive}/>},
         {path: "/forgot-password", element: <ForgotPassword/>},
-        {path: "/admin/*", element: <Navigate to={"/admin"}/>, permissions: []},
-        {path: "/admin", element: <FullLayout element={Admin}/>, permissions: []},
+        // {path: "/admin/*", element: <Navigate to={"/admin"}/>, permissions: []},
+        {path: "/admin", element: <HeaderLayout element={Admin}/>},
         {
             path: "/admin/orders", element: <Order/>,
             permissions: [
