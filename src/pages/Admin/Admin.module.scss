@@ -5,8 +5,9 @@
   position: relative;
   .admin-selection-bar {
     width: 60px;
-    height: 90vh;
+    height: 91vh;
     position: absolute;
+    z-index: 1;
     transition: 300ms;
     border-radius: 0 0 5px 0;
     background-color: #ffffff;
@@ -174,10 +175,11 @@
       }
     }
   }
-
   .panel-function {
     width: 100%;
-    background-color: #44f2eb;
-    height: 90vh;
+    background-color: #d2fffd;
+    display: flex;
+    flex-direction: column;
+    height: 91vh;
   }
 }

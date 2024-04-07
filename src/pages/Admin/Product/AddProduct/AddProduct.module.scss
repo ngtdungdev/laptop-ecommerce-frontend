@@ -1,0 +1,148 @@
+.addProduct-container {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  border-width: 1px;
+  width: 60vh;
+  border-color: rgba(26, 26, 26, 0.41);
+  border-style: solid;
+  align-items: start;
+  .ui-container {
+    width: 100vh;
+    border-radius: 8px;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    .panel {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+    }
+    .ui-title {
+      display: flex;
+      p {
+        margin: 0;
+        font-family: emoji;
+        font-weight: 550;
+        font-size: 36px;
+        color: #1eabbb;
+      }
+    }
+    .list-combobox {
+      position: relative;
+      .ui-category {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        .category {
+        }
+      }
+      .ui-producer {
+        position: absolute;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+
+        .producer {
+
+        }
+      }
+    }
+    .ui-intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      .text-intro {
+        max-width: 50vh;
+        min-width: 50vh;
+        min-height: 5rem;
+        max-height: 7rem;
+        border-style: solid;
+      }
+      .text-intro:focus {
+        border-color: #e3e3e3;
+        border-style: solid;
+        border-width: 1px;
+      }
+    }
+    .ui-btnImage {
+      position: relative;
+      .ui-image {
+        display: flex;
+        width: 300px;
+        justify-content: start;
+        align-items: center;
+        .btn {
+          border-radius: 5px;
+          text-align: center;
+          background-image: linear-gradient(to right, #1eabbb, #56ecfd);
+          width: 5rem;
+          color: #dedede;
+        }
+        .btn:hover {
+          color: #44f2eb;
+        }
+        input {
+          border-radius: 5px;
+          border-width: 1px;
+          border-style: solid;
+          border-color: #303030;
+          background: #e3e3e3;
+        }
+        .ui-name {
+          margin: 0 0 0 5px;
+          font-size: 14px;
+          width: 10rem;
+          display: flex;
+          .name {
+            margin: 0 0 0 5px;
+            font-size: 14px;
+            position: absolute;
+            top: 10px;
+            width: 150px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            white-space: pre-wrap;
+            overflow: hidden;
+            word-wrap: break-word;
+          }
+        }
+        img {
+          border-radius: 5px;
+          border-width: 1px;
+          border-style: solid;
+          border-color: #303030;
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 60px;
+          height: 60px;
+        }
+      }
+    }
+    .ui-btnAdd {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .btn-add {
+        border-radius: 5px;
+        font-size: 14px;
+        width: 8rem;
+        background-image: linear-gradient(to right, #1eabbb, #56ecfd);
+        color: #dedede;
+
+        &:hover {
+          color: #44f2eb;
+        }
+      }
+    }
+  }
+}

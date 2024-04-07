@@ -19,10 +19,10 @@
   .ui-select {
     overflow: hidden;
     height: 2.5rem;
-    width: 10rem;
+    min-width: 6rem;
     border-radius: 8px;
+    padding: 0 10px;
     transition: all 0.3s;
-    position: relative;
     background: #1eabbb;
     z-index: 1;
     display: flex;
@@ -36,10 +36,9 @@
       margin: 0;
     }
     .img {
-      position: absolute;
       transform: rotate(-90deg);
       transition: 300ms;
-      margin-right: 10px;
+      margin: 0 0 0 10px;
       color: #e3e3e3;
       right: 0;
     }
@@ -47,6 +46,8 @@
   .ui-select:before {
     content: "";
     position: absolute;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
     background-image: linear-gradient(to right, #82e4e7, #3d8cf3);
     z-index: -1;
     opacity: 0;
@@ -57,8 +58,8 @@
   }
   .list-option {
     background: #1eabbb;
-    width: 100%;
     top: 2.5rem;
+    width: 100%;
     position: absolute;
     opacity: 0;
     height: 0;
@@ -95,6 +96,42 @@
     }
   }
 }
+.container-white {
+  .ui-select-white {
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #303030;
+    background: #ffffff;
+    .select-white {
+      color: #1A1A1A;
+    }
+    .img {
+      color: #1A1A1A;
+    }
+  }
+  .ui-select:before {
+    content: "";
+    position: absolute;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-image: linear-gradient(to right, #82e4e7, #3d8cf3);
+    z-index: -1;
+    opacity: 0;
+    inset: 0;
+  }
+  .list-option {
+    background: #ffffff;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    .option {
+      border-style: solid;
+      border-width: 0 1px 0 1px;
+      border-color: #303030;
+      color: #1A1A1A;
+    }
+  }
+}
 .ui-select-container:hover {
   .img {
     transform: rotate(0deg);
@@ -106,5 +143,7 @@
   .list-option {
     opacity: 1;
     height: auto;
+    border-style: solid;
+    border-width: 0 0 1px 0;
   }
 }

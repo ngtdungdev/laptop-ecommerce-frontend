@@ -20,6 +20,9 @@ const Shop = () => {
     const handlePriceRangeChange = (newRange) => {
         setSelectedPriceRange(newRange);
     };
+    const handleSelect = () => {
+
+    }
     return (
         <div>
             <div className={cx("shop-container")}>
@@ -36,7 +39,7 @@ const Shop = () => {
                             </div>
                         </div>
                         <div className={cx("ui-combobox", "ui-option")}>
-                            <Combobox listItem={listCategory}/>
+                            <Combobox listItem={listCategory} style={8} handleSelect={handleSelect} isComboboxUI={true}/>
                         </div>
                         <div className={cx("ui-tow-bar", "ui-option")}>
                             <PriceFilter min={priceSlider[0]} max={priceSlider[1]}

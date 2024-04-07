@@ -1,11 +1,20 @@
 import classNames from "classnames/bind";
 import styles from "./Admin.module.scss"
 import {useState} from "react";
-import dashboard from "../../assets/images/dashboard.svg";
-import purchaseOrder from "../../assets/images/purchase-order.svg";
-import orderHistory from "../../assets/images/product.svg";
+import profit from "../../assets/images/profit.svg";
+import revenue from "../../assets/images/revenue.svg";
+import expense from "../../assets/images/expense.svg";
+import star from "../../assets/images/star.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLaptop, faUserGear, faGear} from "@fortawesome/free-solid-svg-icons";
+import Combobox from "../../components/Combobox";
+import Statistics from "./Statistics";
+import Product from "./Product";
+import Order from "./Order";
+import OrderHistory from "./OrderHistory";
+import Role from "./Role";
+import Support from "./Support";
+import Warehouse from "./Warehouse";
 const Admin = () => {
     const cx = classNames.bind(styles)
     const [checkedBurger, setCheckedBurger] = useState(false)
@@ -13,8 +22,21 @@ const Admin = () => {
     const handleClickOption = (id) => {
         setOptions(id)
     };
+    const optionComponents = {
+        1: Statistics,
+        2: Warehouse,
+        3: Order,
+        4: OrderHistory,
+        5: Role,
+        6: Support,
+    };
+
     const handleCheckedBurger= () => {
         setCheckedBurger(!checkedBurger);
+    };
+    const renderComponentBasedOnOption = () => {
+        const SelectedComponent = optionComponents[options];
+        return SelectedComponent ? <SelectedComponent /> : null;
     };
     return (
         <div className={cx("admin-container")}>
@@ -88,7 +110,7 @@ const Admin = () => {
                 </div>
             </div>
             <div className={cx("panel-function")}>
-
+                {renderComponentBasedOnOption()}
             </div>
         </div>
     );

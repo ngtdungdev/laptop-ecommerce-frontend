@@ -78,3 +78,34 @@
   transform: skewX(-45deg) scale(1, 1);
   transition: all 0.5s;
 }
+
+.container {
+  .ui-container {
+    position: relative;
+    .next-label {
+      margin-left: 5px;
+      font-size: 15px;
+      opacity: 0.9;
+      line-height: 20px;
+      font-family: emoji;
+      font-weight: 550;
+      display: block;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+    .next-input {
+      border-radius: 5px;
+    }
+  }
+}
+.next-label {
+  margin-left: 5px;
+  font-size: 15px;
+  opacity: 0.9;
+  line-height: 20px;
+  font-family: emoji;
+  font-weight: 550;
+  display: block;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
