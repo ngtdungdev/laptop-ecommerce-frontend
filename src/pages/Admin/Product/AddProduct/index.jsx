@@ -14,6 +14,12 @@ const AddProduct = () => {
     const handleSelect = () => {
 
     }
+    const comboboxStyle1 = {
+        width: '3rem'
+    };
+    const comboboxStyle2 = {
+        width: '10rem'
+    };
     const [imageSrc, setImageSrc] = useState(image);
     const [fileName, setFileName] = useState('Chọn file ảnh');
     const handleImageChange = (e) => {
@@ -49,14 +55,14 @@ const AddProduct = () => {
                     <div className={cx("ui-category")}>
                         <label className={cd("next-label")}>Loại sản phẩm</label>
                         <div className={cx("category")}>
-                            <Combobox listItem={listCategory} style={3} handleSelect={handleSelect}
+                            <Combobox listItem={listCategory} styleCombobox={comboboxStyle1} handleSelect={handleSelect}
                                       isComboboxUI={false}/>
                         </div>
                     </div>
                     <div className={cx("ui-producer")}>
                         <label className={cd("next-label")}>Hãng sản xuất</label>
                         <div className={cx("producer")}>
-                            <Combobox listItem={listProducer} style={10} handleSelect={handleSelect}
+                            <Combobox listItem={listProducer} styleCombobox={comboboxStyle2} handleSelect={handleSelect}
                                       isComboboxUI={false}/>
                         </div>
                     </div>
