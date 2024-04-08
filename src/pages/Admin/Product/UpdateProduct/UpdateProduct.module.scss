@@ -1,0 +1,164 @@
+
+@keyframes ui-icon{
+  0% {
+    width: 0;
+    height: 3px;
+  }
+  50% {
+    width: 2rem;
+    height: 3px;
+  }
+  100% {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.updateProduct-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  .top-container {
+    width: 75%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .ui-search {
+      width: 15rem;
+      margin-right: 20px;
+      .next-input {
+        height: 2rem;
+        .combined-input{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .input {
+          }
+          .ui-icon {
+            width: 2.5rem;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            height: 2rem;
+            z-index: 1;
+            background-color: #1eabbb;
+            img {
+              width: 1rem;
+              height: 1rem;
+              z-index: 2;
+            }
+          }
+          .ui-icon:after {
+            content: "";
+            width: 0;
+            position: absolute;
+            height: 3px;
+            background-image: linear-gradient(to right, #82e4e7, #3d8cf3);
+            z-index: -1;
+          }
+          .ui-icon:hover:after {
+            animation: ui-icon 0.3s forwards;
+          }
+          .ui-icon:active {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+
+  }
+  .bottom-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    .ui-container {
+      width: 100%;
+      border-radius: 8px;
+      display: flex;
+      justify-content: end;
+      .ui-table {
+        margin-right: 20px;
+        width: 90%;
+        .table-container {
+          border-top-right-radius: 8px;
+          border-top-left-radius: 8px;
+          font-size: 14px;
+          font-family: system-ui;
+          padding: 10px 20px;
+          border-spacing: 0;
+          background-color: #ffffff;
+          tr {
+            th {
+              padding: 10px 10px;
+            }
+          }
+          .item-product {
+            td {
+              border-width: 1px 0 0 0;
+              border-style: solid;
+              border-color: rgba(26, 26, 26, 0.45);
+              padding: 10px 10px;
+              text-align: center;
+              font-size: 13px;
+              font-family: sans-serif;
+            }
+            .index {
+
+            }
+
+            .id {
+
+            }
+
+            .name {
+
+            }
+
+            .category {
+
+            }
+
+            .image {
+
+              img {
+                user-select: none;
+                width: 5rem;
+                height: 5rem;
+              }
+            }
+
+            .producer {
+
+            }
+
+            .intro {
+
+            }
+
+            .price {
+
+            }
+
+            .quantity {
+
+            }
+
+            .display {
+
+            }
+
+            .update {
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
