@@ -10,6 +10,7 @@ import {faAngleLeft, faAngleRight ,faPenToSquare, faTrashCan} from "@fortawesome
 import GroupBox from "../../../../components/GroupBox";
 import image from "../../../../assets/images/imageIcon.svg";
 import UpdateNotification from "./UpdateNotification";
+import Notification from "../../../../components/Notification";
 const UpdateProduct = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
@@ -19,6 +20,19 @@ const UpdateProduct = () => {
         width: '4rem',
         height: '2rem'
     };
+    const handleCategory = () => {
+
+    }
+    const handleClickButton = (index) => {
+        setClickButton(index)
+    };
+    const renderButtonBasedOnOption = () => {
+        const SelectedButton = optionButtons[clickButton];
+        return SelectedButton ? <SelectedButton/> : null;
+    };
+    const handleBtnNotification = () => {
+
+    }
     const optionButtons = {
         0: null,
         1: () => (
@@ -30,22 +44,12 @@ const UpdateProduct = () => {
             </div>
         ),
         2: () => (
-            <div className={cx("notification-container")} onClick={() => handleClickButton(0)}>
-                <div className={cx("notification-delete")}>
-
-                </div>
+            <div className={cx("notification-container")}>
+                <div className={cx("ui-background")} onClick={() => handleClickButton(0)}></div>
+                <Notification text={"Bạn có chắc chắn muốn xóa sản phẩm"} type={"warning"}
+                                  handleBtnNotification={handleBtnNotification}/>
             </div>
         )
-    };
-    const handleCategory = () => {
-
-    }
-    const handleClickButton = (index) => {
-        setClickButton(index)
-    };
-    const renderButtonBasedOnOption = () => {
-        const SelectedButton = optionButtons[clickButton];
-        return SelectedButton ? <SelectedButton/> : null;
     };
     return (
         <div className={cx("updateProduct-container")}>
