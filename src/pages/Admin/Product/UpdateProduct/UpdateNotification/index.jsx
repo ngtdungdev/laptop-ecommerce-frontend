@@ -40,7 +40,7 @@ const UpdateNotification = () => {
     return (
         <div className={cx("ui-notification")}>
             <div className={cx("ui-title")}>
-                <p>Thêm Sản Phẩm Mới</p>
+                <p>Cập nhật sản phẩm</p>
             </div>
             <div className={cx("panel", "ui-name-product")}>
                 <div className={cd("container")}>
