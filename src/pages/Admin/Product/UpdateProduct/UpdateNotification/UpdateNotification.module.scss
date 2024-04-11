@@ -61,7 +61,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
+        .panel-arrow {
+          padding: 5px;
+          border-radius: 5px;
+          background-color: #e3e3e3;
+        }
+        .panel-arrow:active {
+          opacity: 0.5;
+        }
         .imgLeft {
           margin-right: 15px;
         }
@@ -72,6 +79,8 @@
           border-style: solid;
           border-color: #303030;
           p {
+            text-align: center;
+            width: 50px;
             margin: 0;
           }
         }
@@ -88,17 +97,17 @@
     justify-content: start;
 
     .text-intro {
-      max-width: 50vh;
-      min-width: 50vh;
-      min-height: 5rem;
-      max-height: 7rem;
+      border-radius: 5px;
+      resize: none;
+      width: 99%;
+      height: 55px;
+      outline: none;
       border-style: solid;
     }
 
     .text-intro:focus {
-      border-color: #e3e3e3;
-      border-style: solid;
-      border-width: 1px;
+      border: 1px solid #1A1A1A;
+      background-color: #f3f3f3;
     }
   }
 

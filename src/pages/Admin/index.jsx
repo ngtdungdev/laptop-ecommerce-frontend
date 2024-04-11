@@ -11,9 +11,8 @@ import Combobox from "../../components/Combobox";
 import Statistics from "./Statistics";
 import Product from "./Product";
 import Order from "./Order";
-import OrderHistory from "./OrderHistory";
 import Role from "./Role";
-import Support from "./Support";
+import Support from "./SupportClient";
 import Warehouse from "./Warehouse";
 const Admin = () => {
     const cx = classNames.bind(styles)
@@ -25,8 +24,8 @@ const Admin = () => {
     const optionComponents = {
         1: Statistics,
         2: Warehouse,
-        3: Order,
-        4: OrderHistory,
+        3: Support,
+        4: Order,
         5: Role,
         6: Support,
     };

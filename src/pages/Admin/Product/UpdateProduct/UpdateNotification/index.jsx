@@ -11,6 +11,7 @@ const UpdateNotification = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
     const [imageSrc, setImageSrc] = useState(image);
+    const [display, setDisplay] = useState(true);
     const [listCategory, setListCategory] = useState(['Lap Top', 'Chuột', 'Bàn Phím', 'Tai nghe']);
     const [fileName, setFileName] = useState('Chọn file ảnh');
     const [listProducer, setListProducer] = useState(['Lenovo', 'Dell', 'Asus', 'Apple',  'Hewlett-Packard', 'Toshiba']);
@@ -25,6 +26,9 @@ const UpdateNotification = () => {
     }
     const handleSelectProducer = () => {
 
+    }
+    const handleSelectDisplay = () => {
+        setDisplay(!display)
     }
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -74,17 +78,21 @@ const UpdateNotification = () => {
                 <div className={cx("ui-display")}>
                     <label className={`${cx("next-label")} ${cd("next-label")}`}>Trưng bày</label>
                     <div className={cx("display")}>
-                        <FontAwesomeIcon icon={faAngleLeft} className={cx("imgLeft")}/>
-                        <div className={cx("is-display")}>
-                            <p>Có</p>
+                        <div className={cx("panel-arrow", "imgLeft")} onClick={handleSelectDisplay}>
+                            <FontAwesomeIcon icon={faAngleLeft}/>
                         </div>
-                        <FontAwesomeIcon icon={faAngleRight} className={cx("imgRight")}/>
+                        <div className={cx("is-display")}>
+                            <p>{ display ? "Có" : "Không"}</p>
+                        </div>
+                        <div className={cx("panel-arrow", "imgRight")} onClick={handleSelectDisplay}>
+                            <FontAwesomeIcon icon={faAngleRight}/>
+                        </div>
                     </div>
                 </div>
             </div>
             <div className={cx("panel", "ui-intro")}>
                 <label className={cd("next-label")}>Giới thiệu</label>
-                <textarea className={cx("text-intro")}></textarea>
+                <textarea className={cx("text-intro")} spellCheck={"false"}></textarea>
             </div>
             <div className={cx("panel", "ui-price")}>
                 <div className={cd("container")}>

@@ -33,36 +33,6 @@
   align-items: center;
   position: relative;
   width: 100%;
-  .notification-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .ui-background {
-      position: absolute;
-      background-color: #1A1A1A;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 2;
-      right: 0;
-      opacity: 0.5;
-    }
-    .ui-notification-container {
-      background-color: #ffffff;
-      display: flex;
-      justify-content: center;
-      position: fixed;
-      animation: .3s ease-in TransitionY;
-      transform: translateY(55%);
-      border-radius: 8px;
-      border-width: 1px;
-      width: 80vh;
-      z-index: 3;
-      border-color: rgba(26, 26, 26, 0.41);
-      border-style: solid;
-      align-items: start;
-    }
-  }
   .top-container {
     width: 75%;
     height: 10%;
