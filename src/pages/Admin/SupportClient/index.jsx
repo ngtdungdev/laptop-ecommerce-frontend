@@ -1,17 +1,13 @@
 import classNames from "classnames/bind";
 import styles from "./SupportClient.module.scss"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useState} from "react";
-import laptopTest from "../../../assets/images/laptopTest.png";
-import {faPenToSquare, faTrashCan} from "@fortawesome/free-solid-svg-icons";
-import GroupBox from "../../../components/GroupBox";
 import component from "../../../layouts/component.module.scss";
 import UpdateNotification from "../Product/UpdateProduct/UpdateNotification";
 import Notification from "../../../components/Notification";
-import detail from "../../../assets/images/detail.svg"
-import delivery from "../../../assets/images/delivery-success.svg"
-import cancelOrder from "../../../assets/images/cancel-order.svg"
-import receive from "../../../assets/images/receive-application.svg"
+import OrderProcessing from "./OrderProcessing";
+import OrderCompleted from "./OrderCompleted";
+import OrderCancelled from "./OrderCancelled";
+import OrderDetail from "./OrderDetail";
 const Support = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
@@ -32,13 +28,19 @@ const Support = () => {
             transform: 'translateX(200%)'
         }
     };
+
+    const optionPanel = {
+        1: OrderProcessing,
+        2: OrderCompleted,
+        3: OrderCancelled,
+    };
     const optionButtons = {
         0: null,
         1: () => (
             <div className={cd("notification-container")}>
                 <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
                 <div className={cd("ui-notification-container")}>
-                    <UpdateNotification />
+                    <OrderDetail handleClickNo={handleClickButton}/>
                 </div>
             </div>
         ),
@@ -64,6 +66,14 @@ const Support = () => {
     };
     const handleClickOption = (id) => {
         setOptions(id)
+    };
+    const renderPanel = () => {
+        const Panel = optionPanel[options];
+        switch (options) {
+            case 1: return Panel ? <Panel handleClickButton={handleClickButton} status={status}/> : null;
+            case 2: return Panel ? <Panel/> : null;
+            case 3: return Panel ? <Panel/> : null;
+        }
     };
     return (
         <div className={cx("ui-supportClient")}>
@@ -127,72 +137,7 @@ const Support = () => {
             </div>
             <div className={cx("bottom-container")}>
                 <div className={cx("ui-container")}>
-                    <div className={cx("ui-table")}>
-                        <table className={cx("table-container")}>
-                            <thead>
-                            <tr>
-                                <th>TT</th>
-                                <th>Mã đơn hàng</th>
-                                <th>Mã khách hàng</th>
-                                <th>Thời gian</th>
-                                <th>Trạng thái đơn hàng</th>
-                                <th>Thanh toán</th>
-                                <th>Giao hàng</th>
-                                <th>Tổng tiền</th>
-                                <th>Chi tiết đơn hàng</th>
-                                <th>Xử lý</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr className={cx("item-product")}>
-                                <td className={cx("index")}>1</td>
-                                <td className={cx("idOrder")}>OR00000001</td>
-                                <td className={cx("idUser")}>US00000002</td>
-                                <td className={cx("time")}>5-5-2024</td>
-                                <td className={cx("order-status", status ? "selected" : "unSelected")}>Chờ xác nhận</td>
-                                <td className={cx("pay",{})}>Chưa thanh toán</td>
-                                <td className={cx("delivery")}>Chưa giao hàng</td>
-                                <td className={cx("total-amount")}>100.000.000VND</td>
-                                <td className={cx("order-detail")}>
-                                    <div className={cx("detail")}>
-                                        <button className={`${cd("btn")} ${cx("btn-detail")}`}
-                                                onClick={() => handleClickButton(1)}>
-                                            <img src={detail}  alt={""}/>
-                                        </button>
-                                    </div>
-                                </td>
-                                <td className={cx("processing-function")}>
-                                    <div className={cx("receive-application", {"active-btn-receive": status === true})}>
-                                        <button className={`${cd("btn")} ${cx("btn-receive")}`}
-                                                onClick={() => handleClickButton(2)}>
-                                            <img src={receive} alt={""}/>
-                                            <span>Nhận đơn</span>
-                                        </button>
-                                    </div>
-                                    <div className={cx("delivery", {"active-btn-delivery": status === true})}>
-                                        <button className={`${cd("btn")} ${cx("btn-delivery")}`}
-                                                onClick={() => handleClickButton(2)}>
-                                            <img src={delivery} alt={""}/>
-                                            <span>Giao hàng</span>
-                                        </button>
-                                    </div>
-                                    <div className={cx("cancel-order", {"active-btn-order": status === true})}>
-                                        <button className={`${cd("btn")} ${cx("btn-order")}`}
-                                                onClick={() => handleClickButton(2)}>
-                                            <img src={cancelOrder} alt={""}/>
-                                            <span>Hủy đơn</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr className={cx("ui-group-box")}>
-                                <td colSpan={12}>
-                                    <GroupBox quantity={5}></GroupBox>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    {renderPanel()}
                 </div>
             </div>
         </div>
