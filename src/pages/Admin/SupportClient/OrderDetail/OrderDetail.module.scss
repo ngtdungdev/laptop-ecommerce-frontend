@@ -1,0 +1,98 @@
+.ui-notification {
+  border-radius: 8px;
+  padding: 20px 30px;
+  width: 150vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .panel {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  .ui-title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    p {
+      margin: 0;
+      font-family: emoji;
+      font-weight: 550;
+      font-size: 36px;
+      color: #1eabbb;
+    }
+  }
+  table {
+    margin-top: 20px;
+    padding: 0;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0);
+    th {
+      padding: 20px;
+    }
+    .item-product {
+      td {
+        padding: 20px;
+      }
+    }
+  }
+  .table-container-product {
+    width: 100%;
+    overflow: hidden;
+    display: block;
+
+    table {
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    th, td {
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+
+
+    thead {
+      display: table;
+      width: calc(100% - 1em);
+      table-layout: fixed;
+    }
+    tbody {
+      display: block;
+      height: 30vh;
+      overflow-y: auto;
+    }
+
+    tr {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    .item-product {
+      display: table;
+      width: 100%;
+    }
+  }
+  .ui-btnCancel {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .btn-cancel {
+      border-radius: 5px;
+      font-size: 14px;
+      width: 8rem;
+      background-image: linear-gradient(to right, #1eabbb, #56ecfd);
+      color: #dedede;
+
+      &:hover {
+        color: #44f2eb;
+      }
+    }
+  }
+}
