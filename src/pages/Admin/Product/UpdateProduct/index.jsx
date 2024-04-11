@@ -36,16 +36,16 @@ const UpdateProduct = () => {
     const optionButtons = {
         0: null,
         1: () => (
-            <div className={cx("notification-container")}>
-                <div className={cx("ui-background")} onClick={() => handleClickButton(0)}></div>
-                <div className={cx("ui-notification-container")}>
+            <div className={cd("notification-container")}>
+                <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
+                <div className={cd("ui-notification-container")}>
                     <UpdateNotification />
                 </div>
             </div>
         ),
         2: () => (
-            <div className={cx("notification-container")}>
-                <div className={cx("ui-background")} onClick={() => handleClickButton(0)}></div>
+            <div className={cd("notification-container")}>
+                <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
                 <Notification text={"Bạn có chắc chắn muốn xóa sản phẩm"} type={"warning"}
                                   handleBtnNotification={handleBtnNotification}/>
             </div>
@@ -213,7 +213,6 @@ const UpdateProduct = () => {
                                     </button>
                                 </td>
                             </tr>
-
                             <tr className={cx("ui-group-box")}>
                                 <td colSpan={12}>
                                     <GroupBox quantity={5}></GroupBox>

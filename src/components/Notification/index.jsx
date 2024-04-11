@@ -4,7 +4,7 @@ import iconWarning from "../../assets/images/warning.svg";
 import iconSuccess from "../../assets/images/success.svg";
 import component from "../../layouts/component.module.scss";
 
-const Notification = ({text, type, handleBtnNotification}) => {
+const Notification = ({text, type, handleBtnNotification, handleClickNo}) => {
     const optionIcon = {
         success: iconSuccess,
         warning: iconWarning,
@@ -24,8 +24,8 @@ const Notification = ({text, type, handleBtnNotification}) => {
                     <span>{text}</span>
                 </div>
                 <div className={cx("button-container")}>
-                    <button className={`${cx("btn-yes")} ${cd("btn")}`}>Yes</button>
-                    <button className={`${cx("btn-no")} ${cd("btn")}`}>No</button>
+                    <button className={`${cx("btn-yes")} ${cd("btn")}`} onClick={handleBtnNotification}>Yes</button>
+                    <button className={`${cx("btn-no")} ${cd("btn")}`} onClick={() => handleClickNo(0)}>No</button>
                 </div>
             </div>
         </div>
