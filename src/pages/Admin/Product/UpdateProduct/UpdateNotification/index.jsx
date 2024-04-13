@@ -15,12 +15,6 @@ const UpdateNotification = () => {
     const [listCategory, setListCategory] = useState(['Lap Top', 'Chuột', 'Bàn Phím', 'Tai nghe']);
     const [fileName, setFileName] = useState('Chọn file ảnh');
     const [listProducer, setListProducer] = useState(['Lenovo', 'Dell', 'Asus', 'Apple',  'Hewlett-Packard', 'Toshiba']);
-    const comboboxStyle1 = {
-        width: '3rem'
-    };
-    const comboboxStyle2 = {
-        width: '10rem'
-    };
     const handleSelectCategory = () => {
 
     }
@@ -62,7 +56,7 @@ const UpdateNotification = () => {
                 <div className={cx("ui-category")}>
                     <label className={cd("next-label")}>Loại sản phẩm</label>
                     <div className={cx("category")}>
-                        <Combobox listItem={listCategory} styleCombobox={comboboxStyle1}
+                        <Combobox listItem={listCategory}
                                   handleSelect={handleSelectCategory}
                                   isComboboxUI={false}/>
                     </div>
@@ -70,7 +64,7 @@ const UpdateNotification = () => {
                 <div className={cx("ui-producer")}>
                     <label className={cd("next-label")}>Hãng sản xuất</label>
                     <div className={cx("producer")}>
-                        <Combobox listItem={listProducer} styleCombobox={comboboxStyle2}
+                        <Combobox listItem={listProducer}
                                   handleSelect={handleSelectProducer}
                                   isComboboxUI={false}/>
                     </div>

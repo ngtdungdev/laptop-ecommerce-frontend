@@ -16,10 +16,6 @@ const UpdateProduct = () => {
     const cd = classNames.bind(component)
     const [listCategory, setListCategory] = useState(['Lap Top', 'Chuột', 'Bàn Phím', 'Tai nghe']);
     const [clickButton, setClickButton] = useState(0);
-    const comboboxStyle = {
-        width: '4rem',
-        height: '2rem'
-    };
     const handleCategory = () => {
 
     }
@@ -65,8 +61,10 @@ const UpdateProduct = () => {
                         </div>
                     </div>
                 </div>
-                <Combobox listItem={listCategory} styleCombobox={comboboxStyle} handleSelect={handleCategory}
-                          isComboboxUI={true}/>
+                <div>
+                    <Combobox listItem={listCategory}  heightCombobox={2} handleSelect={handleCategory}
+                              isComboboxUI={true}/>
+                </div>
             </div>
             <div className={cx("bottom-container")}>
                 <div className={cx("ui-container")}>

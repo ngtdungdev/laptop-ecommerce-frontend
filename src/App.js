@@ -18,7 +18,7 @@ import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Admin from "./pages/Admin";
-import Order from "./pages/Admin/Order";
+import Order from "./pages/Admin/Import";
 import Support from "./pages/Admin/SupportClient";
 import Product from "./pages/Admin/Product";
 import Category from "./pages/Admin/Category";

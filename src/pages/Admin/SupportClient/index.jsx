@@ -71,8 +71,8 @@ const Support = () => {
         const Panel = optionPanel[options];
         switch (options) {
             case 1: return Panel ? <Panel handleClickButton={handleClickButton} status={status}/> : null;
-            case 2: return Panel ? <Panel/> : null;
-            case 3: return Panel ? <Panel/> : null;
+            case 2: return Panel ? <Panel handleClickButton={handleClickButton}/> : null;
+            case 3: return Panel ? <Panel handleClickButton={handleClickButton}/> : null;
         }
     };
     return (
@@ -136,9 +136,7 @@ const Support = () => {
                 </div>
             </div>
             <div className={cx("bottom-container")}>
-                <div className={cx("ui-container")}>
-                    {renderPanel()}
-                </div>
+                {renderPanel()}
             </div>
         </div>
     );

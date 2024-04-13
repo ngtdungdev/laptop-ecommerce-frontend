@@ -14,9 +14,6 @@ const Statistics = () => {
     const handleSelect = (option) => {
         setOption(option)
     }
-    const comboboxStyle = {
-        width: '11rem'
-    };
     return (
         <div className={cx("container")}>
             <div className={cx("info-container")}>
@@ -51,7 +48,7 @@ const Statistics = () => {
                     </div>
                 </div>
                 <div className={cx("combobox")}>
-                    <Combobox listItem={listChart} styleCombobox={comboboxStyle} handleSelect={handleSelect} isComboboxUI={true}/>
+                    <Combobox listItem={listChart}  handleSelect={handleSelect} isComboboxUI={true}/>
                 </div>
             </div>
             <div className={cx("chart-container")}>

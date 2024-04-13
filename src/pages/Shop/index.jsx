@@ -23,9 +23,7 @@ const Shop = () => {
     const handleSelect = () => {
 
     }
-    const comboboxStyle = {
-        width: '8rem'
-    };
+
     return (
         <div>
             <div className={cx("shop-container")}>
@@ -42,7 +40,7 @@ const Shop = () => {
                             </div>
                         </div>
                         <div className={cx("ui-combobox", "ui-option")}>
-                            <Combobox listItem={listCategory} styleCombobox={comboboxStyle} handleSelect={handleSelect} isComboboxUI={true}/>
+                            <Combobox listItem={listCategory}  handleSelect={handleSelect} isComboboxUI={true}/>
                         </div>
                         <div className={cx("ui-tow-bar", "ui-option")}>
                             <PriceFilter min={priceSlider[0]} max={priceSlider[1]}
