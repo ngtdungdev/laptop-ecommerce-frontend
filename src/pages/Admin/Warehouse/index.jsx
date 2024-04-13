@@ -19,14 +19,11 @@ const Warehouse = () => {
         setOption(option)
         console.log(option)
     }
-    const comboboxStyle = {
-        width: '10.5rem'
-    };
     const [listWarehouse, setWarehouse] = useState(['Thêm sản phẩm', 'Cập nhật sản phẩm']);
     return (
         <div className={cx("warehouse-container")}>
             <div className={cx("combobox")}>
-                <Combobox listItem={listWarehouse} styleCombobox={comboboxStyle} handleSelect={handleSelect} isComboboxUI={true}/>
+                <Combobox listItem={listWarehouse}  handleSelect={handleSelect} isComboboxUI={true}/>
             </div>
             {handleSelectOption()}
         </div>

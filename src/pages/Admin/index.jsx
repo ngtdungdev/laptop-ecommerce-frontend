@@ -1,16 +1,12 @@
 import classNames from "classnames/bind";
 import styles from "./Admin.module.scss"
 import {useState} from "react";
-import profit from "../../assets/images/profit.svg";
-import revenue from "../../assets/images/revenue.svg";
-import expense from "../../assets/images/expense.svg";
-import star from "../../assets/images/star.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLaptop, faUserGear, faGear} from "@fortawesome/free-solid-svg-icons";
 import Combobox from "../../components/Combobox";
 import Statistics from "./Statistics";
 import Product from "./Product";
-import Order from "./Order";
+import Import from "./Import";
 import Role from "./Role";
 import Support from "./SupportClient";
 import Warehouse from "./Warehouse";
@@ -25,7 +21,7 @@ const Admin = () => {
         1: Statistics,
         2: Warehouse,
         3: Support,
-        4: Order,
+        4: Import,
         5: Role,
         6: Support,
     };
