@@ -179,9 +179,7 @@
   .panel-function {
     width: 100%;
     min-height: 91vh;
-    height: 100%;
     background-color: #d2fffd;
-    display: flex;
-    flex-direction: column;
+    display: table;
   }
 }
