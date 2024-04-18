@@ -7,6 +7,8 @@ import GroupBox from "../../../components/GroupBox";
 import component from "../../../layouts/component.module.scss";
 import search from "../../../assets/images/search.svg";
 import laptopTest from "../../../assets/images/laptopTest.png";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
 const Import = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
@@ -256,8 +258,20 @@ const Import = () => {
                                             <span>50.000.000VND</span>
                                         </div>
                                     </div>
-                                    <div className={cx("btn-delete")}></div>
+                                    <div className={cx("btn-delete")}>
+                                        <td className={cx("delete")}>
+                                            <button className={`${cd("btn")} ${cx("btn-delete")}`}>
+                                                <FontAwesomeIcon icon={faTrashCan}/>
+                                            </button>
+                                        </td>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div className={cx("panel")}>
+                            <div className={cx("ui-btn")}>
+                                <button className={`${cx("btn-confirm")} ${cd("btn")}`}>Xác Nhận</button>
+                                <button className={`${cx("btn-cancel")} ${cd("btn")}`}>Hủy</button>
                             </div>
                         </div>
                     </div>
