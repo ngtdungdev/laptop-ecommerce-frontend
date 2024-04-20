@@ -3,13 +3,11 @@ import styles from "./Admin.module.scss"
 import {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLaptop, faUserGear, faGear} from "@fortawesome/free-solid-svg-icons";
-import Combobox from "../../components/Combobox";
 import Statistics from "./Statistics";
-import Product from "./Product";
-import Import from "./Import";
 import Role from "./Role";
 import Support from "./SupportClient";
 import Warehouse from "./Warehouse";
+import Invoice from "./Invoice";
 const Admin = () => {
     const cx = classNames.bind(styles)
     const [checkedBurger, setCheckedBurger] = useState(false)
@@ -21,7 +19,7 @@ const Admin = () => {
         1: Statistics,
         2: Warehouse,
         3: Support,
-        4: Import,
+        4: Invoice,
         5: Role,
         6: Support,
     };
