@@ -1,0 +1,207 @@
+.ui-notification {
+  border-radius: 8px;
+  padding: 20px 30px;
+  width: 150vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .panel {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  .ui-title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    p {
+      margin: 0;
+      font-family: emoji;
+      font-weight: 550;
+      font-size: 36px;
+      color: #1eabbb;
+    }
+  }
+  .ui-center {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 10px;
+    .list-table {
+      display: flex;
+      table {
+        margin-top: 20px;
+        padding: 0;
+        border-radius: 5px;
+        border: 1px solid rgb(0, 0, 0);
+        th {
+          padding: 20px;
+        }
+        .item-product {
+          td {
+            padding: 20px;
+          }
+        }
+      }
+      .table-container-product {
+        overflow: hidden;
+        width: 100%;
+        display: block;
+
+        table {
+          table-layout: fixed;
+        }
+
+        th, td {
+          width: 100%;
+          padding: 20px;
+          box-sizing: border-box;
+        }
+
+        thead {
+          display: table;
+          width: calc(100% - 1em);
+          table-layout: fixed;
+        }
+        tbody {
+          display: block;
+          height: 55vh;
+          overflow-y: auto;
+        }
+
+        tr {
+          width: 100%;
+          display: table;
+          table-layout: fixed;
+        }
+
+        .item-product {
+          display: table;
+          .ui-checkbox-container {
+            .ui-checkbox {
+              display: flex;
+              justify-content: center;
+              .check-box {
+                position: relative;
+                top: 1px;
+                width: 25px;
+                height: 25px;
+                border: 1px solid #c8ccd4;
+                border-radius: 3px;
+                vertical-align: middle;
+                transition: background 0.1s ease;
+                cursor: pointer;
+                display: block;
+              }
+
+              .check-box:after {
+                content: '';
+                position: absolute;
+                top: 4px;
+                left: 9px;
+                width: 5px;
+                height: 12px;
+                opacity: 0;
+                transform: rotate(45deg) scale(0);
+                border-right: 2px solid #fff;
+                border-bottom: 2px solid #fff;
+                transition: all 0.3s ease;
+                transition-delay: 0.15s;
+              }
+
+              .checked:checked ~ .check-box {
+                border-color: transparent;
+                background: #21de0e;
+                animation: jelly 0.6s ease;
+              }
+
+              .checked:checked ~ .check-box:after {
+                opacity: 1;
+                transform: rotate(45deg) scale(1);
+              }
+
+              @keyframes jelly {
+                from {
+                  transform: scale(1, 1);
+                }
+
+                30% {
+                  transform: scale(1.25, 0.75);
+                }
+
+                40% {
+                  transform: scale(0.75, 1.25);
+                }
+
+                50% {
+                  transform: scale(1.15, 0.85);
+                }
+
+                65% {
+                  transform: scale(0.95, 1.05);
+                }
+
+                75% {
+                  transform: scale(1.05, 0.95);
+                }
+
+                to {
+                  transform: scale(1, 1);
+                }
+              }
+
+              .hidden-check-box {
+                display: none!important;
+              }
+            }
+          }
+        }
+      }
+    }
+    .panel-info {
+      margin-left: 10px;
+      margin-top: 20px;
+      border: 1px solid #1A1A1A;
+      border-radius: 5px;
+      padding: 20px;
+      .ui-input {
+        margin-bottom: 10px;
+      }
+      .ui-btn {
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .btn-confirm {
+          border-radius: 5px;
+          font-size: 14px;
+          width: 6rem;
+          background-color: #1eabbb;
+          color: #dedede;
+          &::after {
+            background-color: #1eabbb;
+          }
+          &:hover {
+            color: #44f2eb;
+          }
+        }
+        .btn-cancel {
+          margin-left: 50px;
+          border-radius: 5px;
+          font-size: 14px;
+          width: 5rem;
+          background-color: #3f3f3f;
+          color: #dedede;
+          &::after {
+            background-color: #3f3f3f;
+          }
+          &:hover {
+            color: #44f2eb;
+          }
+        }
+      }
+    }
+  }
+}

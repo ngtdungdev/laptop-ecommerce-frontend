@@ -2,14 +2,14 @@ import classNames from "classnames/bind";
 import styles from "./role.module.scss"
 import component from "../../../layouts/component.module.scss"
 import search from "../../../assets/images/search.svg";
-import cancelOrder from "../../../assets/images/cancel-order.svg";
 import GroupBox from "../../../components/GroupBox";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser, faUserMinus, faUserPlus} from "@fortawesome/free-solid-svg-icons"
-import detail from "../../../assets/images/detail.svg";
 import OrderDetail from "../SupportClient/OrderDetail";
-import Notification from "../../../components/Notification";
 import {useState} from "react";
+import AddUserDialog from "./AddUserDialog";
+import UpdateUserDialog from "./UpdateUserDialog";
+import Notification from "../../../components/Notification";
 const Role = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
@@ -19,7 +19,7 @@ const Role = () => {
             <div className={cd("notification-container")}>
                 <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
                 <div className={cd("ui-notification-container")}>
-                    <OrderDetail handleClickNo={handleClickButton}/>
+                    <AddUserDialog handleClickNo={handleClickButton}/>
                 </div>
             </div>
         ),
@@ -27,18 +27,20 @@ const Role = () => {
             <div className={cd("notification-container")}>
                 <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
                 <div className={cd("ui-notification-container")}>
-                    <OrderDetail handleClickNo={handleClickButton}/>
+                    <UpdateUserDialog handleClickNo={handleClickButton}/>
                 </div>
             </div>
         ),
         3: () => (
             <div className={cd("notification-container")}>
                 <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
-                <div className={cd("ui-notification-container")}>
-                    <OrderDetail handleClickNo={handleClickButton}/>
-                </div>
+                <Notification text={"Bạn có chắc chắn muốn xóa nhân viên này không"} type={"warning"}
+                              handleBtnNotification={handleClickReceive} handleClickNo={handleClickButton}/>
             </div>
         )
+    };
+    const handleClickReceive = () => {
+        handleClickButton(0)
     };
     const [clickButton, setClickButton] = useState(0);
     const handleClickButton = (index) => {
