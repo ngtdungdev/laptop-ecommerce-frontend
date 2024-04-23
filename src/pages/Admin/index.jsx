@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./Admin.module.scss"
+import component from "../../layouts/component.module.scss"
 import {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLaptop, faUserGear, faGear} from "@fortawesome/free-solid-svg-icons";
@@ -8,8 +9,10 @@ import Role from "./Role";
 import Support from "./SupportClient";
 import Warehouse from "./Warehouse";
 import Invoice from "./Invoice";
+import Notification from "../../components/Notification";
 const Admin = () => {
     const cx = classNames.bind(styles)
+    const cd = classNames.bind(component)
     const [checkedBurger, setCheckedBurger] = useState(false)
     const [options, setOptions] = useState(0);
     const handleClickOption = (id) => {
@@ -21,15 +24,21 @@ const Admin = () => {
         3: Support,
         4: Invoice,
         5: Role,
-        6: Support,
+        6: () => (
+            <div className={cd("notification-container")}>
+                <div className={cd("ui-background")} onClick={() => null}></div>
+                <Notification text={"Bạn có chắc chắn muốn xóa sản phẩm"} type={"warning"}
+                              handleBtnNotification={handleClickReceive} handleClickNo={handleClickButton}/>
+            </div>
+        ),
     };
 
-    const handleCheckedBurger= () => {
+    const handleCheckedBurger = () => {
         setCheckedBurger(!checkedBurger);
     };
     const renderComponentBasedOnOption = () => {
         const SelectedComponent = optionComponents[options];
-        return SelectedComponent ? <SelectedComponent /> : null;
+        return SelectedComponent ? <SelectedComponent/> : null;
     };
     return (
         <div className={cx("admin-container")}>
