@@ -10,6 +10,8 @@ import Support from "./SupportClient";
 import Warehouse from "./Warehouse";
 import Invoice from "./Invoice";
 import Notification from "../../components/Notification";
+import AddUserDialog from "./Role/AddUserDialog";
+import UpdateUserDialog from "./Role/UpdateUserDialog";
 const Admin = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
@@ -18,23 +20,37 @@ const Admin = () => {
     const handleClickOption = (id) => {
         setOptions(id)
     };
+
     const optionComponents = {
         1: Statistics,
         2: Warehouse,
         3: Support,
         4: Invoice,
         5: Role,
-        6: () => (
+    };
+    const optionDialogs = {
+        0: null,
+        1: () => (
             <div className={cd("notification-container")}>
-                <div className={cd("ui-background")} onClick={() => null}></div>
-                <Notification text={"Bạn có chắc chắn muốn xóa sản phẩm"} type={"warning"}
+                <div className={cd("ui-background")}  onClick={() => handleClickButton(0)}></div>
+                <Notification text={"Bạn có chắc chắn muốn thoát không"} type={"warning"}
                               handleBtnNotification={handleClickReceive} handleClickNo={handleClickButton}/>
             </div>
-        ),
+        )
     };
-
+    const handleClickReceive = () => {
+        handleClickButton(0)
+    };
+    const [clickButton, setClickButton] = useState(0);
+    const handleClickButton = (index) => {
+        setClickButton(index)
+    };
     const handleCheckedBurger = () => {
         setCheckedBurger(!checkedBurger);
+    };
+    const renderDialog = () => {
+        const Dialog = optionDialogs[clickButton];
+        return Dialog ? <Dialog/> : null;
     };
     const renderComponentBasedOnOption = () => {
         const SelectedComponent = optionComponents[options];
@@ -103,8 +119,8 @@ const Admin = () => {
                         </div>
                     </div>
                     <div className={cx("ui-setting")}>
-                        <div className={cx("option", {"optionActive": options === 6})}
-                             onClick={() => handleClickOption(6)}>
+                        <div className={cx("option", {"optionActive": clickButton === 1})}
+                             onClick={() => setClickButton(1)}>
                             <FontAwesomeIcon icon={faGear} className={cx("img")}/>
                             <p>Đăng xuất</p>
                         </div>
@@ -112,6 +128,7 @@ const Admin = () => {
                 </div>
             </div>
             <div className={cx("panel-function")}>
+                {renderDialog()}
                 {renderComponentBasedOnOption()}
             </div>
         </div>
