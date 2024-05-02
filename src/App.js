@@ -7,7 +7,7 @@ import FullLayout from "./layouts/FullLayout";
 import HeaderLayout from "./layouts/HeaderLayout";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import ForgotPassword from "./pages/ForgotPassword";
+import ForgotPassword from "./pages/Login/Components/ForgotPassword";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";

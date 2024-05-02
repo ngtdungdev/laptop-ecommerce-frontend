@@ -1,13 +1,13 @@
-import {useEffect, useRef, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import styles  from "../../Login.module.scss"
-import classNames from "classnames/bind"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
-import { FcGoogle } from "react-icons/fc";
+import classNames from "classnames/bind";
+import styles from "./ForgotPassword.module.scss";
+import {useEffect, useState} from "react";
 import {login, signInWithGoogle, signUp} from "../../../../utils/firebase/auth";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRightLong} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
+import {FcGoogle} from "react-icons/fc";
 
-const SignIn = ({OnClickSignUp}) => {
+const ForgotPassword = ({OnClickSignUp}) => {
     const cx = classNames.bind(styles)
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -44,8 +44,6 @@ const SignIn = ({OnClickSignUp}) => {
         // }, 2000);
         // return () => clearTimeout(timer);
     }, []);
-
-
 
     return (
         <div className={cx("login-cart-content")}>
@@ -119,7 +117,7 @@ const SignIn = ({OnClickSignUp}) => {
                 </p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default SignIn;
+export default ForgotPassword;
