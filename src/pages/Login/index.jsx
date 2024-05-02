@@ -10,16 +10,26 @@ import {useAuth} from "../../contexts/AuthContext";
 import {login, signInWithGoogle, signUp} from "../../utils/firebase/auth";
 import SignUp from "../SignUp";
 import SignIn from "./Components/SignIn";
+import Import from "../Admin/Invoice/Import";
+import HistoryImport from "../Admin/Invoice/HistoryImport";
+import Supplier from "../Admin/Invoice/Supplier";
 
 const Login = ({active}) => {
     const navigate = useNavigate();
     const {userLoggedIn} = useAuth();
-
     const [isSignIn, setIsSignIn] = useState(active);
+    const optionPanels = {
+        0: Import,
+        1: HistoryImport,
+        2: Supplier,
+    };
+    const renderPanels = () => {
+        const SelectedDialog = optionPanels[clickButton];
+        return SelectedDialog ? <SelectedDialog/> : null;
+    };
     const handleIsSign = () => {
         setIsSignIn((prevSign) => !prevSign);
     }
-
     const cx = classNames.bind(styles)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

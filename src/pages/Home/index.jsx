@@ -47,28 +47,31 @@ const Home = () => {
     const handleClickButtonCart = () => {
         setIsClicked(!isClicked);
     };
-    const arrReview = [
+    const [reviews, setReviews] = useState([
         {
             video: "https://www.youtube.com/embed/-9v2IQVoBX8",
             title: "Trên tay Dell XPS 13 Plus: siêu tối giản!!"
         },
-
         {
             video: "https://www.youtube.com/embed/039mJSEMPdw",
             title: "Đây mới là Laptop sáng tạo - Macbook Pro 16 Killer! | Asus Zenbook Pro 16X Oled"
         },
-
         {
             video: "https://www.youtube.com/embed/-KN8hApyh2o",
             title: "ASUS Zenbook 14X OLED: Đẹp mê ly, nhiều tính năng xịn sò !!!"
         },
-
         {
             video: "https://www.youtube.com/embed/Q7w50fG-GsM",
             title: "Nên mua MacBook nào? Air, Pro 13, Pro 14 hay Pro 16?"
         }
-
-    ]
+    ]);
+    const swapElements = (index) => {
+        let newReviews = [...reviews];
+        let temp = newReviews[index];
+        newReviews[index] = newReviews[0];
+        newReviews[0] = temp;
+        setReviews(newReviews);
+    };
     return (
         <div className={cx("home-container")}>
             <div className={cx("ui-top")}>
@@ -261,38 +264,38 @@ const Home = () => {
                     <div className={cx("sub-container-content")}>
                         <div className={cx("sub-container-content-left")}>
                             <div className={cx("left-content1")}>
-                                <iframe className={cx("sub-clip")} src={arrReview[0].video}
+                                <iframe className={cx("sub-clip")} src={reviews[0].video}
                                         title="YouTube video player"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen></iframe>
                             </div>
                             <div className={cx("left-content2")}>
-                                <p style={{fontSize: 15}}>{arrReview[0].title}</p>
+                                <p style={{fontSize: 15}}>{reviews[0].title}</p>
                             </div>
                         </div>
                         <div className={cx("sub-container__content-right")}>
-                            <div className={cx("right-content1")} onClick="changeVideo1();">
-                                <iframe width="120" height="88" src={arrReview[1].video}
+                            <div className={cx("right-content1")} onClick={() => swapElements(1)}>
+                                <iframe width="120" height="88" src={reviews[1].video}
                                         title="YouTube video player"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen></iframe>
-                                <p>{arrReview[1].title}</p>
+                                <p>{reviews[1].title}</p>
                             </div>
                             <hr className={cx("under")}/>
-                            <div className={cx("right-content2")} onClick="changeVideo2();">
-                                <iframe width="120" height="88" src={arrReview[2].video}
+                            <div className={cx("right-content2")} onClick={() => swapElements(1)}>
+                                <iframe width="120" height="88" src={reviews[2].video}
                                         title="YouTube video player"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen></iframe>
-                                <p>{arrReview[2].title}</p>
+                                <p>{reviews[2].title}</p>
                             </div>
                             <hr className={cx("under")}/>
-                            <div className={cx("right-content3")} onClick="changeVideo3();">
-                                <iframe width="120" height="88" src={arrReview[3].video}
+                            <div className={cx("right-content3")} onClick={() => swapElements(1)}>
+                                <iframe width="120" height="88" src={reviews[3].video}
                                         title="YouTube video player"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen></iframe>
-                                <p>{arrReview[3].title}</p>
+                                <p>{reviews[3].title}</p>
                             </div>
                         </div>
                     </div>
