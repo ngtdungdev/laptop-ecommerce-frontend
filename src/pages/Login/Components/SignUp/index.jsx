@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {useAuth} from "../../contexts/AuthContext";
-import {callApi} from "../../utils/fetch";
-import {apiUrl} from "../../utils/config";
+import {useAuth} from "../../../../contexts/AuthContext";
+import {callApi} from "../../../../utils/fetch";
+import {apiUrl} from "../../../../utils/config";
 import classNames from "classnames/bind"
-import {login, signInWithGoogle, signUp} from "../../utils/firebase/auth";
+import {login, signInWithGoogle, signUp} from "../../../../utils/firebase/auth";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightLong} from "@fortawesome/free-solid-svg-icons";
-import styles from "../Login/Login.module.scss";
+import styles from "../../Login.module.scss";
 
-const SignUp = ({OnClickSignIn}) => {
+const SignUp = ({OnClickPanel}) => {
     const navigate = useNavigate();
     const {userLoggedIn} = useAuth();
     const cx = classNames.bind(styles)
@@ -148,7 +148,7 @@ const SignUp = ({OnClickSignIn}) => {
                     </form>
                     <p className={cx("help-link","help-link-signIn")}>
                         <span className={cx("help-link-text")}>Already have a Shopify account?</span>
-                        <Link className={cx("ui-arrow-link")} to={"/login"} onClick={OnClickSignIn}>
+                        <Link className={cx("ui-arrow-link")} to={"/login"} onClick={() => OnClickPanel(0)}>
                         Login
                             <span className={cx("arrow-link-icon")}>
                             <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>

@@ -3,39 +3,34 @@ import {Link, useNavigate} from "react-router-dom";
 import styles  from "./Login.module.scss"
 import classNames from "classnames/bind"
 import logo from "../../assets/images/logoWeb.svg"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
-import { FcGoogle } from "react-icons/fc";
 import {useAuth} from "../../contexts/AuthContext";
 import {login, signInWithGoogle, signUp} from "../../utils/firebase/auth";
-import SignUp from "../SignUp";
+import SignUp from "./Components/SignUp";
 import SignIn from "./Components/SignIn";
-import Import from "../Admin/Invoice/Import";
-import HistoryImport from "../Admin/Invoice/HistoryImport";
-import Supplier from "../Admin/Invoice/Supplier";
+import ForgotPassword from "./Components/ForgotPassword";
 
-const Login = ({active}) => {
+const Login = ({index}) => {
+    const cx = classNames.bind(styles)
     const navigate = useNavigate();
     const {userLoggedIn} = useAuth();
-    const [isSignIn, setIsSignIn] = useState(active);
-    const optionPanels = {
-        0: Import,
-        1: HistoryImport,
-        2: Supplier,
-    };
-    const renderPanels = () => {
-        const SelectedDialog = optionPanels[clickButton];
-        return SelectedDialog ? <SelectedDialog/> : null;
-    };
-    const handleIsSign = () => {
-        setIsSignIn((prevSign) => !prevSign);
-    }
-    const cx = classNames.bind(styles)
+    const [option, setOption] = useState(index);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-
+    const handleSelectOption = (index) => {
+        console.log(index)
+        setOption(index);
+    }
+    const optionPanels = {
+        0: SignIn,
+        1: SignUp,
+        2: ForgotPassword,
+    };
+    const renderPanels = () => {
+        const Panel = optionPanels[option];
+        return Panel ? <Panel OnClickPanel={handleSelectOption}/> : null;
+    };
     useEffect(() => {
         if (userLoggedIn) {
             navigate("/", {replace: true});
@@ -96,12 +91,7 @@ const Login = ({active}) => {
                                 </header>
                             </h1>
                         </div>
-                        {
-                            isSignIn ?
-                                <SignIn OnClickSignUp={handleIsSign} />
-                                :
-                                <SignUp OnClickSignIn={handleIsSign} />
-                        }
+                        {renderPanels()}
                     </div>
                     <footer className={cx("footer")}>
                         <div className={cx("footer-link")}>
