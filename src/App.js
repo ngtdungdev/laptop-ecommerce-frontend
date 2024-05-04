@@ -6,7 +6,7 @@ import {useAuth} from "./contexts/AuthContext";
 import FullLayout from "./layouts/FullLayout";
 import HeaderLayout from "./layouts/HeaderLayout";
 import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import SignUp from "./pages/Login/Components/SignUp";
 import ForgotPassword from "./pages/Login/Components/ForgotPassword";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
@@ -29,7 +29,6 @@ import Statistics from "./pages/Admin/Statistics";
 
 const App = () => {
     const {currentUser} = useAuth();
-    const [isActive, setIsActive] = useState(true);
     const allRoutes = [
         {path: "*", element: <Navigate to={"/"}/>},
         {path: "/", element: <FullLayout element={Home}/>},
@@ -41,9 +40,9 @@ const App = () => {
         {path: "/about-us", element: <FullLayout element={AboutUs}/>},
         {path: "/payment", element: <FullLayout element={Payment}/>, permissions: []},
         {path: "/profile", element: <FullLayout element={Profile}/>, permissions: []},
-        {path: "/login", element: <Login active={isActive}/>},
-        {path: "/signup", element: <Login active={!isActive}/>},
-        {path: "/forgot-password", element: <ForgotPassword/>},
+        {path: "/login", element: <Login index={0}/>},
+        {path: "/signup", element: <Login index={1}/>},
+        {path: "/forgot-password", element: <Login index={2}/>},
         // {path: "/admin/*", element: <Navigate to={"/admin"}/>, permissions: []},
         {path: "/admin", element: <HeaderLayout element={Admin}/>},
         {

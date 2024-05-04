@@ -7,7 +7,7 @@ import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FcGoogle } from "react-icons/fc";
 import {login, signInWithGoogle, signUp} from "../../../../utils/firebase/auth";
 
-const SignIn = ({OnClickSignUp}) => {
+const SignIn = ({OnClickPanel}) => {
     const cx = classNames.bind(styles)
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -91,7 +91,7 @@ const SignIn = ({OnClickSignUp}) => {
                         </button>
                     </div>
                     <div className={cx("button-forgot-password")}>
-                        <Link className={cx("link")} to={"/forgot-password"} onClick={OnClickSignUp}>
+                        <Link className={cx("link")} to={"/forgot-password"} onClick={() => OnClickPanel(2)}>
                             Forgotten password?
                         </Link>
                     </div>
@@ -110,7 +110,7 @@ const SignIn = ({OnClickSignUp}) => {
                 </div>
                 <p className={cx("help-link")}>
                     <span className={cx("help-link-text")}>New to Laptop?</span>
-                    <Link className={cx("ui-arrow-link")} to={"/signup"} onClick={OnClickSignUp}>
+                    <Link className={cx("ui-arrow-link")} to={"/signup"} onClick={() => OnClickPanel(1)}>
                         Get started
                         <span className={cx("arrow-link-icon")}>
                             <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
