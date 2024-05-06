@@ -20,8 +20,9 @@ const PanelEmail = ({OnClickPanel}) => {
                         </div>
                     </div>
                 </div>
+
                 <div className={cx("button-login-container")}>
-                    <button className={cx("ui-button")} onClick={OnClickPanel(1)}>
+                    <button className={cx("ui-button")} onClick={() => OnClickPanel(1)}>
                         <span className={cx("content")}>
                             <span className={cx("ui-button-text")}>Continue</span>
                             <span className={cx("ui-button-hover-icon")}>

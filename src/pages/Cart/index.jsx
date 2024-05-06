@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashCan, faUser, faUserMinus} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
 import laptopTest from "../../assets/images/laptopTest.png";
+import {Link} from "react-router-dom";
 const Cart = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
@@ -86,8 +87,8 @@ const Cart = () => {
                                                 <span>100.000.000VND</span>
                                             </div>
                                             <div className={cx("btn-pay")}>
-                                                <button className={`${cx("btn-confirm")} ${cd("btn")}`}>Thanh toán
-                                                </button>
+                                                <Link className={`${cx("btn-confirm")} ${cd("btn")}`}  to={"/payment"}>Thanh toán
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

@@ -13,7 +13,7 @@ import logo from "../../assets/images/logoWeb.svg";
 const Navbar = () => {
     const cx = classNames.bind(styles)
     const navigate = useNavigate();
-    const {userLoggedIn, currentUser} = useAuth();
+    const [userLoggedIn, setUserLoggedIn] =  useState(true);
     const [isScrolled, setIsScrolled] = useState(false);
 
     const items = [
@@ -76,7 +76,8 @@ const Navbar = () => {
                                             </div>
                                             <div className={cx("list-option-arrow")}></div>
                                             <div className={cx("list-option")}>
-                                                <span className={cx("option")}>Thông tin cá nhân</span>
+                                                <Link to={"/profile"} className={cx("option")}>Thông tin cá nhân</Link>
+                                                {/*<span className={cx("option")} onClick={}>Thông tin cá nhân</span>*/}
                                                 <span className={cx("option")}>Đăng xuất</span>
                                             </div>
                                         </div>
@@ -88,7 +89,6 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                 </div>
-                                {/*<button onClick={doSignOut}>Sign out</button>*/}
                             </>
                             :
                             <>
