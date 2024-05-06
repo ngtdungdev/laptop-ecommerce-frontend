@@ -1,0 +1,161 @@
+.ui-profile-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 0 8rem 0;
+  .ui-profile {
+    .ui-data-product {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      background-color: #cbcbcb;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .ui-data {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        span {
+          display: block;
+          text-align: center;
+          width: 20rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .panel-text {
+          width: 15rem;
+          height: 40px;
+        }
+        input {
+          width: 15rem;
+        }
+        .ui-data {
+          display: grid;
+          grid-template-columns: 0.5fr 1.5fr;
+          grid-template-rows: 4rem 4rem 4rem auto;
+          gap: 10px;
+          .ui-top {
+            grid-area: 1 / 2 / 2 / 2;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            .ui-nameProduct {
+              margin-left: 20px;
+            }
+          }
+          .ui-center {
+            display: flex;
+            grid-area: 2 / 2 / 3 / 2;
+            .ui-supplier {
+              margin-left: 20px;
+            }
+          }
+          .ui-bottom {
+            display: flex;
+            align-items: center;
+            grid-area: 3 / 1 / 4 / 3;
+            .ui-price {
+              margin-left: 20px;
+            }
+            .ui-total-amount {
+              margin-left: 20px;
+            }
+          }
+          .ui-right {
+            display: flex;
+            flex-direction: column;
+            grid-area: 1 / 1 / 4 / 1;
+            label {
+              text-align: center;
+            }
+            .img-background {
+              width: 180px;
+              height: 180px;
+              position: relative;
+              img {
+                width: 180px;
+                height: 180px;
+                border-radius: 100%;
+                background-color: #ffffff;
+              }
+              .ui-btn {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                .btn {
+                  border-radius: 50px;
+                  text-align: center;
+                  overflow: hidden;
+                  background-image: linear-gradient(to right, #1eabbb, #56ecfd);
+                  width: 5rem;
+                  color: #dedede;
+                  label {
+                    font-size: 20px;
+                  }
+                }
+                .btn:hover {
+                  color: #44f2eb;
+                }
+                .btn:after {
+                  content: none;
+                }
+              }
+            }
+          }
+        }
+        .ui-button {
+          display: flex;
+          justify-content: center;
+          .btn-edit {
+            border-radius: 5px;
+            font-size: 14px;
+            width: 8rem;
+            background-color: #1eabbb;
+            color: #dedede;
+            &::after {
+              background-color: #1eabbb;
+            }
+            &:hover {
+              color: #44f2eb;
+            }
+          }
+          .btn-save {
+            border-radius: 5px;
+            font-size: 14px;
+            margin-left: 10px;
+            width: 8rem;
+            background-color: #1eabbb;
+            color: #dedede;
+            &::after {
+              background-color: #1eabbb;
+            }
+            &:hover {
+              color: #44f2eb;
+            }
+          }
+          .btn-cancel {
+            margin-left: 50px;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 5rem;
+            background-color: #3f3f3f;
+            color: #dedede;
+            &::after {
+              background-color: #3f3f3f;
+            }
+            &:hover {
+              color: #44f2eb;
+            }
+          }
+        }
+      }
+    }
+  }
+}

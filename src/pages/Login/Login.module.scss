@@ -16,22 +16,11 @@ html, body {
 @keyframes slideDownLeftRight {
   from {
     opacity: 0;
-    transform: translateX(-100%);
+    width: 0;
   }
   to {
     opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideDownRightLeft {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+    width: 100%;
   }
 }
 
@@ -174,7 +163,7 @@ html, body {
                   }
                   .next-name {
                     opacity: 0;
-                    animation: slideDownRightLeft 0.5s ease-out forwards;
+                    animation: slideDownLeftRight 0.5s ease-out forwards;
                     //animation-delay: 1.0s;
                   }
                 }
@@ -246,7 +235,7 @@ html, body {
                   }
                   .next-password {
                     opacity: 0;
-                    animation: slideDownRightLeft 0.5s ease-out forwards;
+                    animation: slideDownLeftRight 0.5s ease-out forwards;
                     //animation-delay: 1.0s;
                   }
                   .next-newPassword {

@@ -258,6 +258,7 @@
                 border-radius: 5px;
                 font-size: 14px;
                 width: 6rem;
+                text-decoration: none;
                 background-color: #1eabbb;
                 color: #dedede;
                 &::after {
@@ -265,6 +266,11 @@
                 }
                 &:hover {
                   color: #44f2eb;
+                }
+                &:after {
+                  content: none;
+                  left: 0;
+                  right: 0;
                 }
               }
             }

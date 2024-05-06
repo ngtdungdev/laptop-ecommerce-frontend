@@ -85,7 +85,7 @@ const Login = ({index}) => {
                         <div className={cx("cart-helder")}>
                             <h1 className={cx("cart-logo")}>
                                 <header className={cx("loginCart-helder")}>
-                                    <Link to={"/login"}>
+                                    <Link to={"/login"} onClick={() => handleSelectOption(0)}>
                                         <img src={logo} alt={""}/>
                                     </Link>
                                 </header>
