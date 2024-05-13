@@ -6,23 +6,27 @@ import {faArrowRightLong} from "@fortawesome/free-solid-svg-icons";
 import PanelEmail from "./PanelEmail";
 import PanelPin from "./PanelPin";
 import PanelResetPassword from "./PanelResetPassword";
+import SignIn from "../SignIn";
+import SignUp from "../SignUp";
+import {useLocation} from "react-router-dom";
 
-const ForgotPassword = ({OnClickPanel}) => {
+const ForgotPassword = () => {
     const cx = classNames.bind(styles)
+    const location = useLocation();
     const [option, setOption] = useState(0);
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const optionPanels = {
-        0: PanelEmail,
-        1: PanelPin,
-        2: PanelResetPassword,
-    };
-    const handleSelectOption = (index) => {
-        setOption(index);
-    }
     const renderPanels = () => {
-        const Panel = optionPanels[option];
-        return Panel ? <Panel OnClickPanel={handleSelectOption}/> : null;
+        switch (location.pathname) {
+            case "/forgot-password/email":
+                return <PanelEmail />;
+            case "/forgot-password/pin":
+                return <PanelPin />;
+            case "/forgot-password/reset-password":
+                return <PanelResetPassword />;
+            default:
+                return <PanelEmail />;
+        }
     };
     return (
         <div className={cx("login-cart-content")}>

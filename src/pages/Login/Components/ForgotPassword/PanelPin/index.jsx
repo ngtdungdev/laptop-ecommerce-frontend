@@ -3,8 +3,9 @@ import styles from "../ForgotPassword.module.scss";
 import {useEffect, useRef, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightLong} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
-const PanelPin = ({ OnClickPanel }) => {
+const PanelPin = () => {
     const cx = classNames.bind(styles);
     const numInputs = 4;
     const inputs = useRef(new Array(numInputs).fill(null));
@@ -75,14 +76,16 @@ const PanelPin = ({ OnClickPanel }) => {
                 <span onClick={handleSendConfirmationCode}>Gửi lại mã?</span>
             </div>
             <div className={cx("button-container")}>
-                <button className={cx("ui-button")} onClick={() => OnClickPanel(2)}>
+                <Link to={"/forgot-password/reset-password"}>
+                    <button className={cx("ui-button")}>
                         <span className={cx("content")}>
                             <span className={cx("ui-button-text")}>Continue</span>
                             <span className={cx("ui-button-hover-icon")}>
                                 <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
                             </span>
                         </span>
-                </button>
+                    </button>
+                </Link>
             </div>
         </div>
     );

@@ -2,13 +2,12 @@ import classNames from "classnames/bind";
 import styles from "../ForgotPassword.module.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightLong} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 const PanelResetPassword = ({OnClickPanel}) => {
     const cx = classNames.bind(styles)
     return (
         <div>
-            <div className={cx("captcha-element")}></div>
-            <form className={cx("web_authn_form")}></form>
-            <form className={cx("account-lookup")}>
+            <div className={cx("account-lookup")} action="/login">
                 <div className={cx("combined-password")}>
                     <div className={cx("next-password")}>
                         <label className={cx("next-password-label")}>Password</label>
@@ -30,7 +29,8 @@ const PanelResetPassword = ({OnClickPanel}) => {
                     </div>
                 </div>
                 <div className={cx("button-login-container")}>
-                    <button className={cx("ui-button")}>
+                    <Link to={"/login"}>
+                        <button className={cx("ui-button")}>
                         <span className={cx("content")}>
                             <span className={cx("ui-button-text")}>Confirm</span>
                             <span className={cx("ui-button-hover-icon")}>
@@ -38,9 +38,10 @@ const PanelResetPassword = ({OnClickPanel}) => {
                                                  className={cx("icons")}/>
                             </span>
                         </span>
-                    </button>
+                        </button>
+                    </Link>
                 </div>
-            </form>
+            </div>
         </div>
     );
 };
