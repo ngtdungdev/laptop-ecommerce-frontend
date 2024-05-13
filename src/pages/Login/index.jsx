@@ -1,5 +1,5 @@
 import {useEffect, useState, useRef} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import styles  from "./Login.module.scss"
 import classNames from "classnames/bind"
 import logo from "../../assets/images/logoWeb.svg"
@@ -9,27 +9,29 @@ import SignUp from "./Components/SignUp";
 import SignIn from "./Components/SignIn";
 import ForgotPassword from "./Components/ForgotPassword";
 
-const Login = ({index}) => {
+const Login = () => {
     const cx = classNames.bind(styles)
     const navigate = useNavigate();
     const {userLoggedIn} = useAuth();
-    const [option, setOption] = useState(index);
+    const location = useLocation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const handleSelectOption = (index) => {
-        console.log(index)
-        setOption(index);
-    }
-    const optionPanels = {
-        0: SignIn,
-        1: SignUp,
-        2: ForgotPassword,
-    };
     const renderPanels = () => {
-        const Panel = optionPanels[option];
-        return Panel ? <Panel OnClickPanel={handleSelectOption}/> : null;
+        switch (location.pathname) {
+            case "/login":
+                return <SignIn />;
+            case "/signup":
+                return <SignUp />;
+            case "/forgot-password":
+                return <ForgotPassword />;
+            default:
+                if(location.pathname.startsWith("/forgot-password")){
+                    return <ForgotPassword />;
+                }
+                else return <SignIn />
+        }
     };
     useEffect(() => {
         if (userLoggedIn) {
@@ -85,7 +87,7 @@ const Login = ({index}) => {
                         <div className={cx("cart-helder")}>
                             <h1 className={cx("cart-logo")}>
                                 <header className={cx("loginCart-helder")}>
-                                    <Link to={"/login"} onClick={() => handleSelectOption(0)}>
+                                    <Link to={"/login"}>
                                         <img src={logo} alt={""}/>
                                     </Link>
                                 </header>
