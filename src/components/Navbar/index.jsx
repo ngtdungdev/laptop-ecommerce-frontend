@@ -16,7 +16,6 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [userLoggedIn, setUserLoggedIn] =  useState(true);
     const [isScrolled, setIsScrolled] = useState(false);
-
     const items = [
         {title: "Home", link: "/"},
         {title: "Shop", link: "/shop"},
@@ -24,7 +23,6 @@ const Navbar = () => {
         {title: "My orders", link: "/orders"},
         {title: "About us", link: "/about-us"},
     ]
-
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = window.scrollY;
