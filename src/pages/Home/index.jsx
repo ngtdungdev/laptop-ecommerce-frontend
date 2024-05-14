@@ -11,15 +11,20 @@ import {useEffect, useState} from "react";
 import ProductItem from "../../components/ProductItem";
 import laptop from "../../assets/images/laptopTest.png";
 import asus from "../../assets/images/logo-asus.svg";
+import {useAuth} from "../../contexts/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 const Home = () => {
     const cx = classNames.bind(styles)
     const [counter, setCounter] = useState(1);
     const [isClicked, setIsClicked] = useState(false);
-    // const navigate = useNavigate();
-    // const {userLoggedIn} = useAuth();
-    //
+    const navigate = useNavigate();
+    const {userLoggedIn} = useAuth();
+
     useEffect(() => {
+        // if (!userLoggedIn) {
+        //     navigate("/login", {replace: true});
+        // }
         const interval = setInterval(() => {
             setCounter(counter + 1);
             if (counter > 4) {
@@ -27,26 +32,26 @@ const Home = () => {
             }
         }, 3000);
         return () => clearInterval(interval)
-        // if (!userLoggedIn) {
-        //     navigate("/login", {replace: true});
-        // }
-        // }, [navigate, userLoggedIn]);
-    }, [counter]);
+    }, [counter, navigate, userLoggedIn]);
+
     const handleClickIconLeft = () => {
         setCounter(counter - 1);
         if (counter <= 1) {
             setCounter(4);
         }
     }
+
     const handleClickIconRight = () => {
         setCounter(counter + 1);
         if (counter > 4) {
             setCounter(1);
         }
     }
+
     const handleClickButtonCart = () => {
         setIsClicked(!isClicked);
     };
+
     const [reviews, setReviews] = useState([
         {
             video: "https://www.youtube.com/embed/-9v2IQVoBX8",
@@ -65,6 +70,7 @@ const Home = () => {
             title: "Nên mua MacBook nào? Air, Pro 13, Pro 14 hay Pro 16?"
         }
     ]);
+
     const swapElements = (index) => {
         let newReviews = [...reviews];
         let temp = newReviews[index];
@@ -72,6 +78,7 @@ const Home = () => {
         newReviews[0] = temp;
         setReviews(newReviews);
     };
+
     return (
         <div className={cx("home-container")}>
             <div className={cx("ui-top")}>
@@ -122,7 +129,7 @@ const Home = () => {
                 <div className={cx("panel-container")}>
                     <div className={cx("ui-left")}>
                         <div className={cx("text")}>
-                            <span>Khám Phá Thế Giới Laptop Tại TechBest</span>
+                            <span>Khám Phá Thế Giới Laptop Tại TechBeats</span>
                         </div>
                         <div className={cx("panel")}>
                             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
