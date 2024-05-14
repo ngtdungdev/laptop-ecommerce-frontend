@@ -3,15 +3,15 @@ import styles from "../ForgotPassword.module.scss";
 import {faArrowRightLong} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {callApi} from "../../../../../utils/fetch";
 import {apiUrl} from "../../../../../utils/config";
 
 const PanelEmail = () => {
     const cx = classNames.bind(styles);
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-
     const handleContinue = async () => {
         const response = await callApi(`${apiUrl}/auth/send-otp`, "POST", email);
         console.log(response);
@@ -20,7 +20,7 @@ const PanelEmail = () => {
         } else if (response.status === 400) {
             setErrorMessage("Bạn không thể đổi mật khẩu vì tài khoản này được tạo thông qua Google. Vui lòng đăng nhập bằng tài khoản Google.");
         } else {
-            // link to the next step
+            navigate("/forgot-password/pin");
         }
     };
 
@@ -50,16 +50,14 @@ const PanelEmail = () => {
                 </div>
 
                 <div className={cx("button-login-container")}>
-                    <Link to={"/forgot-password/pin"}>
-                        <button className={cx("ui-button")} onClick={handleContinue}>
-                            <span className={cx("content")}>
-                                <span className={cx("ui-button-text")}>Continue</span>
-                                <span className={cx("ui-button-hover-icon")}>
-                                    <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
-                                </span>
+                    <button className={cx("ui-button")} onClick={handleContinue}>
+                        <span className={cx("content")}>
+                            <span className={cx("ui-button-text")}>Continue</span>
+                            <span className={cx("ui-button-hover-icon")}>
+                                <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
                             </span>
-                        </button>
-                    </Link>
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
