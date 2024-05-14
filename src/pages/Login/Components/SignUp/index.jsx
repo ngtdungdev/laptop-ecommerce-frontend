@@ -9,7 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightLong} from "@fortawesome/free-solid-svg-icons";
 import styles from "../../Login.module.scss";
 
-const SignUp = ({OnClickPanel}) => {
+const SignUp = () => {
     const cx = classNames.bind(styles)
 
     const [email, setEmail] = useState("");
@@ -192,7 +192,7 @@ const SignUp = ({OnClickPanel}) => {
                     </div>
                     <p className={cx("help-link","help-link-signIn")}>
                         <span className={cx("help-link-text")}>Already have a TechBeats account?</span>
-                        <Link className={cx("ui-arrow-link")} to={"/login"} onClick={() => OnClickPanel(0)}>
+                        <Link className={cx("ui-arrow-link")} to={"/login"}>
                         Login
                             <span className={cx("arrow-link-icon")}>
                             <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
