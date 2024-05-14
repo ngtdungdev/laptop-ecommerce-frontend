@@ -6,7 +6,7 @@ import {faArrowRightLong} from "@fortawesome/free-solid-svg-icons";
 
 const PanelPin = ({ OnClickPanel }) => {
     const cx = classNames.bind(styles);
-    const numInputs = 4;
+    const numInputs = 6;
     const inputs = useRef(new Array(numInputs).fill(null));
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);

@@ -11,6 +11,26 @@ const SignIn = ({OnClickPanel}) => {
     const cx = classNames.bind(styles)
     const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const onSignIn = async (e) => {
+        e.preventDefault();
+        if (isLoggingIn)
+            return;
+        setIsLoggingIn(true);
+        try {
+            const user = {email, password};
+            await login(user,
+                () => setErrorMessage("Hệ thống đang bảo trì, vui lòng thử lại sau."),
+                () => setErrorMessage("Email hoặc mật khẩu không đúng.")
+            );
+        } catch (error) {
+            setErrorMessage("Vui lòng kiểm tra kết nối mạng");
+        }
+        setIsLoggingIn(false);
+    };
+
     const onGoogleSignIn = async (e) => {
         e.preventDefault();
         if (isLoggingIn)
@@ -27,6 +47,7 @@ const SignIn = ({OnClickPanel}) => {
         }
         setIsLoggingIn(false);
     };
+
     useEffect(() => {
         // const timer = setTimeout(() => {
         //     const elements = [
@@ -45,15 +66,13 @@ const SignIn = ({OnClickPanel}) => {
         // return () => clearTimeout(timer);
     }, []);
 
-
-
     return (
         <div className={cx("login-cart-content")}>
             <div className={cx("main-cart-section")}>
                 <div className={cx("headings-container")}>
                     <div>
                         <h1 className={cx("ui-heading")}>Log in</h1>
-                        <h3 className={cx("ui-subheading")}>Continue to Laptop account</h3>
+                        <h3 className={cx("ui-subheading")}>Continue to TechBeats account</h3>
                     </div>
                 </div>
                 <div className={cx("captcha-element")}></div>
@@ -64,7 +83,12 @@ const SignIn = ({OnClickPanel}) => {
                             <label className={cx("next-email-label")}>Email</label>
                             <div className={cx("next-input")}>
                                 <div className={cx("combined-input")}>
-                                    <input className={cx("email")} type={"email"}/>
+                                    <input
+                                        className={cx("email")}
+                                        type={"email"}
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -74,13 +98,21 @@ const SignIn = ({OnClickPanel}) => {
                             <label className={cx("next-password-label")}>Password</label>
                             <div className={cx("next-input")}>
                                 <div className={cx("combined-input")}>
-                                    <input className={cx("password")} type={"password"}/>
+                                    <input
+                                        className={cx("password")}
+                                        type={"password"}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className={cx("combined-error-message")}>
+                        <p>{errorMessage}</p>
+                    </div>
                     <div className={cx("button-login-container")}>
-                        <button className={cx("ui-button")}>
+                        <button className={cx("ui-button")} onClick={e => onSignIn(e)}>
                             <span className={cx("content")}>
                                 <span className={cx("ui-button-text")}>Login</span>
                                 <span className={cx("ui-button-hover-icon")}>
@@ -109,7 +141,7 @@ const SignIn = ({OnClickPanel}) => {
                     </button>
                 </div>
                 <p className={cx("help-link")}>
-                    <span className={cx("help-link-text")}>New to Laptop?</span>
+                    <span className={cx("help-link-text")}>New to TechBeats?</span>
                     <Link className={cx("ui-arrow-link")} to={"/signup"} onClick={() => OnClickPanel(1)}>
                         Get started
                         <span className={cx("arrow-link-icon")}>

@@ -9,6 +9,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import avatar from "../../assets/images/logo.svg"
 import styles from "./Navbar.module.scss"
 import logo from "../../assets/images/logoWeb.svg";
+import {logout} from "../../utils/firebase/auth";
 
 const Navbar = () => {
     const cx = classNames.bind(styles)
@@ -36,11 +37,6 @@ const Navbar = () => {
             window.addEventListener("scroll", handleScroll);
         };
     }, []);
-
-    const doSignOut = () => {
-        removeAllTokens();
-        window.location.href = "/";
-    };
 
 
     return (
@@ -78,7 +74,7 @@ const Navbar = () => {
                                             <div className={cx("list-option")}>
                                                 <Link to={"/profile"} className={cx("option")}>Thông tin cá nhân</Link>
                                                 {/*<span className={cx("option")} onClick={}>Thông tin cá nhân</span>*/}
-                                                <span className={cx("option")}>Đăng xuất</span>
+                                                <span className={cx("option")} onClick={logout}>Đăng xuất</span>
                                             </div>
                                         </div>
                                     </div>

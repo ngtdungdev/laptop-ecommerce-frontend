@@ -2,7 +2,7 @@ import {app} from "./firebase";
 import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import {callApi} from "../fetch";
 import {apiUrl} from "../config";
-import {storeTokens} from "../token";
+import {removeAllTokens, storeTokens} from "../token";
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -33,6 +33,7 @@ export const login = async (loginInfo, handleStatus500, handleStatus400) => {
             }
         });
 };
+
 export const signUp = async (signUpInfo, handleStatus500, handleStatus404, handleStatus400) => {
     console.log(signUpInfo)
     await callApi(`${apiUrl}/auth/signup`, "POST", {...signUpInfo})
@@ -49,3 +50,10 @@ export const signUp = async (signUpInfo, handleStatus500, handleStatus404, handl
             }
         });
 };
+
+export const logout = async () => {
+    console.log('Logging out');
+    removeAllTokens();
+    console.log('Logged out');
+    window.location.href = "/login";
+}

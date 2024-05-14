@@ -10,16 +10,14 @@ import {faArrowRightLong} from "@fortawesome/free-solid-svg-icons";
 import styles from "../../Login.module.scss";
 
 const SignUp = ({OnClickPanel}) => {
-    const navigate = useNavigate();
-    const {userLoggedIn} = useAuth();
     const cx = classNames.bind(styles)
 
-    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [displayName, setDisplayName] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [isSigningUp, setIsSigningUp] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const [isLoggingIn, setIsLoggingIn] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -41,22 +39,51 @@ const SignUp = ({OnClickPanel}) => {
         return () => clearTimeout(timer);
     }, []);
 
+    const onSignUp = async (e) => {
+        e.preventDefault();
+        try {
+            if (isSigningUp || await checkEmailExists(e)) {
+                setConfirmPassword("");
+                return;
+            }
+            setIsSigningUp(true);
+            if (confirmPassword !== password) {
+                setErrorMessage("Mật khẩu xác nhận không trùng khớp.");
+                setConfirmPassword("");
+            } else {
+                const signUpInfo = {
+                    email: email,
+                    password: password,
+                    displayName: displayName,
+                    phone: null,
+                    avatar: null
+                };
+                await signUp(signUpInfo,
+                    () => setErrorMessage("Hệ thống đang bảo trì, vui lòng thử lại sau."),
+                    () => setErrorMessage("Không tìm thấy nhóm quyền."),
+                    () => setErrorMessage("Email đã tồn tại.")
+                );
+            }
+        } catch (error) {
+            setErrorMessage("Vui lòng kiểm tra kết nối mạng.");
+        }
+        setIsSigningUp(false);
+    };
+
     const checkEmailExists = async (e) => {
         e.preventDefault();
+        let success = false;
         if (!isSigningUp && email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) {
-            await callApi(
-                `${apiUrl}/auth/find-by-email`,
-                "POST",
-                email
-            )
+            await callApi(`${apiUrl}/auth/find-by-email`, "POST", email)
                 .then(response => {
                     if (response.status === 200) {
                         setErrorMessage("Email đã tồn tại.")
+                        success = true;
                     }
                 })
         }
-    }
-
+        return success;
+    };
 
     const onGoogleSignUp = async (e) => {
         e.preventDefault();
@@ -76,26 +103,30 @@ const SignUp = ({OnClickPanel}) => {
         setIsSigningUp(false);
     };
 
-
     return (
         <div>
             <div className={cx("login-cart-content")}>
                 <div className={cx("main-cart-section")}>
                     <div className={cx("headings-container")}>
                         <div>
-                            <h1 className={cx("ui-heading")}>Create a LapTop account</h1>
+                            <h1 className={cx("ui-heading")}>Create a TechBeats account</h1>
                             <h3 className={cx("ui-subheading")}>One last step before starting your free trial.</h3>
                         </div>
                     </div>
                     <div className={cx("captcha-element")}></div>
                     <form className={cx("web_authn_form")}></form>
-                    <form className={cx("account-lookup")} >
+                    <div className={cx("account-lookup")}>
                         <div className={cx("combined-email")}>
                             <div className={cx("next-email")}>
                                 <label className={cx("next-email-label")}>Email</label>
                                 <div className={cx("next-input")}>
                                     <div className={cx("combined-input")}>
-                                        <input className={cx("email")} type={"email"}/>
+                                        <input
+                                            className={cx("email")}
+                                            type={"email"}
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -105,22 +136,27 @@ const SignUp = ({OnClickPanel}) => {
                                 <label className={cx("next-name-label")}>Name</label>
                                 <div className={cx("next-input")}>
                                     <div className={cx("combined-input")}>
-                                        <input className={cx("name")}/>
+                                        <input
+                                            className={cx("name")}
+                                            type={"text"}
+                                            value={displayName}
+                                            onChange={(e) => setDisplayName(e.target.value)}
+                                        />
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className={cx("section-help-text")}>
-                            <p className={cx("next-text-help-text")}>
-                                Enter your first and last name as they appear on your government-issued ID.
-                            </p>
                         </div>
                         <div className={cx("combined-password")}>
                             <div className={cx("next-password")}>
                                 <label className={cx("next-password-label")}>Password</label>
                                 <div className={cx("next-input")}>
                                     <div className={cx("combined-input")}>
-                                        <input className={cx("password")} type={"password"}/>
+                                        <input
+                                            className={cx("password")}
+                                            type={"password"}
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -130,24 +166,32 @@ const SignUp = ({OnClickPanel}) => {
                                 <label className={cx("next-newPassword-label")}>Confirm new password</label>
                                 <div className={cx("next-input")}>
                                     <div className={cx("combined-input")}>
-                                        <input className={cx("newPassword")} type={"password"}/>
+                                        <input
+                                            className={cx("newPassword")}
+                                            type={"password"}
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                        />
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div className={cx("combined-error-message")}>
+                            <p>{errorMessage}</p>
+                        </div>
                         <div className={cx("button-login-container")}>
-                            <button className={cx("ui-button")} style={{ opacity: 0 }}>
+                            <button className={cx("ui-button")} style={{ opacity: 0 }} onClick={e => onSignUp(e)}>
                             <span className={cx("content")}>
-                                <span className={cx("ui-button-text")}>Create Laptop account</span>
+                                <span className={cx("ui-button-text")}>Create TechBeats account</span>
                                 <span className={cx("ui-button-hover-icon")}>
                                     <FontAwesomeIcon icon={faArrowRightLong} className={cx("icons")}/>
                                 </span>
                             </span>
                             </button>
                         </div>
-                    </form>
+                    </div>
                     <p className={cx("help-link","help-link-signIn")}>
-                        <span className={cx("help-link-text")}>Already have a Shopify account?</span>
+                        <span className={cx("help-link-text")}>Already have a TechBeats account?</span>
                         <Link className={cx("ui-arrow-link")} to={"/login"} onClick={() => OnClickPanel(0)}>
                         Login
                             <span className={cx("arrow-link-icon")}>

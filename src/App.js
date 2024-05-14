@@ -43,7 +43,7 @@ const App = () => {
         {path: "/login", element: <Login index={0}/>},
         {path: "/signup", element: <Login index={1}/>},
         {path: "/forgot-password", element: <Login index={2}/>},
-        // {path: "/admin/*", element: <Navigate to={"/admin"}/>, permissions: []},
+        {path: "/admin/*", element: <Navigate to={"/admin"}/>, permissions: []},
         {path: "/admin", element: <HeaderLayout element={Admin}/>},
         {
             path: "/admin/orders", element: <Order/>,
