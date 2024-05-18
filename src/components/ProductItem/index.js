@@ -6,16 +6,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightLong, faCartShopping} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
 
-const ProductItem = () => {
+const ProductItem = ({key, id, name, description, price, image, quantity}) => {
     const cx = classNames.bind(styles)
     const [isClicked, setIsClicked] = useState(false);
     const handleClickButtonCart = () => {
         setIsClicked(!isClicked);
     };
     return (
-        <div className={cx("product-container")}>
+        <div className={cx("product-container")} key={key}>
             <div className={cx("product-top")}>
-                <img src={laptop} alt={""}/>
+                <img src={image} alt={""}/>
             </div>
             <div className={cx("product-bottom")}>
                 <div className={cx("ui-data")}>
@@ -23,11 +23,11 @@ const ProductItem = () => {
                         <img src={asus} alt={""}/>
                     </div>
                     <div className={cx("name-laptop")}>
-                        <p>MACBOOK AIR 13 2020 - M1 256GB</p>
+                        <p>{name}</p>
                     </div>
                 </div>
                 <div className={cx("price")}>
-                    <p>26.000.000VNĐ</p>
+                    <p>{price}VNĐ</p>
                 </div>
                 <div className={cx("button-cart")}>
                     <div className={cx("button")}>

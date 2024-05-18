@@ -12,6 +12,7 @@ export const AuthProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [userLoggedIn, setUserLoggedIn] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,6 +34,7 @@ export const AuthProvider = ({children}) => {
         if (user) {
             setCurrentUser({...user});
             setUserLoggedIn(true);
+            setIsAdmin(checkAdmin(user));
         } else {
             setCurrentUser(null);
             setUserLoggedIn(false);
@@ -40,9 +42,17 @@ export const AuthProvider = ({children}) => {
         setLoading(false);
     };
 
+    const checkAdmin = (user) => {
+        for (let i = 0; i < user.roles.length - 1; i++) {
+            if (user.roles[i] === "ADMIN") return true;
+        }
+        return false
+    };
+
     const value = {
         currentUser,
         userLoggedIn,
+        isAdmin,
         loading
     };
 

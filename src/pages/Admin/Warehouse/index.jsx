@@ -8,8 +8,8 @@ const Warehouse = () => {
     const cx = classNames.bind(styles)
     const [option, setOption] = useState(0);
     const optionPanels = {
-        0: AddProduct,
-        1: UpdateProduct,
+        0: UpdateProduct,
+        1: AddProduct,
     };
     const handleSelectOption = () => {
         const SelectedPanel = optionPanels[option];
@@ -19,7 +19,7 @@ const Warehouse = () => {
         setOption(option)
         console.log(option)
     }
-    const [listWarehouse, setWarehouse] = useState(['Thêm sản phẩm', 'Cập nhật sản phẩm']);
+    const [listWarehouse, setWarehouse] = useState(['Cập nhật sản phẩm', 'Thêm sản phẩm']);
     return (
         <div className={cx("warehouse-container")}>
             <div className={cx("combobox")}>

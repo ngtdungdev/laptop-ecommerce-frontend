@@ -4,6 +4,7 @@ import FullLayout from "../layouts/FullLayout";
 import Home from "../pages/Home";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
+import Shop from "../pages/Shop";
 
 const ComponentPreviews = () => {
     return (
@@ -19,6 +20,9 @@ const ComponentPreviews = () => {
             </ComponentPreview>
             <ComponentPreview path="/Navbar">
                 <Navbar/>
+            </ComponentPreview>
+            <ComponentPreview path="/Shop">
+                <Shop/>
             </ComponentPreview>
         </Previews>
     )
