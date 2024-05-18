@@ -8,7 +8,6 @@ import laptop4 from "../../assets/images/4.png"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightLong, faCircleChevronLeft, faCircleChevronRight} from "@fortawesome/free-solid-svg-icons";
 import {useEffect, useState} from "react";
-import ProductItem from "../../components/ProductItem";
 import laptop from "../../assets/images/laptopTest.png";
 import asus from "../../assets/images/logo-asus.svg";
 import {useAuth} from "../../contexts/AuthContext";

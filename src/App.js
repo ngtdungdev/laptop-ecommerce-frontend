@@ -49,50 +49,50 @@ const App = () => {
         {path: "/admin/*", element: <Navigate to={"/admin"}/>, permissions: []},
         {path: "/admin", element: <HeaderLayout element={Admin}/>},
         {
-            path: "/admin/orders", element: <Order/>,
+            path: "/admin/orders", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 "CREATE_ORDER", "READ_ORDER", "UPDATE_ORDER", "DELETE_ORDER",
                 "CREATE_ORDER_DETAIL", "READ_ORDER_DETAIL", "UPDATE_ORDER_DETAIL", "DELETE_ORDER_DETAIL",
             ]
         },
         {
-            path: "/admin/support", element: <Support/>,
+            path: "/admin/support", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 // TODO
             ]
         },
         {
-            path: "/admin/products", element: <Product/>,
+            path: "/admin/products", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 "CREATE_PRODUCT", "READ_PRODUCT", "UPDATE_PRODUCT", "DELETE_PRODUCT",
             ]
         },
         {
-            path: "/admin/categories", element: <Category/>,
+            path: "/admin/categories", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 "CREATE_CATEGORY", "READ_CATEGORY", "UPDATE_CATEGORY", "DELETE_CATEGORY",
             ]
         },
         {
-            path: "/admin/warehouse", element: <Warehouse/>,
+            path: "/admin/warehouse", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 // TODO
             ]
         },
         {
-            path: "/admin/users", element: <User/>,
+            path: "/admin/users", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 "CREATE_USER", "READ_USER", "UPDATE_USER", "DELETE_USER",
             ]
         },
         {
-            path: "/admin/roles", element: <Role/>,
+            path: "/admin/roles", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 "CREATE_ROLE", "READ_ROLE", "UPDATE_ROLE", "DELETE_ROLE",
             ]
         },
         {
-            path: "/admin/statistics", element: <Statistics/>,
+            path: "/admin/statistics", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 // TODO
             ]

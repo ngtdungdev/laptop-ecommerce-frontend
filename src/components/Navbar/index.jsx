@@ -1,6 +1,4 @@
 import {Link, useNavigate} from "react-router-dom";
-import {useAuth} from "../../contexts/AuthContext";
-import {removeAllTokens} from "../../utils/token";
 import {useEffect, useState} from "react";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,13 +6,13 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import avatar from "../../assets/images/logo.svg"
 import styles from "./Navbar.module.scss"
-import logo from "../../assets/images/logoWeb.svg";
 import {logout} from "../../utils/firebase/auth";
+import {useAuth} from "../../contexts/AuthContext";
 
 const Navbar = () => {
     const cx = classNames.bind(styles)
     const navigate = useNavigate();
-    const [userLoggedIn, setUserLoggedIn] =  useState(true);
+    const {userLoggedIn, currentUser, isAdmin} = useAuth();
     const [isScrolled, setIsScrolled] = useState(false);
     const items = [
         {title: "Home", link: "/"},
@@ -60,8 +58,8 @@ const Navbar = () => {
                                     <div className={cx("ui-avatar")}>
                                         <div className={cx("avatar-container")}>
                                             <div className={cx("avatar")}>
-                                                <img src={avatar} alt={""}/>
-                                                <span className={cx("user-name")}>Nguyễn Tiến Dũng</span>
+                                                <img src={currentUser.avatar} alt={""}/>
+                                                <span className={cx("user-name")}>{currentUser.displayName}</span>
                                             </div>
                                             <div className={cx("ui-info")}>
                                                 <div className={cx("ui-arrow")}>
@@ -71,7 +69,7 @@ const Navbar = () => {
                                             <div className={cx("list-option-arrow")}></div>
                                             <div className={cx("list-option")}>
                                                 <Link to={"/profile"} className={cx("option")}>Thông tin cá nhân</Link>
-                                                {/*<span className={cx("option")} onClick={}>Thông tin cá nhân</span>*/}
+                                                {isAdmin ? <Link to={"/admin"} className={cx("option")}>Admin</Link> : "" }
                                                 <span className={cx("option")} onClick={logout}>Đăng xuất</span>
                                             </div>
                                         </div>
