@@ -7,34 +7,45 @@ import classNames from "classnames/bind";
 import styles from "./UpdateNotification.module.scss";
 import component from "../../../../../layouts/component.module.scss";
 
-const UpdateNotification = () => {
-    const cx = classNames.bind(styles)
-    const cd = classNames.bind(component)
+const UpdateNotification = ({product}) => {
+    const cx = classNames.bind(styles);
+    const cd = classNames.bind(component);
+    const [name, setName] = useState(product.name);
+    const [category, setCategory] = useState(product.category?.name);
+    const [supplier, setSupplier] = useState(product.supplier?.name);
+    const [display, setDisplay] = useState(product.display);
+    const [description, setDescription] = useState(product.description);
+    const [price, setPrice] = useState(product.price);
+    const [imageFile, setImageFile] = useState(null);
     const [imageSrc, setImageSrc] = useState(image);
-    const [display, setDisplay] = useState(true);
-    const [listCategory, setListCategory] = useState(['Lap Top', 'Chuột', 'Bàn Phím', 'Tai nghe']);
-    const [fileName, setFileName] = useState('Chọn file ảnh');
+    const [listCategory, setListCategory] = useState(['Laptop', 'Chuột', 'Bàn phím', 'Tai nghe']);
     const [listProducer, setListProducer] = useState(['Lenovo', 'Dell', 'Asus', 'Apple',  'Hewlett-Packard', 'Toshiba']);
     const handleSelectCategory = () => {
-
-    }
+        // TODO
+    };
     const handleSelectProducer = () => {
-
-    }
+        // TODO
+    };
     const handleSelectDisplay = () => {
         setDisplay(!display)
-    }
+    };
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setFileName(file.name);
+            setImageFile(file);
             const reader = new FileReader();
             reader.onload = (loadEvent) => {
                 setImageSrc(loadEvent.target.result);
             };
             reader.readAsDataURL(file);
         }
+        setImageFile(null);
+        setImageSrc(image);
     };
+    const handleSubmit = () => {
+        // TODO
+    };
+
     return (
         <div className={cx("ui-notification")}>
             <div className={cx("ui-title")}>
@@ -107,13 +118,13 @@ const UpdateNotification = () => {
                            className={cx("btn-image")} hidden={"hidden"}/>
                     <label className={`${cx("btn")} ${cd("btn")}`} htmlFor={"imageInput"}>Chọn ảnh</label>
                     <div className={cx("ui-name")}>
-                        <p className={cx("name")}>{fileName}</p>
+                        <p className={cx("name")}>{imageFile?.name ?? 'Chọn file ảnh'}</p>
                     </div>
                     <img src={imageSrc} alt=""/>
                 </div>
             </div>
             <div className={cx("panel", "ui-btnAdd")}>
-                <button className={`${cx("btn-add")} ${cd("btn")}`}>Thêm sản phẩm</button>
+                <button className={`${cx("btn-add")} ${cd("btn")}`}>Cập nhật sản phẩm</button>
             </div>
         </div>
     )
