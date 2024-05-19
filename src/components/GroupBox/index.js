@@ -8,10 +8,10 @@ import {useNavigate} from "react-router-dom";
 const GroupBox = ({quantity, page, setPage}) => {
     const cx = classNames.bind(styles)
     const navigate = useNavigate();
-    const [options, setOptions] = useState([1, 2, 3]);
+    const [options, setOptions] = useState(page > 3 ? [page -2, page - 1, page] : [1, 2, 3]);
     const handleClickLeft = () => {
         const newLocation = Math.max(1, page - 1);
-        navigate(`?page=${newLocation}`);
+        navigate(`/shop?page=${newLocation}`);
         setPage(newLocation - 1);
         if (page === options[0] && page > 1) {
             setOptions(options.map(option => option - 1));
@@ -20,14 +20,14 @@ const GroupBox = ({quantity, page, setPage}) => {
 
     const handleClickRight = () => {
         const newLocation = Math.min(quantity, page + 1);
-        navigate(`?page=${newLocation}`);
+        navigate(`/shop?page=${newLocation}`);
         setPage(newLocation - 1);
         if (page === options[2] && page < quantity) {
             setOptions(options.map(option => option + 1));
         }
     };
     const handleClickOption = (index) => {
-        navigate(index);
+        navigate(`/shop?page=${index}`);
         setPage(index - 1);
     };
     return (

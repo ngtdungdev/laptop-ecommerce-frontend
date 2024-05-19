@@ -17,16 +17,13 @@ import ForgotPassword from "../Login/Components/ForgotPassword";
 const Shop = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
-    const [pricePage, setPricePage] = useState(5)
-    const [page, setPage] = useState(0)
-    const [size, setSize] = useState(10)
-    const [data, setData] = useState(null)
-    const location = useLocation();
     const navigate = useNavigate();
-    const [listProduct, setListProduct] = useState(null);
+    const location = useLocation();
+    const [size, setSize] = useState(10)
+    const [pricePage, setPricePage] = useState(5)
+    const [data, setData] = useState(null)
     const [selectCombobox, setSelectCombobox] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const [isSearch, setIsSearch] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [priceSlider, setPriceSlider] = useState([0, 100000000]);
     const [selectedPriceRange, setSelectedPriceRange] = useState([priceSlider[0], priceSlider[1]]);
@@ -42,7 +39,12 @@ const Shop = () => {
     const handleSelect = (text) => {
         setSelectCombobox(text);
     }
-
+    const extractPageAndSize = (url) => {
+        const urlObj = new URL(url, 'http://example.com');
+        return  urlObj.searchParams.get('page');
+    }
+    const result = extractPageAndSize(location.pathname + location.search);
+    const [page, setPage] = useState(result != null ? result - 1 : 0)
     useEffect( () => {
         const loadListCategories = async() => {
             try {
@@ -54,64 +56,38 @@ const Shop = () => {
         loadListCategories().then(r => {})
     }, []);
     useEffect(() => {
-        location.pathname.startsWith("/shop?page=")
-        location.pathname.startsWith("/shop/")
-        // const searchProducts = async () => {
-        //     try {
-        //         const searchRequest = {
-        //             text: searchText,
-        //             category: selectCombobox !== "Tất cả" ? "" : selectCombobox,
-        //             sliderStart: selectedPriceRange[0],
-        //             sliderEnd: selectedPriceRange[1],
-        //             page: 0,
-        //             size: 10
-        //         };
-        //         await findProducts(setData, searchRequest);
-        //     } catch (error) {
-        //         setErrorMessage("Vui lòng kiểm tra kết nối mạng.");
-        //     }
-        // }
-        // switch (location.pathname) {
-        //     case "/shop?page=${page}&size=${size}":
-        //         return <SignIn />;
-        //     case "/signup":
-        //         return <SignUp />;
-        //     case "/forgot-password":
-        //         return <ForgotPassword />;
-        //     default:
-        //         if(location.pathname.startsWith("/forgot-password")){
-        //             return <ForgotPassword />;
-        //         }
-        //         else return <SignIn />
-        // }
-        const loadListProduct = async() => {
-            try {
-                await loadProducts(page,  size, setData);
-            } catch (error) {
-                setErrorMessage("Vui lòng kiểm tra kết nối mạng");
+        console.log(page)
+        if(location.pathname.startsWith("/shop?search")) {
+            const searchProducts = async () => {
+                try {
+                    const searchRequest = {
+                        text: searchText,
+                        category: selectCombobox !== "Tất cả" ? "" : selectCombobox,
+                        sliderStart: selectedPriceRange[0],
+                        sliderEnd: selectedPriceRange[1],
+                        page: page,
+                        size: size
+                    };
+                    await findProducts(setData, searchRequest);
+                } catch (error) {
+                    setErrorMessage("Vui lòng kiểm tra kết nối mạng.");
+                }
             }
+            searchProducts().then(r => {})
+        } else {
+            const loadListProduct = async () => {
+                try {
+                    await loadProducts(page, size, setData);
+                } catch (error) {
+                    setErrorMessage("Vui lòng kiểm tra kết nối mạng");
+                }
+            }
+            loadListProduct().then(r => {});
         }
-        // if(!isSearch)
-            loadListProduct().then(r => {})
-        // else searchProducts().then(r => {})
     }, [size, page]);
 
-    const searchProducts = async (e) => {
-        e.preventDefault();
-        // try {
-        //     setIsSearch(true)
-        //     const searchRequest = {
-        //         text: searchText,
-        //         category: selectCombobox !== "Tất cả" ? "" : selectCombobox,
-        //         sliderStart: selectedPriceRange[0],
-        //         sliderEnd: selectedPriceRange[1],
-        //         page: 0,
-        //         size: 10
-        //     };
-        //     await findProducts(setData, searchRequest);
-        // } catch (error) {
-        //     setErrorMessage("Vui lòng kiểm tra kết nối mạng.");
-        // }
+    const searchProducts = ()=> {
+        navigate("/shop?search&page=0");
     }
     return (
         <div>
@@ -124,7 +100,7 @@ const Shop = () => {
                                     <input className={`${cx("input")} ${cd("input")}`} placeholder={"Search"}
                                            value={searchText}
                                            onChange={handleInputChange} />
-                                    <div className={cx("ui-icon")} onClick={e => searchProducts(e)}>
+                                    <div className={cx("ui-icon")} onClick={searchProducts}>
                                         <img src={search} alt={""}/>
                                     </div>
                                 </div>
@@ -138,7 +114,7 @@ const Shop = () => {
                                          functionCallback={handlePriceRangeChange}/>
                         </div>
                         <div className={cx("ui-button")}>
-                            <button className={`${cd("btn")} ${cx("btn-price-filter")}`} onClick={e => searchProducts(e)}>Search</button>
+                            <button className={`${cd("btn")} ${cx("btn-price-filter")}`} onClick={searchProducts}>Search</button>
                         </div>
                     </div>
                     <div className={cx("ui-shop-center")}>

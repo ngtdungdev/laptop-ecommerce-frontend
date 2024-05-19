@@ -92,6 +92,12 @@ const App = () => {
             ]
         },
         {
+            path: "/admin/invoice", element: <HeaderLayout element={Admin}/>,
+            permissions: [
+                "CREATE_ROLE", "READ_ROLE", "UPDATE_ROLE", "DELETE_ROLE",
+            ]
+        },
+        {
             path: "/admin/statistics", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 // TODO
