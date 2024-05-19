@@ -6,10 +6,10 @@ import {useEffect, useRef, useState} from "react";
 
 const Combobox = ({listItem, heightCombobox, handleSelect, isComboboxUI}) => {
     const cx = classNames.bind(styles)
-    const [selectedOption, setSelectedOption] = useState(listItem[0]);
+    const [selectedOption, setSelectedOption] = useState("Tất cả");
     const handleSelectOption = (item, option) => {
         setSelectedOption(item);
-        handleSelect(option)
+        handleSelect(item)
     };
     const [styleDiv, setStyleDiv] = useState([0, 0]);
     const heightRef = useRef(null);
@@ -27,8 +27,14 @@ const Combobox = ({listItem, heightCombobox, handleSelect, isComboboxUI}) => {
         }
     }, []);
 
-    const renderCategory = listItem.map((item, index) => (
-        <span className={cx("option")} key={index} onClick={() => handleSelectOption(item, index)}>{item}</span>
+    const renderCategory = [{ name: "Tất cả", id: -1 }, ...(listItem || [])].map((item, index) => (
+        <span
+            className={cx("option")}
+            key={index}
+            onClick={() => handleSelectOption(item.name, index)}
+        >
+            {item.name}
+        </span>
     ));
     return (
         isComboboxUI ?
