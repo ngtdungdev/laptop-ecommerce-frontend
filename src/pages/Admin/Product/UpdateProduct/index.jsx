@@ -11,16 +11,27 @@ import GroupBox from "../../../../components/GroupBox";
 import image from "../../../../assets/images/imageIcon.svg";
 import UpdateNotification from "./UpdateNotification";
 import Notification from "../../../../components/Notification";
+import {loadProducts} from "../../../../utils/load";
 const UpdateProduct = () => {
-    const cx = classNames.bind(styles)
-    const cd = classNames.bind(component)
-    const [listCategory, setListCategory] = useState(['Lap Top', 'Chuột', 'Bàn Phím', 'Tai nghe']);
+    const cx = classNames.bind(styles);
+    const cd = classNames.bind(component);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(10);
+    const [data, setData] = useState(null);
+    const [listCategory, setListCategory] = useState(['Laptop', 'Chuột', 'Bàn phím', 'Tai nghe']);
     const [clickButton, setClickButton] = useState(0);
+    const [clickedProduct, setClickedProduct] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
+    const formatter = new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+    });
     const handleCategory = () => {
 
-    }
-    const handleClickButton = (index) => {
-        setClickButton(index)
+    };
+    const handleClickButton = (index, product) => {
+        setClickedProduct(product);
+        setClickButton(index);
     };
     const renderButtonBasedOnOption = () => {
         const SelectedButton = optionButtons[clickButton];
@@ -28,14 +39,14 @@ const UpdateProduct = () => {
     };
     const handleBtnNotification = () => {
 
-    }
+    };
     const optionButtons = {
         0: null,
         1: () => (
             <div className={cd("notification-container")}>
                 <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
                 <div className={cd("ui-notification-container")}>
-                    <UpdateNotification />
+                    <UpdateNotification product={clickedProduct}/>
                 </div>
             </div>
         ),
@@ -47,6 +58,19 @@ const UpdateProduct = () => {
             </div>
         )
     };
+
+    useEffect(() => {
+        const loadListProduct = async () => {
+            try {
+                await loadProducts(page, size, setData);
+            } catch (error) {
+                setErrorMessage("Vui lòng kiểm tra kết nối mạng.");
+            }
+        };
+
+        loadListProduct().then();
+    }, [page, size, setData]);
+
     return (
         <div className={cx("updateProduct-container")}>
             {renderButtonBasedOnOption()}
@@ -87,132 +111,36 @@ const UpdateProduct = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            <tr className={cx("item-product")}>
-                                <td className={cx("index")}>1</td>
-                                <td className={cx("id")}>P0001</td>
-                                <td className={cx("name")}>MACBOOK AIR 13 2020 - M1 256GB</td>
-                                <td className={cx("image")}>
-                                    <img src={laptopTest} alt={""} className={cx("img")}/>
-                                </td>
-                                <td className={cx("category")}>LapTop</td>
-                                <td className={cx("producer")}>Dell</td>
-                                <td className={cx("intro")}>LapTop</td>
-                                <td className={cx("price")}>10.000.000VND</td>
-                                <td className={cx("quantity")}>100</td>
-                                <td className={cx("display")}>Có</td>
-                                <td className={cx("update")}>
-                                    <button className={`${cd("btn")} ${cx("btn-update")}`}
-                                            onClick={() => handleClickButton(1)}>
-                                        <FontAwesomeIcon icon={faPenToSquare}/>
-                                    </button>
-                                </td>
-                                <td className={cx("delete")}>
-                                    <button className={`${cd("btn")} ${cx("btn-delete")}`}
-                                            onClick={() => handleClickButton(2)}>
-                                        <FontAwesomeIcon icon={faTrashCan}/>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr className={cx("item-product")}>
-                                <td className={cx("index")}>2</td>
-                                <td className={cx("id")}>P0001</td>
-                                <td className={cx("name")}>MACBOOK AIR 13 2020 - M1 256GB</td>
-                                <td className={cx("image")}>
-                                    <img src={laptopTest} alt={""} className={cx("img")}/>
-                                </td>
-                                <td className={cx("category")}>LapTop</td>
-                                <td className={cx("producer")}>Dell</td>
-                                <td className={cx("intro")}>LapTop</td>
-                                <td className={cx("price")}>10.000.000VND</td>
-                                <td className={cx("quantity")}>100</td>
-                                <td className={cx("display")}>Có</td>
-                                <td className={cx("update")}>
-                                    <button className={`${cd("btn")} ${cx("btn-update")}`}>
-                                        <FontAwesomeIcon icon={faPenToSquare}/>
-                                    </button>
-                                </td>
-                                <td className={cx("delete")}>
-                                    <button className={`${cd("btn")} ${cx("btn-delete")}`}>
-                                        <FontAwesomeIcon icon={faTrashCan}/>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr className={cx("item-product")}>
-                                <td className={cx("index")}>3</td>
-                                <td className={cx("id")}>P0001</td>
-                                <td className={cx("name")}>MACBOOK AIR 13 2020 - M1 256GB</td>
-                                <td className={cx("image")}>
-                                    <img src={laptopTest} alt={""} className={cx("img")}/>
-                                </td>
-                                <td className={cx("category")}>LapTop</td>
-                                <td className={cx("producer")}>Dell</td>
-                                <td className={cx("intro")}>LapTop</td>
-                                <td className={cx("price")}>10.000.000VND</td>
-                                <td className={cx("quantity")}>100</td>
-                                <td className={cx("display")}>Có</td>
-                                <td className={cx("update")}>
-                                    <button className={`${cd("btn")} ${cx("btn-update")}`}>
-                                        <FontAwesomeIcon icon={faPenToSquare}/>
-                                    </button>
-                                </td>
-                                <td className={cx("delete")}>
-                                    <button className={`${cd("btn")} ${cx("btn-delete")}`}>
-                                        <FontAwesomeIcon icon={faTrashCan}/>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr className={cx("item-product")}>
-                                <td className={cx("index")}>4</td>
-                                <td className={cx("id")}>P0001</td>
-                                <td className={cx("name")}>MACBOOK AIR 13 2020 - M1 256GB</td>
-                                <td className={cx("image")}>
-                                    <img src={laptopTest} alt={""} className={cx("img")}/>
-                                </td>
-                                <td className={cx("category")}>LapTop</td>
-                                <td className={cx("producer")}>Dell</td>
-                                <td className={cx("intro")}>LapTop</td>
-                                <td className={cx("price")}>10.000.000VND</td>
-                                <td className={cx("quantity")}>100</td>
-                                <td className={cx("display")}>Có</td>
-                                <td className={cx("update")}>
-                                    <button className={`${cd("btn")} ${cx("btn-update")}`}>
-                                        <FontAwesomeIcon icon={faPenToSquare}/>
-                                    </button>
-                                </td>
-                                <td className={cx("delete")}>
-                                    <button className={`${cd("btn")} ${cx("btn-delete")}`}>
-                                        <FontAwesomeIcon icon={faTrashCan}/>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr className={cx("item-product")}>
-                                <td className={cx("index")}>5</td>
-                                <td className={cx("id")}>P0001</td>
-                                <td className={cx("name")}>MACBOOK AIR 13 2020 - M1 256GB</td>
-                                <td className={cx("image")}>
-                                    <img src={laptopTest} alt={""} className={cx("img")}/>
-                                </td>
-                                <td className={cx("category")}>LapTop</td>
-                                <td className={cx("producer")}>Dell</td>
-                                <td className={cx("intro")}>LapTop</td>
-                                <td className={cx("price")}>10.000.000VND</td>
-                                <td className={cx("quantity")}>100</td>
-                                <td className={cx("display")}>Có</td>
-                                <td className={cx("update")}>
-                                    <button className={`${cd("btn")} ${cx("btn-update")}`}
-                                            onClick={() => handleClickButton(0)}>
-                                        <FontAwesomeIcon icon={faPenToSquare}/>
-                                    </button>
-                                </td>
-                                <td className={cx("delete")}>
-                                    <button className={`${cd("btn")} ${cx("btn-delete")}`}
-                                            onClick={() => handleClickButton(1)}>
-                                        <FontAwesomeIcon icon={faTrashCan}/>
-                                    </button>
-                                </td>
-                            </tr>
+                            {(data?.content ?? []).map((product, index) => (
+                                <tr className={cx("item-product")} key={index}>
+                                    <td className={cx("index")}>{index + 1}</td>
+                                    <td className={cx("id")}>{product.id}</td>
+                                    <td className={cx("name")}>{product.name}</td>
+                                    <td className={cx("image")}>
+                                        <img src={product.image} alt={""} className={cx("img")}/>
+                                    </td>
+                                    <td className={cx("category")}>{product.category?.name}</td>
+                                    <td className={cx("brand")}>{product.supplier?.name}</td>
+                                    <td className={cx("description")}>{product.description}</td>
+                                    <td className={cx("price")}>{formatter.format(product.price)}</td>
+                                    <td className={cx("quantity")}>{product.quantity}</td>
+                                    <td className={cx("display")}>Có</td>
+                                    <td className={cx("update")}>
+                                        <button className={`${cd("btn")} ${cx("btn-update")}`}
+                                                onClick={() => handleClickButton(1, product)}>
+                                            <FontAwesomeIcon icon={faPenToSquare}/>
+                                        </button>
+                                    </td>
+                                    <td className={cx("delete")}>
+                                        <button className={`${cd("btn")} ${cx("btn-delete")}`}
+                                                onClick={() => handleClickButton(2, product)}>
+                                            <FontAwesomeIcon icon={faTrashCan}/>
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                             <tr className={cx("ui-group-box")}>
-                                <td colSpan={12}>
+                            <td colSpan={12}>
                                     <GroupBox quantity={5}></GroupBox>
                                 </td>
                             </tr>
