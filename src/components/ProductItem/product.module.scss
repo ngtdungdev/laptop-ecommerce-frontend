@@ -44,11 +44,20 @@
         border-radius: 8px;
       }
       .name-laptop {
-        width: 75%;
+        width: 155px;
         margin-left: 10px;
         font-size: 14px;
         p {
           margin: 0;
+          text-align: center;
+          align-items: center;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          line-height: 1.2em;
+          max-height: 2.4em;
         }
       }
     }
