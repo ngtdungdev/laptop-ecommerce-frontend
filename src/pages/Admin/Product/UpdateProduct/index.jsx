@@ -12,6 +12,7 @@ import image from "../../../../assets/images/imageIcon.svg";
 import UpdateNotification from "./UpdateNotification";
 import Notification from "../../../../components/Notification";
 import {loadProducts} from "../../../../utils/load";
+import {formatter} from "../../../../utils/currency";
 const UpdateProduct = () => {
     const cx = classNames.bind(styles);
     const cd = classNames.bind(component);
@@ -22,10 +23,6 @@ const UpdateProduct = () => {
     const [clickButton, setClickButton] = useState(0);
     const [clickedProduct, setClickedProduct] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
-    const formatter = new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-    });
     const handleCategory = () => {
 
     };

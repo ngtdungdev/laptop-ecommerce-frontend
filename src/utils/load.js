@@ -45,3 +45,16 @@ export const findProducts = async (setData, searchProducts) => {
         });
 };
 
+export const saveCartItem = async (product) => {
+    await POST(`${apiUrl}/cart-item`, product)
+        .then(response => {
+            //TODO
+        })
+}
+
+export const getCartByUserId = async (userId) => {
+    await GET(`${apiUrl}/cart-item/search?id=${userId}}`)
+        .then(response => {
+
+        })
+}

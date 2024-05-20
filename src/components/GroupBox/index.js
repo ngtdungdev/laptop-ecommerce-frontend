@@ -2,33 +2,47 @@ import classNames from "classnames/bind";
 import styles from "./GroupBox.module.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-const GroupBox = ({quantity, page, setPage}) => {
+const GroupBox = ({quantity, page, setPage, location}) => {
     const cx = classNames.bind(styles)
     const navigate = useNavigate();
-    const [options, setOptions] = useState(page > 3 ? [page -2, page - 1, page] : [1, 2, 3]);
+    const [options, setOptions] = useState([]);
+    useEffect(() => {
+        const generateOptions = (page, quantity) => {
+            let result = [];
+            if (quantity <= 3) {
+                for (let i = 1; i <= quantity; i++) {
+                    result.push(i);
+                }
+            } else {
+                if (page > 3) {
+                    result = [page - 2, page - 1, page];
+                } else {
+                    result = [1, 2, 3];
+                }
+            }
+            return result;
+        };
+        setOptions(generateOptions(page, quantity));
+    }, [page, quantity]);
+
     const handleClickLeft = () => {
-        const newLocation = Math.max(1, page - 1);
-        navigate(`/shop?page=${newLocation}`);
-        setPage(newLocation - 1);
-        if (page === options[0] && page > 1) {
-            setOptions(options.map(option => option - 1));
-        }
+        const newPage = Math.max(1, page - 1);
+        setPage(newPage - 1);
+        navigate(`${location}page=${newPage}`);
     };
 
     const handleClickRight = () => {
-        const newLocation = Math.min(quantity, page + 1);
-        navigate(`/shop?page=${newLocation}`);
-        setPage(newLocation - 1);
-        if (page === options[2] && page < quantity) {
-            setOptions(options.map(option => option + 1));
-        }
+        const newPage = Math.min(quantity, page + 1);
+        setPage(newPage - 1);
+        navigate(`${location}page=${newPage}`);
     };
-    const handleClickOption = (index) => {
-        navigate(`/shop?page=${index}`);
-        setPage(index - 1);
+
+    const handleClickOption = (option) => {
+        setPage(option);
+        navigate(`${location}page=${option}`);
     };
     return (
         <div className={cx("group-box-container")}>

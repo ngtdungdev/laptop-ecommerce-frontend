@@ -119,3 +119,27 @@
     }
   }
 }
+.ui-background {
+  position: fixed;
+  background-color: #1A1A1A;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  right: 0;
+  opacity: 0.5;
+}
+.ui-notification-container {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  animation: 0.3s ease-in component_TransitionY__\+36o8;
+  transform: translateY(100%);
+  border-radius: 8px;
+  border-width: 1px;
+  z-index: 3;
+  border-color: rgba(26, 26, 26, 0.41);
+  border-style: solid;
+  align-items: start;
+}
