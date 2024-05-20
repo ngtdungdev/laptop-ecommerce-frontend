@@ -19,6 +19,7 @@ const Shop = () => {
     const cd = classNames.bind(component);
     const navigate = useNavigate();
     const location = useLocation();
+    const [locationProduct, setLocationProduct] = useState("/Shop?");
     const [size, setSize] = useState(10);
     const [pricePage, setPricePage] = useState(5);
     const [data, setData] = useState(null);
@@ -33,11 +34,12 @@ const Shop = () => {
         console.log(selectedPriceRange[0], selectedPriceRange[1]);
     };
     const handleInputChange = (e) => {
-        setSearchText(e.target.value); // Cập nhật giá trị của input
+        setSearchText(e.target.value);
     };
 
     const handleSelect = (text) => {
         setSelectCombobox(text);
+        console.log(text)
     };
     const extractPageAndSize = (url) => {
         const urlObj = new URL(url, 'http://example.com');
@@ -63,7 +65,7 @@ const Shop = () => {
                 try {
                     const searchRequest = {
                         text: searchText,
-                        category: selectCombobox !== "Tất cả" ? "" : selectCombobox,
+                        category: selectCombobox !== "Tất cả" ? selectCombobox : "",
                         sliderStart: selectedPriceRange[0],
                         sliderEnd: selectedPriceRange[1],
                         page: page,
@@ -89,7 +91,8 @@ const Shop = () => {
 
     const searchProducts = ()=> {
         setPage(0);
-        navigate(`/shop?search&page=${page + 1}`);
+        navigate(`/Shop?search&page=1`);
+        setLocationProduct("/Shop?search&")
     };
     return (
         <div>
@@ -125,7 +128,7 @@ const Shop = () => {
                         ))}
                     </div>
                     <div className={cx("ui-shop-bottom")}>
-                        <GroupBox quantity={data?.totalPages ?? 1} page={page + 1} setPage={setPage}/>
+                        <GroupBox quantity={data?.totalPages ?? 1} page={page + 1} setPage={setPage} location={locationProduct}/>
                     </div>
                 </div>
             </div>
