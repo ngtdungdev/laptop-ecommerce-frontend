@@ -1,26 +1,36 @@
 import classNames from "classnames/bind";
 import styles from "./Profile.module.scss";
 import component from "../../layouts/component.module.scss";
+import defaultAvatar from "../../assets/images/default_avatar.svg";
 import {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faImage} from "@fortawesome/free-solid-svg-icons";
 import {useAuth} from "../../contexts/AuthContext";
 
 const Profile = () => {
-    const cx = classNames.bind(styles)
-    const cd = classNames.bind(component)
+    const cx = classNames.bind(styles);
+    const cd = classNames.bind(component);
     const {currentUser} = useAuth();
-    const [imageSrc, setImageSrc] = useState(currentUser.avatar);
+    const [displayName, setDisplayName] = useState(currentUser.displayName);
+    const [email, setEmail] = useState(currentUser.email);
+    const [phone, setPhone] = useState(currentUser.phone ?? "");
+    const [birthdate, setBirthdate] = useState(currentUser.birthdate ?? "");
+    const [imageFile, setImageFile] = useState(null);
+    const [imageSrc, setImageSrc] = useState(currentUser.avatar ?? defaultAvatar);
     const [option, setOption] = useState(1);
+
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
+            setImageFile(file);
             const reader = new FileReader();
             reader.onload = (loadEvent) => {
                 setImageSrc(loadEvent.target.result);
             };
             reader.readAsDataURL(file);
         }
+        setImageFile(null);
+        setImageSrc(defaultAvatar);
     };
     const options = {
         1: () => (
@@ -33,7 +43,7 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className={cx("ui-nameProduct")}>
-                        <label className={cd("next-label")}>Gmail</label>
+                        <label className={cd("next-label")}>Email</label>
                         <div className={`${cd("panel-text")} ${cx("panel-text")}`}>
                             <span>{currentUser.email}</span>
                         </div>
@@ -47,7 +57,7 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className={cx("ui-supplier")}>
-                        <label className={cd("next-label")}>Năm sinh</label>
+                        <label className={cd("next-label")}>Ngày sinh</label>
                         <div className={`${cd("panel-text")} ${cx("panel-text")}`}>
                             <span>{currentUser.birthdate}</span>
                         </div>
@@ -90,15 +100,15 @@ const Profile = () => {
                         <label className={cd("next-label")}>Tên đăng nhập</label>
                         <div className={cd("next-input")}>
                             <div className={cd("combined-input")}>
-                                <input className={cd("input")} value={currentUser.displayName}/>
+                                <input className={cd("input")} value={displayName} onChange={setDisplayName}/>
                             </div>
                         </div>
                     </div>
                     <div className={cx("ui-nameProduct")}>
-                        <label className={cd("next-label")}>Gmail</label>
+                        <label className={cd("next-label")}>Email</label>
                         <div className={cd("next-input")}>
                             <div className={cd("combined-input")}>
-                                <input className={cd("input")} value={currentUser.email}/>
+                                <input className={cd("input")} value={email} onChange={setEmail}/>
                             </div>
                         </div>
                     </div>
@@ -108,15 +118,15 @@ const Profile = () => {
                         <label className={cd("next-label")}>Số điện thoại</label>
                         <div className={cd("next-input")}>
                             <div className={cd("combined-input")}>
-                                <input className={cd("input")} value={currentUser.phone}/>
+                                <input className={cd("input")} value={phone} onChange={setPhone}/>
                             </div>
                         </div>
                     </div>
                     <div className={cx("ui-supplier")}>
-                        <label className={cd("next-label")}>Năm sinh</label>
+                        <label className={cd("next-label")}>Ngày sinh</label>
                         <div className={cd("next-input")}>
                             <div className={`${cd("combined-input")}`}>
-                                <input className={cd("input")} type={"date"}/>
+                                <input className={cd("input")} type={"date"} value={birthdate} onChange={setBirthdate}/>
                             </div>
                         </div>
                     </div>
