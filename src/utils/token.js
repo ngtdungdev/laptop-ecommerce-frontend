@@ -24,12 +24,6 @@ export const removeAllTokens = () => {
 }
 
 export const refreshNewTokens = async () => {
-    const accessToken = getAccessToken();
-    const refreshToken = getRefreshToken();
-    if (!accessToken || !refreshToken) {
-        removeAllTokens();
-        return false;
-    }
     return await callApiWithRefreshToken(
         `${apiUrl}/auth/refresh-token`,
         "POST",

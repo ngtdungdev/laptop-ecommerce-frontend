@@ -15,33 +15,31 @@ export const AuthProvider = ({children}) => {
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (currentUser === null) {
-                await loadUser()
+        const loadUser = async () => {
+            setLoading(true);
+            const user = await POST(`${apiUrl}/auth/get-profile`, null)
+                .then(response => {
+                    if (response.status === 200) {
+                        console.log(response);
+                        return response.data;
+                    }
+                    return null;
+                });
+            if (user) {
+                setCurrentUser({...user});
+                setUserLoggedIn(true);
+                setIsAdmin(checkAdmin(user));
+            } else {
+                setCurrentUser(null);
+                setUserLoggedIn(false);
             }
+            setLoading(false);
         };
-        fetchData().then(r => {});
-    }, [currentUser]);
 
-    const loadUser = async () => {
-        const user = await POST(`${apiUrl}/auth/get-profile`, null)
-            .then(response => {
-                if (response.status === 200) {
-                    console.log(response);
-                    return response.data;
-                }
-                return null;
-            });
-        if (user) {
-            setCurrentUser({...user});
-            setUserLoggedIn(true);
-            setIsAdmin(checkAdmin(user));
-        } else {
-            setCurrentUser(null);
-            setUserLoggedIn(false);
+        if (currentUser === null) {
+            loadUser().then();
         }
-        setLoading(false);
-    };
+    }, [currentUser]);
 
     const checkAdmin = (user) => {
         for (let i = 0; i < user.roles.length - 1; i++) {
