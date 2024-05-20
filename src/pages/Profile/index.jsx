@@ -1,19 +1,16 @@
-import laptopTest from "../../assets/images/laptopTest.png";
 import classNames from "classnames/bind";
 import styles from "./Profile.module.scss";
 import component from "../../layouts/component.module.scss";
 import {useState} from "react";
-import image from "../../assets/images/imageIcon.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faImage} from "@fortawesome/free-solid-svg-icons";
-import AddUserDialog from "../Admin/Role/AddUserDialog";
-import UpdateUserDialog from "../Admin/Role/UpdateUserDialog";
-import Notification from "../../components/Notification";
+import {useAuth} from "../../contexts/AuthContext";
 
 const Profile = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
-    const [imageSrc, setImageSrc] = useState(laptopTest);
+    const {currentUser} = useAuth();
+    const [imageSrc, setImageSrc] = useState(currentUser.avatar);
     const [option, setOption] = useState(1);
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -32,13 +29,13 @@ const Profile = () => {
                     <div className={cx("ui-idProduct")}>
                         <label className={cd("next-label")}>Tên đăng nhập</label>
                         <div className={`${cd("panel-text")} ${cx("panel-text")}`}>
-                            <span>Đinh Quang Duy</span>
+                            <span>{currentUser.displayName}</span>
                         </div>
                     </div>
                     <div className={cx("ui-nameProduct")}>
                         <label className={cd("next-label")}>Gmail</label>
                         <div className={`${cd("panel-text")} ${cx("panel-text")}`}>
-                            <span>dungboi1029@gmail.com</span>
+                            <span>{currentUser.email}</span>
                         </div>
                     </div>
                 </div>
@@ -46,13 +43,13 @@ const Profile = () => {
                     <div className={cx("ui-category")}>
                         <label className={cd("next-label")}>Số điện thoại</label>
                         <div className={`${cd("panel-text")} ${cx("panel-text")}`}>
-                            <span>0812535278</span>
+                            <span>{currentUser.phone}</span>
                         </div>
                     </div>
                     <div className={cx("ui-supplier")}>
                         <label className={cd("next-label")}>Năm sinh</label>
                         <div className={`${cd("panel-text")} ${cx("panel-text")}`}>
-                            <span>19-12-2003</span>
+                            <span>{currentUser.birthdate}</span>
                         </div>
                     </div>
                 </div>
@@ -60,7 +57,7 @@ const Profile = () => {
                     <div className={cx("ui-image")}>
                         <label className={cd("next-label")}>Hình ảnh</label>
                         <div className={cx("img-background")}>
-                            <img src={imageSrc} alt={""} className={cx("img")}/>
+                            <img src={currentUser.avatar} alt={""} className={cx("img")}/>
                         </div>
                     </div>
                 </div>
@@ -93,7 +90,7 @@ const Profile = () => {
                         <label className={cd("next-label")}>Tên đăng nhập</label>
                         <div className={cd("next-input")}>
                             <div className={cd("combined-input")}>
-                                <input className={cd("input")} value={"Nguyễn Tiến Dũng"}/>
+                                <input className={cd("input")} value={currentUser.displayName}/>
                             </div>
                         </div>
                     </div>
@@ -101,7 +98,7 @@ const Profile = () => {
                         <label className={cd("next-label")}>Gmail</label>
                         <div className={cd("next-input")}>
                             <div className={cd("combined-input")}>
-                                <input className={cd("input")} value={"dungboi1029@gmail.com"}/>
+                                <input className={cd("input")} value={currentUser.email}/>
                             </div>
                         </div>
                     </div>
@@ -111,7 +108,7 @@ const Profile = () => {
                         <label className={cd("next-label")}>Số điện thoại</label>
                         <div className={cd("next-input")}>
                             <div className={cd("combined-input")}>
-                                <input className={cd("input")} value={"0812535278"}/>
+                                <input className={cd("input")} value={currentUser.phone}/>
                             </div>
                         </div>
                     </div>
@@ -119,7 +116,7 @@ const Profile = () => {
                         <label className={cd("next-label")}>Năm sinh</label>
                         <div className={cd("next-input")}>
                             <div className={`${cd("combined-input")}`}>
-                                <input className={cd("input")} value={"19-12-2003"}/>
+                                <input className={cd("input")} type={"date"}/>
                             </div>
                         </div>
                     </div>

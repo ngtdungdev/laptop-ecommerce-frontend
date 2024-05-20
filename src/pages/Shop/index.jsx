@@ -15,13 +15,13 @@ import SignUp from "../Login/Components/SignUp";
 import ForgotPassword from "../Login/Components/ForgotPassword";
 
 const Shop = () => {
-    const cx = classNames.bind(styles)
-    const cd = classNames.bind(component)
+    const cx = classNames.bind(styles);
+    const cd = classNames.bind(component);
     const navigate = useNavigate();
     const location = useLocation();
-    const [size, setSize] = useState(10)
-    const [pricePage, setPricePage] = useState(5)
-    const [data, setData] = useState(null)
+    const [size, setSize] = useState(10);
+    const [pricePage, setPricePage] = useState(5);
+    const [data, setData] = useState(null);
     const [selectCombobox, setSelectCombobox] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [searchText, setSearchText] = useState("");
@@ -53,7 +53,7 @@ const Shop = () => {
                 setErrorMessage("Vui lòng kiểm tra kết nối mạng");
             }
         }
-        loadListCategories().then(r => {})
+        loadListCategories().then(r => {});
     }, []);
     useEffect(() => {
         console.log(page)
