@@ -1,5 +1,22 @@
 import {apiUrl} from "./config";
 import {callApi, GET, POST, PUT, DELETE} from "./fetch";
+import {storeTokens} from "./token";
+
+export const saveProfile = async (userId, profile, setErrorMessage) => {
+    await PUT(`${apiUrl}/users/update-profile?id=${userId}`, profile)
+        .then(response => {
+            if (response.status === 500) {
+                setErrorMessage("Hệ thống đang bảo trì, vui lòng thử lại sau.")
+            } else if (response.status === 404) {
+                setErrorMessage("Không tìm thấy mã người dùng.")
+            } else if (response.status === 400) {
+                setErrorMessage("Bạn không thể đổi email vì tài khoản này được tạo thông qua Google. Vui lòng đăng nhập bằng tài khoản Google.")
+            } else {
+                storeTokens(response.data.accessToken, response.data.refreshToken);
+                window.location.href = "/profile";
+            }
+        });
+}
 
 export const loadProducts = async (page, size, setData) => {
     let url;

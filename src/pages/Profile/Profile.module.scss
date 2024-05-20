@@ -130,6 +130,9 @@
             border-radius: 5px;
             font-size: 14px;
             margin-left: 10px;
+            display: flex;
+            text-align: center;
+            justify-content: center;
             width: 8rem;
             background-color: #1eabbb;
             color: #dedede;
@@ -157,5 +160,35 @@
         }
       }
     }
+  }
+}
+.loader {
+  border: 3px solid white;
+  border-left-color: transparent;
+  border-radius: 50%;
+}
+
+.loader {
+  border: 3px solid white;
+  border-left-color: transparent;
+  width: 10px;
+  height: 10px;
+}
+
+.loader {
+  border: 3px solid white;
+  border-left-color: transparent;
+  width: 10px;
+  height: 10px;
+  animation: spin89345 1s linear infinite;
+}
+
+@keyframes spin89345 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }

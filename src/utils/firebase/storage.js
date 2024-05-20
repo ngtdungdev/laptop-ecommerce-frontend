@@ -6,7 +6,7 @@ const storage = getStorage(app);
 export const uploadImage = async (file, imageUrl) => {
     let url = "";
     if (file) {
-        const storageRef = ref(storage, `images/${file.name}`);
+        const storageRef = ref(storage, imageUrl);
         await uploadBytes(storageRef, file);
         url = await getDownloadURL(storageRef);
     }
