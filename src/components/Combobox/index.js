@@ -6,7 +6,7 @@ import {useEffect, useRef, useState} from "react";
 
 const Combobox = ({listItem, heightCombobox, handleSelect, isComboboxUI}) => {
     const cx = classNames.bind(styles)
-    const [selectedOption, setSelectedOption] = useState("Tất cả");
+    const [selectedOption, setSelectedOption] = useState(listItem[0]?.name);
     const handleSelectOption = (item, option) => {
         setSelectedOption(item);
         handleSelect(item)
@@ -27,7 +27,7 @@ const Combobox = ({listItem, heightCombobox, handleSelect, isComboboxUI}) => {
         }
     }, []);
 
-    const renderCategory = [{ name: "Tất cả", id: -1 }, ...(listItem || [])].map((item, index) => (
+    const renderCategory = (listItem || []).map((item, index) => (
         <span
             className={cx("option")}
             key={index}

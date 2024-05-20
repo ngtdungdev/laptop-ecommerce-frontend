@@ -8,7 +8,7 @@ import classNames from "classnames/bind";
 import styles from "./Statistics.module.scss";
 
 const Statistics = () => {
-    const [listChart, setListChart] = useState(['Tổng quát', 'Thống kê theo ngày', 'Thống kê theo tháng']);
+    const [listChart, setListChart] = useState([{ name: 'Tổng quan'} , { name: 'Thống kê theo ngày'}, { name: 'Thống kê theo tháng'}]);
     const cx = classNames.bind(styles)
     const [option, setOption] = useState(1);
     const handleSelect = (option) => {

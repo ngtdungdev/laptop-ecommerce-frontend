@@ -13,12 +13,17 @@ import {login, signInWithGoogle, signUp} from "../../utils/firebase/auth";
 import SignIn from "../Login/Components/SignIn";
 import SignUp from "../Login/Components/SignUp";
 import ForgotPassword from "../Login/Components/ForgotPassword";
+import UpdateNotification from "../Admin/Product/UpdateProduct/UpdateNotification";
+import Notification from "../../components/Notification";
+import AddProductNotification from "./AddProductNotification";
+import {useAuth} from "../../contexts/AuthContext";
 
 const Shop = () => {
     const cx = classNames.bind(styles);
     const cd = classNames.bind(component);
     const navigate = useNavigate();
     const location = useLocation();
+    const {userLoggedIn, currentUser, isAdmin} = useAuth();
     const [locationProduct, setLocationProduct] = useState("/Shop?");
     const [size, setSize] = useState(10);
     const [pricePage, setPricePage] = useState(5);
@@ -28,18 +33,18 @@ const Shop = () => {
     const [searchText, setSearchText] = useState("");
     const [priceSlider, setPriceSlider] = useState([0, 100000000]);
     const [selectedPriceRange, setSelectedPriceRange] = useState([priceSlider[0], priceSlider[1]]);
-    const [listCategory, setListCategory] = useState(null);
+    const [listCategory, setListCategory] = useState();
+    const [clickButton, setClickButton] = useState(0);
+    const [product, setProduct] = useState(null);
+    const [clickedProduct, setClickedProduct] = useState(null);
     const handlePriceRangeChange = (newRange) => {
         setSelectedPriceRange(newRange);
-        console.log(selectedPriceRange[0], selectedPriceRange[1]);
     };
     const handleInputChange = (e) => {
         setSearchText(e.target.value);
     };
-
     const handleSelect = (text) => {
         setSelectCombobox(text);
-        console.log(text)
     };
     const extractPageAndSize = (url) => {
         const urlObj = new URL(url, 'http://example.com');
@@ -88,14 +93,44 @@ const Shop = () => {
             loadListProduct().then(r => {});
         }
     }, [size, page, location]);
-
     const searchProducts = ()=> {
         setPage(0);
         navigate(`/Shop?search&page=1`);
         setLocationProduct("/Shop?search&")
     };
+    const handleClickButton = (product, index) => {
+        setClickButton(index);
+        setProduct(product);
+    };
+    const renderButtonBasedOnOption = () => {
+        const SelectedButton = optionButtons[clickButton];
+        return SelectedButton ? <SelectedButton/> : null;
+    };
+    const handleClickReceive = () => {
+
+    }
+    const optionButtons = {
+        0: null,
+        1: () => (
+            <div className={cd("notification-container")}>
+                <div className={`${cx("ui-background")}`} onClick={() => handleClickButton(0)}></div>
+                <div className={`${cx("ui-notification-container")}`}>
+                    <AddProductNotification product={product}/>
+                </div>
+            </div>
+        ),
+        2: () => (
+            <div className={cd("notification-container")}>
+                <div className={`${cx("ui-background")}`} onClick={() => handleClickButton(0)}></div>
+                <Notification text={"Bạn chưa đăng nhập"} type={"warning"}
+                              handleBtnNotification={handleClickReceive} handleClickNo={handleClickButton}/>
+            </div>
+        )
+    };
+
     return (
         <div>
+            {renderButtonBasedOnOption()}
             <div className={cx("shop-container")}>
                 <div className={cx("ui-shop")}>
                     <div className={cx("ui-shop-top")}>
@@ -112,7 +147,7 @@ const Shop = () => {
                             </div>
                         </div>
                         <div className={cx("ui-combobox", "ui-option")}>
-                            <Combobox listItem={listCategory} handleSelect={handleSelect} isComboboxUI={true}/>
+                            <Combobox listItem={[{ name: "Tất cả", id: -1 }, ...(listCategory || [])]} handleSelect={handleSelect} isComboboxUI={true}/>
                         </div>
                         <div className={cx("ui-tow-bar", "ui-option")}>
                             <PriceFilter min={priceSlider[0]} max={priceSlider[1]}
@@ -124,7 +159,7 @@ const Shop = () => {
                     </div>
                     <div className={cx("ui-shop-center")}>
                         {(data?.content ?? []).map((product) => (
-                            <ProductItem key={product.id} id={product.id} name={product.name} description={product.description} price={product.price} image={product.image}/>
+                            <ProductItem product={product} handleClick={handleClickButton}/>
                         ))}
                     </div>
                     <div className={cx("ui-shop-bottom")}>
@@ -132,7 +167,6 @@ const Shop = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };
