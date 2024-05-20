@@ -13,6 +13,7 @@ import UpdateNotification from "./UpdateNotification";
 import Notification from "../../../../components/Notification";
 import {loadProducts} from "../../../../utils/load";
 import {formatter} from "../../../../utils/currency";
+
 const UpdateProduct = () => {
     const cx = classNames.bind(styles);
     const cd = classNames.bind(component);

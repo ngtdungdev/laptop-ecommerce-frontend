@@ -6,6 +6,7 @@ import image from "../../../../assets/images/imageIcon.svg"
 import {useState} from "react";
 import {faImage} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 const AddProduct = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)

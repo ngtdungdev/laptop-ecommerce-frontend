@@ -5,10 +5,10 @@ import {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLaptop, faUserGear, faGear} from "@fortawesome/free-solid-svg-icons";
 import Statistics from "./Statistics";
-import Role from "./Role";
-import Support from "./SupportClient";
+import Product from "./Product";
+import Order from "./Order";
 import Warehouse from "./Warehouse";
-import Invoice from "./Invoice";
+import User from "./User";
 import Notification from "../../components/Notification";
 import {Link, useLocation} from "react-router-dom";
 const Admin = () => {
@@ -25,23 +25,23 @@ const Admin = () => {
         switch (location.pathname) {
             case "/admin/statistics":
                 return <Statistics />;
+            case "/admin/products":
+                return <Product />;
+            case "/admin/orders":
+                return <Order />;
             case "/admin/warehouse":
                 return <Warehouse />;
-            case "/admin/support":
-                return <Support />;
-            case "/admin/invoice":
-                return <Invoice />;
-            case "/admin/roles":
-                return <Role />;
+            case "/admin/users":
+                return <User />;
             default:
-                return <Statistics />
+                return null;
         }
     };
     const optionDialogs = {
         0: null,
         1: () => (
             <div className={cd("notification-container")}>
-                <div className={cd("ui-background")}  onClick={() => handleClickButton(0)}></div>
+                <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
                 <Notification text={"Bạn có chắc chắn muốn thoát không"} type={"warning"}
                               handleBtnNotification={handleClickReceive} handleClickNo={handleClickButton}/>
             </div>
@@ -86,7 +86,7 @@ const Admin = () => {
                             </div>
                         </div>
                     </Link>
-                    <Link to={"/admin/warehouse"}>
+                    <Link to={"/admin/products"}>
                         <div className={cx("ui-laptop")}>
                             <div className={cx("option", {"optionActive": options === 2})}
                                  onClick={() => handleClickOption(2)}>
@@ -95,7 +95,7 @@ const Admin = () => {
                             </div>
                         </div>
                     </Link>
-                    <Link to={"/admin/support"}>
+                    <Link to={"/admin/orders"}>
                         <div className={cx("ui-purchase-order")}>
                             <div className={cx("option", {"optionActive": options === 3})}
                                  onClick={() => handleClickOption(3)}>
@@ -109,7 +109,7 @@ const Admin = () => {
                             </div>
                         </div>
                     </Link>
-                    <Link to={"/admin/invoice"}>
+                    <Link to={"/admin/warehouse"}>
                         <div className={cx("ui-order-history")}>
                             <div className={cx("option", {"optionActive": options === 4})}
                                  onClick={() => handleClickOption(4)}>
@@ -123,7 +123,7 @@ const Admin = () => {
                             </div>
                         </div>
                     </Link>
-                    <Link to={"/admin/roles"}>
+                    <Link to={"/admin/users"}>
                         <div className={cx("ui-employee-manager")}>
                             <div className={cx("option", {"optionActive": options === 5})}
                                  onClick={() => handleClickOption(5)}>

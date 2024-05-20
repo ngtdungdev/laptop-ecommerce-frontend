@@ -1,12 +1,26 @@
-.warehouse-container {
+.ui-container {
   display: flex;
+  align-items: start;
+  justify-content: start;
   position: relative;
-  justify-content: center;
-  height: 100%;
-  align-items: center;
+  user-select: none;
+
   .combobox {
     position: absolute;
     top: 0;
     right: 0;
+    display: flex;
+    align-items: start;
+    justify-content: right;
+  }
+
+  .UI {
+    margin-top: 2rem;
+    margin-left: 60px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
   }
 }
