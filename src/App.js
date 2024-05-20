@@ -51,6 +51,12 @@ const App = () => {
             ]
         },
         {
+            path: "/admin/categories", element: <HeaderLayout element={Admin}/>,
+            permissions: [
+                "CREATE_CATEGORY", "READ_CATEGORY", "UPDATE_CATEGORY", "DELETE_CATEGORY",
+            ]
+        },
+        {
             path: "/admin/orders", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 "CREATE_ORDER", "READ_ORDER", "UPDATE_ORDER", "DELETE_ORDER",
@@ -67,12 +73,6 @@ const App = () => {
             path: "/admin/users", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 "CREATE_USER", "READ_USER", "UPDATE_USER", "DELETE_USER",
-            ]
-        },
-        {
-            path: "/admin/categories", element: <HeaderLayout element={Admin}/>,
-            permissions: [
-                "CREATE_CATEGORY", "READ_CATEGORY", "UPDATE_CATEGORY", "DELETE_CATEGORY",
             ]
         },
         {

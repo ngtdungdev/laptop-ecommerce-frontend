@@ -21,10 +21,22 @@ export const saveProfile = async (userId, profile, setErrorMessage) => {
 export const loadProducts = async (page, size, setData) => {
     let url;
     if (page === null || size === null)
-        url = `${apiUrl}/public/products`;
+        url = `${apiUrl}/products`;
     else
-        url = `${apiUrl}/public/products?page=${page}&size=${size}`;
-    await callApi(url, "GET", null)
+        url = `${apiUrl}/products?page=${page}&size=${size}`;
+    await GET(url)
+        .then(response => {
+            setData(response.data);
+        });
+};
+
+export const loadUsers = async (page, size, setData) => {
+    let url;
+    if (page === null || size === null)
+        url = `${apiUrl}/users`;
+    else
+        url = `${apiUrl}/users?page=${page}&size=${size}`;
+    await GET(url)
         .then(response => {
             setData(response.data);
         });

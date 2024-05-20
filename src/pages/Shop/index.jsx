@@ -24,7 +24,7 @@ const Shop = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const {userLoggedIn, currentUser, isAdmin} = useAuth();
-    const [locationProduct, setLocationProduct] = useState("/Shop?");
+    const [locationProduct, setLocationProduct] = useState("/shop?");
     const [size, setSize] = useState(10);
     const [pricePage, setPricePage] = useState(5);
     const [data, setData] = useState(null);

@@ -6,14 +6,29 @@ import GroupBox from "../../../components/GroupBox";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser, faUserMinus, faUserPlus} from "@fortawesome/free-solid-svg-icons"
 import OrderDetail from "../Order/OrderDetail";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import AddUserDialog from "./AddUserDialog";
 import UpdateUserDialog from "./UpdateUserDialog";
 import Notification from "../../../components/Notification";
+import {useLocation} from "react-router-dom";
+import {loadUsers} from "../../../utils/load";
+import {useAuth} from "../../../contexts/AuthContext";
 
 const User = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
+    const {currentUser} = useAuth();
+    const location = useLocation();
+    const [locationUser, setLocationUser] = useState("/admin/users?")
+    const [data, setData] = useState(null);
+    const extractPageAndSize = (url) => {
+        const urlObj = new URL(url, 'http://example.com');
+        return urlObj.searchParams.get('page');
+    };
+    const result = extractPageAndSize(location.pathname + location.search);
+    const [page, setPage] = useState(result != null ? result - 1 : 0)
+    const [size, setSize] = useState(10);
+    const [errorMessage, setErrorMessage] = useState("");
     const optionButtons = {
         0: null,
         1: () => (
@@ -51,6 +66,19 @@ const User = () => {
         const SelectedButton = optionButtons[clickButton];
         return SelectedButton ? <SelectedButton/> : null;
     };
+
+    useEffect(() => {
+        const loadUserList = async () => {
+            try {
+                await loadUsers(page, size, setData)
+            } catch (error) {
+                setErrorMessage("Vui lòng kiểm tra kết nối mạng.");
+            }
+        };
+
+        loadUserList().then();
+    }, [page, size, setData]);
+
     return (
         <div>
             {renderButtonBasedOnOption()}
@@ -66,13 +94,19 @@ const User = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={cx("add")}>
-                        <button className={`${cd("btn")} ${cx("btn-add")}`}
-                                onClick={() => handleClickButton(1)}>
-                            <FontAwesomeIcon icon={faUserPlus}/>
-                            <span>Thêm mới</span>
-                        </button>
-                    </div>
+                    {
+                        currentUser.authorities.indexOf("CREATE_USER") !== -1
+                            ?
+                            <div className={cx("add")}>
+                                <button className={`${cd("btn")} ${cx("btn-add")}`}
+                                        onClick={() => handleClickButton(1)}>
+                                    <FontAwesomeIcon icon={faUserPlus}/>
+                                    <span>Thêm mới</span>
+                                </button>
+                            </div>
+                            :
+                            <></>
+                    }
                 </div>
                 <div className={cx("ui-table")}>
                     <table className={cx("table-container")}>
@@ -81,40 +115,60 @@ const User = () => {
                             <th>TT</th>
                             <th>Tên đăng nhập</th>
                             <th>Email</th>
-                            <th>Giới tính</th>
+                            <th>SĐT</th>
+                            <th>Ngày sinh</th>
                             <th>Phân quyền</th>
-                            <th>Ngày tạo</th>
-                            <th>Cập nhật</th>
-                            <th>Xóa</th>
+                            {
+                                currentUser.authorities.indexOf("UPDATE_USER") !== -1
+                                    ? <th>Cập nhật</th> : <></>
+                            }
+                            {
+                                currentUser.authorities.indexOf("DELETE_USER") !== -1
+                                    ? <th>Xóa</th> : <></>
+                            }
                         </tr>
                         </thead>
                         <tbody>
-                        <tr className={cx("item-product")}>
-                            <td className={cx("index")}>1</td>
-                            <td className={cx("user-name")}>Nguyễn Tiến Dũng</td>
-                            <td className={cx("email")}>dungboi1029@gmail.com</td>
-                            <td className={cx("gender")}>Nam</td>
-                            <td className={cx("decentralize")}>Quản lý</td>
-                            <td className={cx("date")}>5-5-2024</td>
-                            <td className={cx("update")}>
-                                <div className={cx("update-user")}>
-                                    <button className={`${cd("btn")} ${cx("btn-update")}`}
-                                            onClick={() => handleClickButton(2)}>
-                                        <FontAwesomeIcon icon={faUser}/>
-                                        <span>Cập nhật</span>
-                                    </button>
-                                </div>
-                            </td>
-                            <td className={cx("delete")}>
-                                <div className={cx("delete-user")}>
-                                    <button className={`${cd("btn")} ${cx("btn-delete")}`}
-                                            onClick={() => handleClickButton(3)}>
-                                        <FontAwesomeIcon icon={faUserMinus}/>
-                                        <span>Xóa</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                        {(data?.content ?? []).map((user, index) => (
+                            <tr className={cx("item-product")}>
+                                <td className={cx("index")}>{index + 1}</td>
+                                <td className={cx("user-name")}>{user.displayName}</td>
+                                <td className={cx("email")}>{user.email}</td>
+                                <td className={cx("phone")}>{user.phone}</td>
+                                <td className={cx("birthdate")}>{user.birthdate}</td>
+                                <td className={cx("decentralize")}>{user.roles.join(", ")}</td>
+                                {
+                                    currentUser.authorities.indexOf("UPDATE_USER") !== -1
+                                        ?
+                                        <td className={cx("update")}>
+                                            <div className={cx("update-user")}>
+                                                <button className={`${cd("btn")} ${cx("btn-update")}`}
+                                                        onClick={() => handleClickButton(2)}>
+                                                    <FontAwesomeIcon icon={faUser}/>
+                                                    <span>Cập nhật</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        :
+                                        <></>
+                                }
+                                {
+                                    currentUser.authorities.indexOf("DELETE_USER") !== -1
+                                        ?
+                                        <td className={cx("delete")}>
+                                            <div className={cx("delete-user")}>
+                                                <button className={`${cd("btn")} ${cx("btn-delete")}`}
+                                                        onClick={() => handleClickButton(3)}>
+                                                    <FontAwesomeIcon icon={faUserMinus}/>
+                                                    <span>Xóa</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        :
+                                        <></>
+                                }
+                            </tr>
+                        ))}
                         <tr className={cx("ui-group-box")}>
                             <td colSpan={12}>
                                 <GroupBox quantity={5}></GroupBox>
