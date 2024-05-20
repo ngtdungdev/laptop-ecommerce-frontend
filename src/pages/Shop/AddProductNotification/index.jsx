@@ -8,11 +8,14 @@ import component from "../../../layouts/component.module.scss";
 import Combobox from "../../../components/Combobox";
 import laptopTest from "../../../assets/images/laptopTest.png";
 import {formatter} from "../../../utils/currency";
+import {saveCartItem} from "../../../utils/load";
+import {useAuth} from "../../../contexts/AuthContext";
 
-const AddProductNotification = ({product}) => {
+const AddProductNotification = ({product, handleBtnAdd, handleBtnCancel}) => {
     const cx = classNames.bind(styles);
     const cd = classNames.bind(component);
     const [id, setId] = useState(product.id);
+    const {currentUser} = useAuth();
     const [name, setName] = useState(product.name);
     const [category, setCategory] = useState(product?.category?.name);
     const [supplier, setSupplier] = useState(product?.supplier?.name);
@@ -22,6 +25,7 @@ const AddProductNotification = ({product}) => {
     const [quantity, setQuantity] = useState(product.quantity !== null ? product.quantity : 1);
     const [imageSrc, setImageSrc] = useState(product.image);
     const [imageFile, setImageFile] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
     const handleSelectCategory = () => {
         // TODO
     };
@@ -44,6 +48,28 @@ const AddProductNotification = ({product}) => {
         setImageFile(null);
         setImageSrc(image);
     };
+    const saveCart = async () => {
+        try {
+            const cart = {
+                userId: currentUser.id,
+                cartItems: [
+                    {
+                        productId: product.id,
+                        quantity: quantity
+                    }
+                ]
+            };
+            await saveCartItem(cart);
+        } catch (error) {
+            setErrorMessage("Vui lòng kiểm tra kết nối mạng");
+        }
+    }
+    const addCart = () => {
+
+    }
+    const addCancel = () => {
+        
+    }
     const handleSubmit = () => {
         // TODO
     };
@@ -110,7 +136,7 @@ const AddProductNotification = ({product}) => {
                                 type="number"
                                 value={quantity}
                                 onChange={handleChange}
-                                step="1" size="4" min="1"
+                                step="1" size="4" min="1" max={product.quantity}
                                 className={cx("input-text")}
                                 spellCheck="true"
                             />
@@ -123,8 +149,8 @@ const AddProductNotification = ({product}) => {
                         </div>
                     </div>
                     <div className={cx("ui-button")}>
-                        <button className={`${cx("btn-add")} ${cd("btn")}`}>Thêm</button>
-                        <button className={`${cx("btn-cancel")} ${cd("btn")}`}>Hủy</button>
+                        <button className={`${cx("btn-add")} ${cd("btn")}`} onClick={addCart}>Thêm</button>
+                        <button className={`${cx("btn-cancel")} ${cd("btn")}`} onClick={addCancel}>Hủy</button>
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import PriceFilter from "../../components/PriceFilter";
 import ProductItem from "../../components/ProductItem";
 import GroupBox from "../../components/GroupBox";
-import {findProducts, loadCategories, loadProducts} from "../../utils/load";
+import {findProducts, getCartByUserId, loadCategories, loadProducts} from "../../utils/load";
 import {useLocation, useNavigate} from "react-router-dom";
 import {login, signInWithGoogle, signUp} from "../../utils/firebase/auth";
 import SignIn from "../Login/Components/SignIn";
@@ -33,6 +33,7 @@ const Shop = () => {
     const [searchText, setSearchText] = useState("");
     const [priceSlider, setPriceSlider] = useState([0, 100000000]);
     const [selectedPriceRange, setSelectedPriceRange] = useState([priceSlider[0], priceSlider[1]]);
+    const [carts, setCarts] = useState();
     const [listCategory, setListCategory] = useState();
     const [clickButton, setClickButton] = useState(0);
     const [product, setProduct] = useState(null);
@@ -43,8 +44,8 @@ const Shop = () => {
     const handleInputChange = (e) => {
         setSearchText(e.target.value);
     };
-    const handleSelect = (text) => {
-        setSelectCombobox(text);
+    const handleSelect = (index) => {
+        setSelectCombobox(listCategory[index - 1]?.name);
     };
     const extractPageAndSize = (url) => {
         const urlObj = new URL(url, 'http://example.com');
@@ -60,11 +61,18 @@ const Shop = () => {
                 setErrorMessage("Vui lòng kiểm tra kết nối mạng");
             }
         }
+        const getCartById = async() => {
+            try {
+                await getCartByUserId(setCarts, currentUser.id);
+            } catch (error) {
+                setErrorMessage("Vui lòng kiểm tra kết nối mạng");
+            }
+        }
+        getCartById().then(r => {})
         loadListCategories().then(r => {});
     }, []);
     useEffect(() => {
-        console.log(page)
-        console.log(location);
+        console.log(carts)
         if (location.search.startsWith("?search")) {
             const searchProducts = async () => {
                 try {
@@ -95,8 +103,8 @@ const Shop = () => {
     }, [size, page, location]);
     const searchProducts = ()=> {
         setPage(0);
-        navigate(`/Shop?search&page=1`);
-        setLocationProduct("/Shop?search&")
+        navigate(`/shop?search&page=1`);
+        setLocationProduct("/shop?search&")
     };
     const handleClickButton = (product, index) => {
         setClickButton(index);
@@ -115,7 +123,7 @@ const Shop = () => {
             <div className={cd("notification-container")}>
                 <div className={`${cx("ui-background")}`} onClick={() => handleClickButton(0)}></div>
                 <div className={`${cx("ui-notification-container")}`}>
-                    <AddProductNotification product={product}/>
+                    <AddProductNotification product={product} handleBtnAdd={handleClickButton} handleBtnCancel={handleClickButton}/>
                 </div>
             </div>
         ),
@@ -159,7 +167,7 @@ const Shop = () => {
                     </div>
                     <div className={cx("ui-shop-center")}>
                         {(data?.content ?? []).map((product) => (
-                            <ProductItem product={product} handleClick={handleClickButton}/>
+                            <ProductItem product={product} handleClick={handleClickButton} isCartItem={(carts || []).find((item) => item.productId === product.id) !== undefined}/>
                         ))}
                     </div>
                     <div className={cx("ui-shop-bottom")}>

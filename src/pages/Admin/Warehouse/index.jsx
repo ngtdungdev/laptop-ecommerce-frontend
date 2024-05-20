@@ -19,7 +19,7 @@ const Warehouse = () => {
         setOption(option)
         console.log(option)
     }
-    const [listWarehouse, setWarehouse] = useState(['Cập nhật sản phẩm', 'Thêm sản phẩm']);
+    const [listWarehouse, setWarehouse] = useState([{name: 'Cập nhật sản phẩm'}, { name: 'Thêm sản phẩm'}]);
     return (
         <div className={cx("warehouse-container")}>
             <div className={cx("combobox")}>

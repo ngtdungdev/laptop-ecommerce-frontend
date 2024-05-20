@@ -26,7 +26,6 @@ export const loadProducts = async (page, size, setData) => {
         url = `${apiUrl}/public/products?page=${page}&size=${size}`;
     await callApi(url, "GET", null)
         .then(response => {
-            console.log(response);
             setData(response.data);
         });
 };
@@ -52,9 +51,10 @@ export const saveCartItem = async (product) => {
         })
 }
 
-export const getCartByUserId = async (userId) => {
-    await GET(`${apiUrl}/cart-item/search?id=${userId}}`)
+export const getCartByUserId = async (setCarts, userId) => {
+    await GET(`${apiUrl}/cart-item/search?id=${userId}`)
         .then(response => {
-
+            console.log(response)
+            setCarts(response.data.cartItems)
         })
 }
