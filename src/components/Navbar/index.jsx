@@ -85,8 +85,12 @@ const Navbar = () => {
                             :
                             <>
                                 <div className={cx("ui-button")}>
-                                    <button className={cx("btn-Login")}>Login</button>
-                                    <button className={cx("btn-SignUp")}>Sign up</button>
+                                    <Link to={"/login"}>
+                                        <button className={cx("btn-Login")}>Login</button>
+                                    </Link>
+                                    <Link to={"/signup"}>
+                                        <button className={cx("btn-SignUp")}>Sign up</button>
+                                    </Link>
                                 </div>
                             </>
                         }

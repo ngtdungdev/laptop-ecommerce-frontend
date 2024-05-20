@@ -3,7 +3,7 @@ import {getStorage, ref, uploadBytes, getDownloadURL, deleteObject} from "fireba
 
 const storage = getStorage(app);
 
-export const uploadImage = async (file) => {
+export const uploadImage = async (file, imageUrl) => {
     let url = "";
     if (file) {
         const storageRef = ref(storage, `images/${file.name}`);

@@ -38,11 +38,11 @@ const Shop = () => {
 
     const handleSelect = (text) => {
         setSelectCombobox(text);
-    }
+    };
     const extractPageAndSize = (url) => {
         const urlObj = new URL(url, 'http://example.com');
-        return  urlObj.searchParams.get('page');
-    }
+        return urlObj.searchParams.get('page');
+    };
     const result = extractPageAndSize(location.pathname + location.search);
     const [page, setPage] = useState(result != null ? result - 1 : 0)
     useEffect( () => {
@@ -57,7 +57,8 @@ const Shop = () => {
     }, []);
     useEffect(() => {
         console.log(page)
-        if(location.pathname.startsWith("/shop?search")) {
+        console.log(location);
+        if (location.search.startsWith("?search")) {
             const searchProducts = async () => {
                 try {
                     const searchRequest = {
@@ -84,11 +85,12 @@ const Shop = () => {
             }
             loadListProduct().then(r => {});
         }
-    }, [size, page]);
+    }, [size, page, location]);
 
     const searchProducts = ()=> {
-        navigate("/shop?search&page=0");
-    }
+        setPage(0);
+        navigate(`/shop?search&page=${page + 1}`);
+    };
     return (
         <div>
             <div className={cx("shop-container")}>
