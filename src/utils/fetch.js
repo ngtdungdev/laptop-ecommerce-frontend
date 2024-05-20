@@ -8,60 +8,62 @@ export class ApiResponse {
     }
 }
 
-export const GET = (url) => {
-    return callApiWithAccessToken(url, "GET", undefined);
+export const GET = async (url) => {
+    return await callApiWithAccessToken(url, "GET", undefined);
 };
 
-export const POST = (url, body) => {
-    return callApiWithAccessToken(url, "POST", body);
+export const POST = async (url, body) => {
+    return await callApiWithAccessToken(url, "POST", body);
 };
 
-export const PUT = (url, body) => {
-    return callApiWithAccessToken(url, "PUT", body);
+export const PUT = async (url, body) => {
+    return await callApiWithAccessToken(url, "PUT", body);
 };
 
-export const DELETE = (url) => {
-    return callApiWithAccessToken(url, "DELETE", undefined);
+export const DELETE = async (url) => {
+    return await callApiWithAccessToken(url, "DELETE", undefined);
 };
 
-export const callApiWithAccessToken = (url, method, body) => {
+export const callApiWithAccessToken = async (url, method, body) => {
     const accessToken = getAccessToken();
-    return callApiWithToken(url, method, body, accessToken)
-        .then(response => {
-            if (response.status === 401) {
-                const success = refreshNewTokens();
-                if (success) {
-                    return callApiWithRefreshToken(url, method, body);
-                } else {
-                    console.log("call using refresh");
-                    return new ApiResponse({
-                        status: 401,
-                        message: "Unauthorized",
-                        data: null
-                    });
-                }
+    return await callApiWithToken(url, method, body, accessToken)
+        .then(async (response) => {
+            if (!response.status || response.status === 401) {
+                return await refreshNewTokens().then(success => {
+                    if (success) {
+                        console.log("call using refresh");
+                        return callApiWithRefreshToken(url, method, body);
+                    } else {
+                        return new ApiResponse({
+                            status: 401,
+                            message: "Unauthorized",
+                            data: null
+                        });
+                    }
+                });
             }
             return response;
-        });
+        })
+        .then(response => response);
 };
 
-export const callApiWithRefreshToken = (url, method, body) => {
+export const callApiWithRefreshToken = async (url, method, body) => {
     const refreshToken = getRefreshToken();
-    return callApiWithToken(url, method, body, refreshToken);
+    return await callApiWithToken(url, method, body, refreshToken);
 };
 
-export const callApiWithToken = (url, method, body, token) => {
+export const callApiWithToken = async (url, method, body, token) => {
     const extraHeaders = {
         "Authorization": `Bearer ${token}`,
     };
-    return call(url, method, extraHeaders, body);
+    return await call(url, method, extraHeaders, body);
 };
 
-export const callApi = (url, method, body) => {
-    return call(url, method, undefined, body);
+export const callApi = async (url, method, body) => {
+    return await call(url, method, undefined, body);
 };
 
-export const call = (url, method, extraHeaders, body) => {
+export const call = async (url, method, extraHeaders, body) => {
     const init = {
         method: method,
         headers: {
@@ -72,7 +74,8 @@ export const call = (url, method, extraHeaders, body) => {
     if (body && (method === "POST" || method === "PUT" || method === "PATCH")) {
         init.body = JSON.stringify(body);
     }
-    return fetch(url, init)
+    return await fetch(url, init)
+        .catch(error => console.log(error))
         .then(response => response.json())
         .then(data => new ApiResponse(data))
         .catch(error => {
