@@ -23,6 +23,7 @@ const SignIn = () => {
             const user = {email, password};
             await login(user,
                 () => setErrorMessage("Hệ thống đang bảo trì, vui lòng thử lại sau."),
+                () => setErrorMessage("Email không tồn tại."),
                 () => setErrorMessage("Email hoặc mật khẩu không đúng.")
             );
         } catch (error) {
@@ -40,7 +41,8 @@ const SignIn = () => {
             const user = await signInWithGoogle();
             await login(user,
                 () => setErrorMessage("Hệ thống đang bảo trì, vui lòng thử lại sau."),
-                () => signUp(user)
+                () => signUp(user),
+                () => setErrorMessage("Email hoặc mật khẩu không đúng.")
             );
         } catch (error) {
             setErrorMessage("Vui lòng kiểm tra kết nối mạng.");
