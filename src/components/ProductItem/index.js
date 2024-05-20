@@ -4,17 +4,17 @@ import laptop from "../../assets/images/laptopTest.png";
 import asus from "../../assets/images/logo-asus.svg";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRightLong, faCartShopping} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useAuth} from "../../contexts/AuthContext";
 import {useNavigate} from "react-router-dom";
 import {loadProducts, saveCartItem} from "../../utils/load";
 
-const ProductItem = ({product, handleClick}) => {
+const ProductItem = ({product, handleClick, isCartItem}) => {
     const cx = classNames.bind(styles)
     const navigate = useNavigate();
     const {userLoggedIn, currentUser, isAdmin} = useAuth();
     const [errorMessage, setErrorMessage] = useState("");
-    const [isClicked, setIsClicked] = useState(false);
+    const [isClicked, setIsClicked] = useState(isCartItem);
     const handleClickButtonCart = () => {
         if (!userLoggedIn) {
             navigate("/login", {replace: true});
@@ -24,6 +24,9 @@ const ProductItem = ({product, handleClick}) => {
             saveCart().then(r => {})
         }
     };
+    useEffect(() => {
+        setIsClicked(isCartItem)
+    }, [isCartItem]);
     const saveCart = async () => {
         try {
             const cart = {

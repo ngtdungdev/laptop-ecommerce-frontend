@@ -41,7 +41,7 @@ const GroupBox = ({quantity, page, setPage, location}) => {
     };
 
     const handleClickOption = (option) => {
-        setPage(option);
+        setPage(option - 1);
         navigate(`${location}page=${option}`);
     };
     return (
