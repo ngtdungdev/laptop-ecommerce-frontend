@@ -9,7 +9,7 @@ const Combobox = ({listItem, heightCombobox, handleSelect, isComboboxUI}) => {
     const [selectedOption, setSelectedOption] = useState(listItem[0]?.name);
     const handleSelectOption = (item, option) => {
         setSelectedOption(item);
-        handleSelect(option)
+        handleSelect(option);
     };
     const [styleDiv, setStyleDiv] = useState([0, 0]);
     const heightRef = useRef(null);

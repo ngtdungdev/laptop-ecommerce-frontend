@@ -2,11 +2,14 @@ import classNames from "classnames/bind";
 import styles from "./UpdateUserDialog.module.scss";
 import component from "../../../../layouts/component.module.scss";
 import {useState} from "react";
-const AddUserDialog = ({handleClickNo}) => {
+import {useLocation} from "react-router-dom";
+
+const UpdateUserDialog = ({handleClickNo}) => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
     const [isChecked, setIsChecked] = useState(false);
     const handleCheckbox = () => {setIsChecked(!isChecked)}
+
     return (
         <div className={cx("ui-notification")}>
             <div className={cx("ui-title")}>
@@ -239,4 +242,4 @@ const AddUserDialog = ({handleClickNo}) => {
         </div>
     )
 }
-export default AddUserDialog
+export default UpdateUserDialog

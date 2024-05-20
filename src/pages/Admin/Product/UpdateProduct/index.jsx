@@ -13,16 +13,25 @@ import UpdateNotification from "./UpdateNotification";
 import Notification from "../../../../components/Notification";
 import {loadProducts} from "../../../../utils/load";
 import {formatter} from "../../../../utils/currency";
+import {useLocation} from "react-router-dom";
+
 const UpdateProduct = () => {
     const cx = classNames.bind(styles);
     const cd = classNames.bind(component);
-    const [page, setPage] = useState(0);
-    const [size, setSize] = useState(10);
+    const location = useLocation();
+    const [locationProduct, setLocationProduct] = useState("/admin/products?")
     const [data, setData] = useState(null);
     const [listCategory, setListCategory] = useState(['Laptop', 'Chuột', 'Bàn phím', 'Tai nghe']);
     const [clickButton, setClickButton] = useState(0);
     const [clickedProduct, setClickedProduct] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
+    const extractPageAndSize = (url) => {
+        const urlObj = new URL(url, 'http://example.com');
+        return urlObj.searchParams.get('page');
+    };
+    const result = extractPageAndSize(location.pathname + location.search);
+    const [page, setPage] = useState(result != null ? result - 1 : 0)
+    const [size, setSize] = useState(10);
     const handleCategory = () => {
 
     };
@@ -138,7 +147,7 @@ const UpdateProduct = () => {
                             ))}
                             <tr className={cx("ui-group-box")}>
                             <td colSpan={12}>
-                                    <GroupBox quantity={5}></GroupBox>
+                                    <GroupBox quantity={data?.totalPages ?? 1} page={page + 1} setPage={setPage} location={locationProduct}></GroupBox>
                                 </td>
                             </tr>
                             </tbody>

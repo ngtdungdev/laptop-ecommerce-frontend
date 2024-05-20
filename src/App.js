@@ -6,8 +6,6 @@ import {useAuth} from "./contexts/AuthContext";
 import FullLayout from "./layouts/FullLayout";
 import HeaderLayout from "./layouts/HeaderLayout";
 import Login from "./pages/Login";
-import SignUp from "./pages/Login/Components/SignUp";
-import ForgotPassword from "./pages/Login/Components/ForgotPassword";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
@@ -18,14 +16,6 @@ import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Admin from "./pages/Admin";
-import Order from "./pages/Admin/Invoice/Import";
-import Support from "./pages/Admin/SupportClient";
-import Product from "./pages/Admin/Product";
-import Category from "./pages/Admin/Category";
-import Warehouse from "./pages/Admin/Warehouse";
-import User from "./pages/Admin/User";
-import Role from "./pages/Admin/Role";
-import Statistics from "./pages/Admin/Statistics";
 
 const App = () => {
     const {currentUser} = useAuth();
@@ -49,14 +39,7 @@ const App = () => {
         {path: "/admin/*", element: <Navigate to={"/admin"}/>, permissions: []},
         {path: "/admin", element: <HeaderLayout element={Admin}/>},
         {
-            path: "/admin/orders", element: <HeaderLayout element={Admin}/>,
-            permissions: [
-                "CREATE_ORDER", "READ_ORDER", "UPDATE_ORDER", "DELETE_ORDER",
-                "CREATE_ORDER_DETAIL", "READ_ORDER_DETAIL", "UPDATE_ORDER_DETAIL", "DELETE_ORDER_DETAIL",
-            ]
-        },
-        {
-            path: "/admin/support", element: <HeaderLayout element={Admin}/>,
+            path: "/admin/statistics", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 // TODO
             ]
@@ -71,6 +54,13 @@ const App = () => {
             path: "/admin/categories", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 "CREATE_CATEGORY", "READ_CATEGORY", "UPDATE_CATEGORY", "DELETE_CATEGORY",
+            ]
+        },
+        {
+            path: "/admin/orders", element: <HeaderLayout element={Admin}/>,
+            permissions: [
+                "CREATE_ORDER", "READ_ORDER", "UPDATE_ORDER", "DELETE_ORDER",
+                "CREATE_ORDER_DETAIL", "READ_ORDER_DETAIL", "UPDATE_ORDER_DETAIL", "DELETE_ORDER_DETAIL",
             ]
         },
         {
@@ -89,18 +79,6 @@ const App = () => {
             path: "/admin/roles", element: <HeaderLayout element={Admin}/>,
             permissions: [
                 "CREATE_ROLE", "READ_ROLE", "UPDATE_ROLE", "DELETE_ROLE",
-            ]
-        },
-        {
-            path: "/admin/invoice", element: <HeaderLayout element={Admin}/>,
-            permissions: [
-                "CREATE_ROLE", "READ_ROLE", "UPDATE_ROLE", "DELETE_ROLE",
-            ]
-        },
-        {
-            path: "/admin/statistics", element: <HeaderLayout element={Admin}/>,
-            permissions: [
-                // TODO
             ]
         },
     ];

@@ -1,14 +1,14 @@
 import classNames from "classnames/bind";
-import styles from "./SupportClient.module.scss"
+import styles from "./Order.module.scss"
 import {useState} from "react";
 import component from "../../../layouts/component.module.scss";
-import UpdateNotification from "../Product/UpdateProduct/UpdateNotification";
 import Notification from "../../../components/Notification";
 import OrderProcessing from "./OrderProcessing";
 import OrderCompleted from "./OrderCompleted";
 import OrderCancelled from "./OrderCancelled";
 import OrderDetail from "./OrderDetail";
-const Support = () => {
+
+const Order = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
     const [options, setOptions] = useState(1);
@@ -47,7 +47,7 @@ const Support = () => {
         2: () => (
             <div className={cd("notification-container")}>
                 <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
-                <Notification text={"Bạn có chắc chắn muốn xóa sản phẩm"} type={"warning"}
+                <Notification text={"Bạn có chắc chắn muốn hủy đơn hàng này?"} type={"warning"}
                               handleBtnNotification={handleClickReceive} handleClickNo={handleClickButton}/>
             </div>
         )
@@ -101,7 +101,7 @@ const Support = () => {
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span>Đang sử lý</span>
+                        <span>Đang xử lý</span>
                     </div>
                     <div className={cx("icon-name", {"active-icon-name2": options === 2})} onClick={() => {handleClickOption(2)}}>
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,4 +142,4 @@ const Support = () => {
     );
 };
 
-export default Support;
+export default Order;

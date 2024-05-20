@@ -1,0 +1,12 @@
+.warehouse-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  .combobox {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
