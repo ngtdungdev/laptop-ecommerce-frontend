@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import avatar from "../../assets/images/logo.svg"
+import avatar from "../../assets/images/default_avatar.svg"
 import styles from "./Navbar.module.scss"
 import {logout} from "../../utils/firebase/auth";
 import {useAuth} from "../../contexts/AuthContext";
@@ -58,7 +58,7 @@ const Navbar = () => {
                                     <div className={cx("ui-avatar")}>
                                         <div className={cx("avatar-container")}>
                                             <div className={cx("avatar")}>
-                                                <img src={currentUser.avatar} alt={""}/>
+                                                <img src={currentUser.avatar ?? avatar} alt={""}/>
                                                 <span className={cx("user-name")}>{currentUser.displayName}</span>
                                             </div>
                                             <div className={cx("ui-info")}>
@@ -69,7 +69,7 @@ const Navbar = () => {
                                             <div className={cx("list-option-arrow")}></div>
                                             <div className={cx("list-option")}>
                                                 <Link to={"/profile"} className={cx("option")}>Thông tin cá nhân</Link>
-                                                {isAdmin ? <Link to={"/admin"} className={cx("option")}>Admin</Link> : "" }
+                                                {isAdmin ? <Link to={"/admin"} className={cx("option")}>Admin</Link> : ""}
                                                 <span className={cx("option")} onClick={logout}>Đăng xuất</span>
                                             </div>
                                         </div>

@@ -19,12 +19,14 @@ export const signInWithGoogle = async () => {
     };
 };
 
-export const login = async (loginInfo, handleStatus500, handleStatus400) => {
+export const login = async (loginInfo, handleStatus500, handleStatus404, handleStatus400) => {
     const {email, password} = loginInfo;
     await callApi(`${apiUrl}/auth/login`, "POST", {email, password})
         .then(response => {
             if (response.status === 500) {
                 handleStatus500();
+            } else if (response.status === 404) {
+                handleStatus404();
             } else if (response.status === 400) {
                 handleStatus400();
             } else {
@@ -43,7 +45,9 @@ export const signUp = async (signUpInfo, handleStatus500, handleStatus404, handl
             } else if (response.status === 404) {
                 handleStatus404();
             } else if (response.status === 400) {
+                console.log(handleStatus400);
                 handleStatus400();
+                console.log(handleStatus400);
             } else {
                 storeTokens(response.data.accessToken, response.data.refreshToken);
                 window.location.href = "/";
