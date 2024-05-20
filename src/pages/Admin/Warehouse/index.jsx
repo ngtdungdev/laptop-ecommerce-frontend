@@ -11,7 +11,8 @@ import HistoryImportDetail from "./HistoryImportDetail";
 const Warehouse = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
-    const [listChoice, setListChoice] = useState(['Nhập hàng', 'Lịch sử nhập hàng', 'Nhà cung cấp']);
+    const [listChoice, setListChoice] = useState([{name: 'Nhập hàng'}, {name: 'Lịch sử nhập hàng'}, {name: 'Nhà cung cấp'}]);
+    const [option, setOption] = useState(0);
     const handleSelect = (option) => {
         setOption(option)
     }
@@ -34,7 +35,7 @@ const Warehouse = () => {
                 </div>
             </div>
         )
-    }
+    };
 
     const renderDialog = () => {
         const SelectedDialog = optionDialog[clickButton];
@@ -44,8 +45,8 @@ const Warehouse = () => {
         const SelectedPanel = optionPanels[option];
         if (option === 1) return SelectedPanel ? <SelectedPanel handleClickButton={handleClickButton}/> : null
         else return SelectedPanel ? <SelectedPanel/> : null
-    }
-    const [option, setOption] = useState(0);
+    };
+
     return (
         <div>
             {renderDialog()}
