@@ -1,15 +1,19 @@
 import Combobox from "../../../../../components/Combobox";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import image from "../../../../../assets/images/imageIcon.svg";
 import classNames from "classnames/bind";
 import styles from "./UpdateNotification.module.scss";
 import component from "../../../../../layouts/component.module.scss";
+import {loadCategories} from "../../../../../utils/load";
+import {uploadImage} from "../../../../../utils/firebase/storage";
+import {useAuth} from "../../../../../contexts/AuthContext";
 
 const UpdateNotification = ({product}) => {
     const cx = classNames.bind(styles);
     const cd = classNames.bind(component);
+    const {currentUser} = useAuth();
     const [name, setName] = useState(product.name);
     const [category, setCategory] = useState(product.category?.name);
     const [supplier, setSupplier] = useState(product.supplier?.name);
@@ -18,8 +22,11 @@ const UpdateNotification = ({product}) => {
     const [price, setPrice] = useState(product.price);
     const [imageFile, setImageFile] = useState(null);
     const [imageSrc, setImageSrc] = useState(image);
-    const [listCategory, setListCategory] = useState(['Laptop', 'Chuột', 'Bàn phím', 'Tai nghe']);
-    const [listProducer, setListProducer] = useState(['Lenovo', 'Dell', 'Asus', 'Apple',  'Hewlett-Packard', 'Toshiba']);
+    const [listCategory, setListCategory] = useState(null);
+    const [listProducer, setListProducer] = useState([{name: 'Lenovo'}, {name: 'Dell'}, {name: 'Asus'}, {name: 'Apple'},  {name: 'Hewlett-Packard'}, {name: 'Toshiba'}]);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isUpdating, setIsUpdating] = useState("");
+
     const handleSelectCategory = () => {
         // TODO
     };
@@ -38,13 +45,45 @@ const UpdateNotification = ({product}) => {
                 setImageSrc(loadEvent.target.result);
             };
             reader.readAsDataURL(file);
+        } else {
+            setImageFile(null);
+            setImageSrc(image);
         }
-        setImageFile(null);
-        setImageSrc(image);
     };
-    const handleSubmit = () => {
-        // TODO
+    const handleSubmit = async () => {
+        if (isUpdating || !validateProduct()) {
+            return;
+        }
+        setIsUpdating(true);
+
+        let url;
+        if (imageFile === null) {
+            url = null;
+        } else {
+            url = await uploadImage(imageFile, `products/${currentUser.id}`)
+            if (url === "") {
+                setErrorMessage("Không thể lưu hình ảnh. Vui lòng thử lại sau.");
+                console.log(errorMessage);
+                return;
+            }
+        }
     };
+
+    const validateProduct = () => {
+
+    };
+
+    useEffect(() => {
+        const loadListCategories = async() => {
+            try {
+                await loadCategories(setListCategory);
+            } catch (error) {
+                setErrorMessage("Vui lòng kiểm tra kết nối mạng");
+            }
+        };
+
+        loadListCategories().then();
+    }, []);
 
     return (
         <div className={cx("ui-notification")}>
@@ -57,7 +96,9 @@ const UpdateNotification = ({product}) => {
                         <label className={cd("next-label")}>Tên sản phẩm</label>
                         <div className={cd("next-input")}>
                             <div className={cd("combined-input")}>
-                                <input className={cd("input")}/>
+                                <input className={cd("input")}
+                                       value={name}
+                                       onChange={e => setName(e.target.value)}/>
                             </div>
                         </div>
                     </div>
@@ -67,7 +108,7 @@ const UpdateNotification = ({product}) => {
                 <div className={cx("ui-category")}>
                     <label className={cd("next-label")}>Loại sản phẩm</label>
                     <div className={cx("category")}>
-                        <Combobox listItem={listCategory}
+                        <Combobox listItem={[{ name: "Tất cả", id: -1 }, ...(listCategory || [])]}
                                   handleSelect={handleSelectCategory}
                                   isComboboxUI={false}/>
                     </div>
@@ -75,7 +116,7 @@ const UpdateNotification = ({product}) => {
                 <div className={cx("ui-producer")}>
                     <label className={cd("next-label")}>Hãng sản xuất</label>
                     <div className={cx("producer")}>
-                        <Combobox listItem={listProducer}
+                        <Combobox listItem={[{ name: "Tất cả", id: -1 }, ...(listProducer || [])]}
                                   handleSelect={handleSelectProducer}
                                   isComboboxUI={false}/>
                     </div>
@@ -97,7 +138,9 @@ const UpdateNotification = ({product}) => {
             </div>
             <div className={cx("panel", "ui-intro")}>
                 <label className={cd("next-label")}>Giới thiệu</label>
-                <textarea className={cx("text-intro")} spellCheck={"false"}></textarea>
+                <textarea className={cx("text-intro")} spellCheck={"false"}
+                          value={description}
+                          onChange={e => setDescription(e.target.value)}></textarea>
             </div>
             <div className={cx("panel", "ui-price")}>
                 <div className={cd("container")}>
@@ -105,7 +148,9 @@ const UpdateNotification = ({product}) => {
                         <label className={cd("next-label")}>Giá Tiển</label>
                         <div className={cd("next-input")}>
                             <div className={cd("combined-input")}>
-                                <input className={cd("input")}/>
+                                <input className={cd("input")}
+                                       value={price}
+                                       onChange={e => setPrice(e.target.value)}/>
                             </div>
                         </div>
                     </div>
@@ -124,7 +169,7 @@ const UpdateNotification = ({product}) => {
                 </div>
             </div>
             <div className={cx("panel", "ui-btnAdd")}>
-                <button className={`${cx("btn-add")} ${cd("btn")}`}>Cập nhật sản phẩm</button>
+                <button className={`${cx("btn-add")} ${cd("btn")}`} onClick={handleSubmit}>Cập nhật sản phẩm</button>
             </div>
         </div>
     )
