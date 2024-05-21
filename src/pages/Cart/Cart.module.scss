@@ -250,7 +250,28 @@
                   margin: 0;
                 }
                 span {
+                  margin-top: 8px;
                   margin-left: 10px;
+                }
+              }
+              .btn-save {
+                margin-left: 20px;
+                border-radius: 5px;
+                font-size: 14px;
+                width: 10rem;
+                text-decoration: none;
+                background-color: #1eabbb;
+                color: #dedede;
+                &::after {
+                  background-color: #1eabbb;
+                }
+                &:hover {
+                  color: #44f2eb;
+                }
+                &:after {
+                  content: none;
+                  left: 0;
+                  right: 0;
                 }
               }
               .btn-confirm {
