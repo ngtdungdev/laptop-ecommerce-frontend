@@ -11,8 +11,8 @@ import {faTrashCan} from "@fortawesome/free-solid-svg-icons";
 const Import = () => {
     const cx = classNames.bind(styles)
     const cd = classNames.bind(component)
-    const [listCategory, setListCategory] = useState(['Lap Top', 'Chuột', 'Bàn Phím', 'Tai nghe']);
-    const [listProducer, setListProducer] = useState(['Lenovo', 'Dell', 'Asus', 'Apple',  'Hewlett-Packard', 'Toshiba']);
+    const [listCategory, setListCategory] = useState([{ name: 'Lap Top'}, { name: 'Chuột'}, { name: 'Bàn Phím'}, { name: 'Tai nghe'}]);
+    const [listProducer, setListProducer] = useState([{ name:'Lenovo'}, { name:'Dell'}, { name:'Asus'}, { name:'Apple'},  { name:'Hewlett-Packard'}, { name:'Toshiba'}]);
     const handleSelectSupplier = () => {
 
     }

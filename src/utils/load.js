@@ -73,3 +73,7 @@ export const getCartByUserId = async (setCarts, userId) => {
 export const deleteCartItem = async (userId, productId) => {
     await DELETE(`${apiUrl}/cart-item?userId=${userId}&productId=${productId}`)
 }
+
+export const deleteUser = async (userId) => {
+    await DELETE(`${apiUrl}/users?id=${userId}`)
+}

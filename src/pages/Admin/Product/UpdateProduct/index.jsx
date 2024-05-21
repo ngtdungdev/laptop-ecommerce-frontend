@@ -21,7 +21,7 @@ const UpdateProduct = () => {
     const location = useLocation();
     const [locationProduct, setLocationProduct] = useState("/admin/products?")
     const [data, setData] = useState(null);
-    const [listCategory, setListCategory] = useState(['Laptop', 'Chuột', 'Bàn phím', 'Tai nghe']);
+    const [listCategory, setListCategory] = useState([{name: 'Laptop'}, {name: 'Chuột'}, {name: 'Bàn phím'}, {name: 'Tai nghe'}]);
     const [clickButton, setClickButton] = useState(0);
     const [clickedProduct, setClickedProduct] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
