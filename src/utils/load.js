@@ -66,7 +66,6 @@ export const saveCartItem = async (product) => {
 export const getCartByUserId = async (setCarts, userId) => {
     await GET(`${apiUrl}/cart-item/search?id=${userId}`)
         .then(response => {
-            console.log(response)
             setCarts(response.data.cartItems)
         })
 }

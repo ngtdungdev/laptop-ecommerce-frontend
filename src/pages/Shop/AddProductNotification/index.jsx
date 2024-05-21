@@ -65,14 +65,9 @@ const AddProductNotification = ({product, handleBtnAdd, handleBtnCancel}) => {
         }
     }
     const addCart = () => {
-
+        saveCart().then(r => {});
+        handleBtnAdd(3);
     }
-    const addCancel = () => {
-        
-    }
-    const handleSubmit = () => {
-        // TODO
-    };
     const handleChange = (event) => {
         const inputValue = event.target.value;
         setQuantity(inputValue);
@@ -150,7 +145,7 @@ const AddProductNotification = ({product, handleBtnAdd, handleBtnCancel}) => {
                     </div>
                     <div className={cx("ui-button")}>
                         <button className={`${cx("btn-add")} ${cd("btn")}`} onClick={addCart}>Thêm</button>
-                        <button className={`${cx("btn-cancel")} ${cd("btn")}`} onClick={addCancel}>Hủy</button>
+                        <button className={`${cx("btn-cancel")} ${cd("btn")}`} onClick={() => handleBtnCancel(0)}>Hủy</button>
                     </div>
                 </div>
             </div>

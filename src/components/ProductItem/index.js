@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import {useAuth} from "../../contexts/AuthContext";
 import {useNavigate} from "react-router-dom";
 import {loadProducts, saveCartItem} from "../../utils/load";
+import {formatter} from "../../utils/currency";
 
 const ProductItem = ({product, handleClick, isCartItem}) => {
     const cx = classNames.bind(styles)
@@ -58,7 +59,7 @@ const ProductItem = ({product, handleClick, isCartItem}) => {
                     </div>
                 </div>
                 <div className={cx("price")}>
-                    <p>{product.price}VNĐ</p>
+                    <p>{formatter.format(product.price)}</p>
                 </div>
                 <div className={cx("button-cart")}>
                     <div className={cx("button")} onClick={() => handleClick(product, 1)}>

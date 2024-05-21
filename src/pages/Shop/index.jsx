@@ -45,7 +45,7 @@ const Shop = () => {
         setSearchText(e.target.value);
     };
     const handleSelect = (index) => {
-        setSelectCombobox(listCategory[index - 1]?.name);
+        setSelectCombobox(index >= 1 ? listCategory[index - 1]?.name : "Tất cả");
     };
     const extractPageAndSize = (url) => {
         const urlObj = new URL(url, 'http://example.com');
@@ -72,7 +72,6 @@ const Shop = () => {
         loadListCategories().then(r => {});
     }, []);
     useEffect(() => {
-        console.log(carts)
         if (location.search.startsWith("?search")) {
             const searchProducts = async () => {
                 try {
@@ -110,6 +109,10 @@ const Shop = () => {
         setClickButton(index);
         setProduct(product);
     };
+
+    const handleClickOption = (index) => {
+        setClickButton(index)
+    }
     const renderButtonBasedOnOption = () => {
         const SelectedButton = optionButtons[clickButton];
         return SelectedButton ? <SelectedButton/> : null;
@@ -121,17 +124,24 @@ const Shop = () => {
         0: null,
         1: () => (
             <div className={cd("notification-container")}>
-                <div className={`${cx("ui-background")}`} onClick={() => handleClickButton(0)}></div>
+                <div className={`${cx("ui-background")}`} onClick={() => handleClickOption(0)}></div>
                 <div className={`${cx("ui-notification-container")}`}>
-                    <AddProductNotification product={product} handleBtnAdd={handleClickButton} handleBtnCancel={handleClickButton}/>
+                    <AddProductNotification product={product} handleBtnAdd={handleClickOption} handleBtnCancel={handleClickOption}/>
                 </div>
             </div>
         ),
         2: () => (
             <div className={cd("notification-container")}>
-                <div className={`${cx("ui-background")}`} onClick={() => handleClickButton(0)}></div>
+                <div className={`${cx("ui-background")}`} onClick={() => handleClickOption(0)}></div>
                 <Notification text={"Bạn chưa đăng nhập"} type={"warning"}
-                              handleBtnNotification={handleClickReceive} handleClickNo={handleClickButton}/>
+                              handleBtnNotification={handleClickReceive} handleClickNo={handleClickOption}/>
+            </div>
+        ),
+        3: () => (
+            <div className={cd("notification-container")}>
+                <div className={`${cx("ui-background")}`} onClick={() => handleClickOption(0)}></div>
+                <Notification text={"Thêm Sản Phẩm Thành Công"} type={"success"}
+                              handleBtnNotification={handleClickReceive} handleClickNo={handleClickOption}/>
             </div>
         )
     };
@@ -167,7 +177,7 @@ const Shop = () => {
                     </div>
                     <div className={cx("ui-shop-center")}>
                         {(data?.content ?? []).map((product) => (
-                            <ProductItem product={product} handleClick={handleClickButton} isCartItem={(carts || []).find((item) => item.productId === product.id) !== undefined}/>
+                            <ProductItem product={product} handleClick={handleClickButton} isCartItem={(carts || []).find((item) => item.product.id === product.id) !== undefined}/>
                         ))}
                     </div>
                     <div className={cx("ui-shop-bottom")}>
