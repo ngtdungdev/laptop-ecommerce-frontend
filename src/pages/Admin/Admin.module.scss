@@ -6,8 +6,8 @@
   position: relative;
   .admin-selection-bar {
     width: 60px;
-    height: 91vh;
-    position: absolute;
+    height: 94vh;
+    position: fixed;
     z-index: 1;
     transition: 300ms;
     border-radius: 0 0 5px 0;

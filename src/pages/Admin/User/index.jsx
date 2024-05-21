@@ -11,7 +11,7 @@ import AddUserDialog from "./AddUserDialog";
 import UpdateUserDialog from "./UpdateUserDialog";
 import Notification from "../../../components/Notification";
 import {useLocation} from "react-router-dom";
-import {loadUsers} from "../../../utils/load";
+import {deleteUser, loadCategories, loadUsers} from "../../../utils/load";
 import {useAuth} from "../../../contexts/AuthContext";
 
 const User = () => {
@@ -19,6 +19,7 @@ const User = () => {
     const cd = classNames.bind(component)
     const {currentUser} = useAuth();
     const location = useLocation();
+    const [userId, setUserId] = useState();
     const [locationUser, setLocationUser] = useState("/admin/users?")
     const [data, setData] = useState(null);
     const extractPageAndSize = (url) => {
@@ -50,17 +51,28 @@ const User = () => {
         3: () => (
             <div className={cd("notification-container")}>
                 <div className={cd("ui-background")} onClick={() => handleClickButton(0)}></div>
-                <Notification text={"Bạn có chắc chắn muốn xóa nhân viên này không"} type={"warning"}
+                <Notification text={"Bạn có chắc chắn muốn xóa taì khoản này không"} type={"warning"}
                               handleBtnNotification={handleClickReceive} handleClickNo={handleClickButton}/>
             </div>
         )
     };
+    const deleteUserById = async(id) => {
+        try {
+            await deleteUser(id);
+        } catch (error) {
+            setErrorMessage("Vui lòng kiểm tra kết nối mạng");
+        }
+    }
     const handleClickReceive = () => {
         handleClickButton(0)
+        if(currentUser !== userId) {
+            deleteUserById(userId).then(r => {});
+        }
     };
     const [clickButton, setClickButton] = useState(0);
-    const handleClickButton = (index) => {
-        setClickButton(index)
+    const handleClickButton = (index, userId) => {
+        setClickButton(index);
+        setUserId(userId);
     };
     const renderButtonBasedOnOption = () => {
         const SelectedButton = optionButtons[clickButton];
@@ -158,7 +170,7 @@ const User = () => {
                                         <td className={cx("delete")}>
                                             <div className={cx("delete-user")}>
                                                 <button className={`${cd("btn")} ${cx("btn-delete")}`}
-                                                        onClick={() => handleClickButton(3)}>
+                                                        onClick={() => handleClickButton(3, user.id)}>
                                                     <FontAwesomeIcon icon={faUserMinus}/>
                                                     <span>Xóa</span>
                                                 </button>
