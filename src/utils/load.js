@@ -18,6 +18,10 @@ export const saveProfile = async (userId, profile, setErrorMessage) => {
         });
 }
 
+export const updateProduct = async (productId, product, setErrorMessage) => {
+    await PUT(`${apiUrl}/products?id=${productId}`, product)
+}
+
 export const loadProducts = async (page, size, setData) => {
     let url;
     if (page === null || size === null)
