@@ -6,7 +6,7 @@ import {faTrashCan, faUser, faUserMinus} from "@fortawesome/free-solid-svg-icons
 import {useEffect, useState} from "react";
 import laptopTest from "../../assets/images/laptopTest.png";
 import {Link} from "react-router-dom";
-import {getCartByUserId, saveCartItem} from "../../utils/load";
+import {deleteCartItem, getCartByUserId, saveCartItem} from "../../utils/load";
 import {useAuth} from "../../contexts/AuthContext";
 import ProductItem from "../../components/ProductItem";
 import {formatter} from "../../utils/currency";
@@ -31,24 +31,39 @@ const Cart = () => {
         }));
     };
     useEffect(() => {
+        const initialQuantities = {};
+        const listCheck = {}
+        let initialTotalPrice = 0;
+        carts?.forEach(cart => {
+            initialQuantities[cart.product.id] = cart.quantity;
+            listCheck[cart.product.id] = false;
+            initialTotalPrice += cart.quantity * cart.product.price;
+        });
+        setQuantities(initialQuantities);
+        setIsChecked(listCheck);
+        setTotalPrice(initialTotalPrice);
+    }, [carts]);
+    useEffect(() => {
         const getCartById = async() => {
             try {
                 await getCartByUserId(setCarts, currentUser.id);
-                const initialQuantities = {};
-                const listCheck = {}
-                carts.forEach(cart => {
-                    initialQuantities[cart.product.id] = cart.quantity;
-                    listCheck[cart.product.id] = false;
-                    setTotalPrice(totalPrice + (cart.quantity * cart.product.price))
-                });
-                setQuantities(initialQuantities);
-                setIsChecked(listCheck);
             } catch (error) {
                 setErrorMessage("Vui lòng kiểm tra kết nối mạng");
             }
         }
         getCartById().then(r => {})
-    }, [currentUser]);
+    }, []);
+
+    const deleteCart = async (id) => {
+        try {
+            await deleteCartItem(currentUser.id, id);
+        } catch (error) {
+            setErrorMessage("Vui lòng kiểm tra kết nối mạng");
+        }
+    }
+    const handleDeleteCart = (id) => {
+        deleteCart(id).then(r => {});
+    }
     const [clickButton, setClickButton] = useState(0);
     const handleClickButton = (index) => {
         setClickButton(index)
@@ -57,7 +72,6 @@ const Cart = () => {
         
     }
     const handleCheckbox = (productId) => {
-        console.log(carts)
         setIsChecked(prev => ({
             ...prev,
             [productId]: !prev[productId]
@@ -68,7 +82,7 @@ const Cart = () => {
     }
     const saveCart = async () => {
         try {
-            const cartItems = carts.map(cart => ({
+            const cartItems = carts?.map(cart => ({
                 productId: cart.product.id,
                 quantity: quantities[cart.product.id] || cart.quantity
             }));
@@ -120,9 +134,9 @@ const Cart = () => {
                                         className={cx("input-text")}
                                         spellCheck="true"
                                     /></td>
-                                    <td className={cx("total")}>{formatter.format(cart.quantity * cart.product.price)}</td>
+                                    <td className={cx("total")}>{formatter.format(quantities[cart.product.id] * cart.product.price)}</td>
                                     <td className={cx("delete")}>
-                                        <button className={`${cd("btn")} ${cx("btn-delete")}`}>
+                                        <button className={`${cd("btn")} ${cx("btn-delete")}`} onClick={() =>handleDeleteCart(cart.product.id)}>
                                             <FontAwesomeIcon icon={faTrashCan}/>
                                         </button>
                                     </td>
